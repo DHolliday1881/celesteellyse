@@ -43,6 +43,12 @@
   height: var(--moon-size);
   margin-bottom: 0.25rem;
   filter: drop-shadow(var(--moon-glow));
+  transition: opacity 0.9s ease, translate 0.9s ease;
+}
+
+.steps[data-reveal="waiting"] .moon {
+  opacity: 0;
+  translate: 0 6px;
 }
 
 .number {

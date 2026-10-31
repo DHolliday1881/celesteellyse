@@ -1,6 +1,7 @@
 import Image from "next/image"
 import {images, services} from "@/content/site"
 import styles from "./HowSessionsWork.module.css"
+import StepsReveal from "./StepsReveal"
 
 /** Four numbered steps, each marked by a moon phase. */
 export default function HowSessionsWork() {
@@ -13,16 +14,24 @@ export default function HowSessionsWork() {
         <h2 id="how-heading">{heading}</h2>
       </header>
 
-      <ol className={styles.steps}>
+      <StepsReveal className={styles.steps}>
         {steps.map((step, index) => (
           <li key={step.title} className={styles.step}>
-            <Image src={images.moons[index]} alt="" width={72} height={72} sizes="72px" className={styles.moon} />
+            <Image
+              src={images.moons[index]}
+              alt=""
+              width={72}
+              height={72}
+              sizes="72px"
+              className={styles.moon}
+              style={{transitionDelay: `${index * 180}ms`}}
+            />
             <span className={styles.number}>{String(index + 1).padStart(2, "0")}</span>
             <h3 className={styles.title}>{step.title}</h3>
             <p className={styles.body}>{step.body}</p>
           </li>
         ))}
-      </ol>
+      </StepsReveal>
     </section>
   )
 }
