@@ -22,7 +22,7 @@
 
 /* Steps */
 .steps {
-  --moon-size: 56px;
+  --moon-size: 68px;
   --moon-glow: 0 0 18px rgba(243, 241, 234, 0.35);
   display: grid;
   gap: 2.75rem;
@@ -73,7 +73,7 @@
 /* Tablet: two columns. Desktop: four */
 @media (min-width: 40rem) {
   .steps {
-    --moon-size: 72px;
+    --moon-size: 80px;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 3rem 2rem;
   }
@@ -81,6 +81,7 @@
 
 @media (min-width: 64rem) {
   .steps {
+    --moon-size: 88px;
     grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 }

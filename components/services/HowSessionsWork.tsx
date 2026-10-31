@@ -20,9 +20,9 @@ export default function HowSessionsWork() {
             <Image
               src={images.moons[index]}
               alt=""
-              width={72}
-              height={72}
-              sizes="72px"
+              width={88}
+              height={88}
+              sizes="(min-width: 64rem) 88px, (min-width: 40rem) 80px, 68px"
               className={styles.moon}
               style={{transitionDelay: `${index * 180}ms`}}
             />
