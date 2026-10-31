@@ -23,6 +23,7 @@ export default function SiteNav() {
   return (
     <header className={styles.header}>
       <Link href="/" className={styles.name} onClick={close}>
+        <span className={styles.moon} aria-hidden="true" />
         {brand.name}
       </Link>
 
