@@ -28,7 +28,12 @@ export const images = {
   bookYou: "/images/book-you.jpg",
   servicesClouds: "/images/services-clouds.jpg",
   servicesOcean: "/images/services-ocean.jpg",
-  moons: ["/images/moon-1.png", "/images/moon-2.png", "/images/moon-3.png", "/images/moon-4.png"],
+  moons: [
+    "/images/crescent-moon.png",
+    "/images/quarter-moon.png",
+    "/images/waxing-moon.png",
+    "/images/full-moon.png",
+  ],
 }
 
 // Home

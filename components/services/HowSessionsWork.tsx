@@ -16,7 +16,7 @@ export default function HowSessionsWork() {
       <ol className={styles.steps}>
         {steps.map((step, index) => (
           <li key={step.title} className={styles.step}>
-            <Image src={images.moons[index]} alt="" width={48} height={48} className={styles.moon} />
+            <Image src={images.moons[index]} alt="" width={72} height={72} sizes="72px" className={styles.moon} />
             <span className={styles.number}>{String(index + 1).padStart(2, "0")}</span>
             <h3 className={styles.title}>{step.title}</h3>
             <p className={styles.body}>{step.body}</p>
