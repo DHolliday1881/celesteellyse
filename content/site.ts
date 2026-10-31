@@ -148,17 +148,19 @@ export const services = {
     },
   ] satisfies ServiceGroup[],
   howItWorks: {
-    label: "How sessions work",
+    eyebrow: "How it works",
+    heading: "How sessions work",
+    moons: [
+      {src: images.moonCrescent, flips: true},
+      {src: images.moonQuarter, flips: true},
+      {src: images.moonWaxing, flips: true},
+      {src: images.moonFull, flips: false},
+    ],
     tabs: [
       {
         id: "animal-communication",
         label: "Animal communication",
-        moons: [
-          {src: images.moonCrescent, mirrored: false},
-          {src: images.moonQuarter, mirrored: false},
-          {src: images.moonWaxing, mirrored: false},
-          {src: images.moonFull, mirrored: false},
-        ],
+        mirrored: false,
         steps: [
           {title: "Book and pay", body: "Choose your session and book it here."},
           {
@@ -172,12 +174,7 @@ export const services = {
       {
         id: "reiki",
         label: "Reiki",
-        moons: [
-          {src: images.moonFull, mirrored: false},
-          {src: images.moonWaxing, mirrored: true},
-          {src: images.moonQuarter, mirrored: true},
-          {src: images.moonCrescent, mirrored: true},
-        ],
+        mirrored: true,
         steps: [
           {title: "Book and pay", body: "Choose a time that works for you."},
           {
