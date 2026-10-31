@@ -1,5 +1,6 @@
 import type {Metadata} from "next"
 import Image from "next/image"
+import Faq from "@/components/services/Faq"
 import HowSessionsWork from "@/components/services/HowSessionsWork"
 import ServiceList from "@/components/services/ServiceList"
 import SiteFooter from "@/components/SiteFooter"
@@ -29,6 +30,7 @@ export default function ServicesPage() {
         </header>
         <ServiceList groups={services.groups} />
         <HowSessionsWork />
+        <Faq />
       </main>
 
       <SiteFooter />
