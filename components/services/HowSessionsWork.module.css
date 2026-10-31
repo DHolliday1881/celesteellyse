@@ -118,14 +118,6 @@
 }
 
 /* Steps */
-.panel {
-  transition: opacity 0.25s ease;
-}
-
-.panel[data-fading] {
-  opacity: 0;
-}
-
 .steps {
   --moon-size: 84px;
   display: grid;
@@ -140,25 +132,37 @@
   align-items: center;
   gap: 1rem;
   text-align: center;
+  transition:
+    opacity var(--enter-ms) ease,
+    translate var(--enter-ms) cubic-bezier(0.2, 0.7, 0.2, 1);
+  transition-delay: calc(var(--i) * var(--enter-stagger));
+}
+
+.steps[data-reveal="waiting"] .step,
+.panel[data-leaving] .step {
+  opacity: 0;
+  translate: 0 1.5rem;
+}
+
+.panel[data-leaving] .step {
+  transition-duration: var(--leave-ms);
+  transition-timing-function: ease-in;
+  transition-delay: calc(var(--ri) * var(--leave-stagger));
 }
 
 .step:nth-child(1) {
-  --i: 0;
   --glow: 0.1;
 }
 
 .step:nth-child(2) {
-  --i: 1;
   --glow: 0.14;
 }
 
 .step:nth-child(3) {
-  --i: 2;
   --glow: 0.18;
 }
 
 .step:nth-child(4) {
-  --i: 3;
   --glow: 0.24;
 }
 
@@ -168,8 +172,6 @@
   width: var(--moon-size);
   height: var(--moon-size);
   margin-bottom: 0.5rem;
-  transition: opacity 0.9s ease, translate 0.9s ease;
-  transition-delay: calc(var(--i) * 180ms);
 }
 
 .moon::before {
@@ -181,11 +183,6 @@
   height: 170%;
   translate: -50% -50%;
   background: radial-gradient(closest-side, rgba(200, 212, 255, var(--glow)), transparent);
-}
-
-.steps[data-reveal="waiting"] .moon {
-  opacity: 0;
-  translate: 0 6px;
 }
 
 .moonImage {

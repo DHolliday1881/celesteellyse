@@ -7,32 +7,44 @@ import styles from "./HowSessionsWork.module.css"
 import StepsReveal from "./StepsReveal"
 
 const PANEL_ID = "how-sessions-panel"
-const FADE_MS = 250
+
+// Step motion
+const ENTER_MS = 600 // how long each step takes to slide up
+const ENTER_STAGGER_MS = 120 // gap between steps sliding up, left to right
+const LEAVE_MS = 220 // how long each step takes to leave on switch
+const LEAVE_STAGGER_MS = 60 // gap between steps leaving, right to left
+
+const motion = {
+  "--enter-ms": `${ENTER_MS}ms`,
+  "--enter-stagger": `${ENTER_STAGGER_MS}ms`,
+  "--leave-ms": `${LEAVE_MS}ms`,
+  "--leave-stagger": `${LEAVE_STAGGER_MS}ms`,
+} as CSSProperties
 
 /** How it works: a horizon-line switch between Animal communication and Distance Reiki over a dusk sky. */
 export default function HowSessionsWork() {
   const {eyebrow, heading, moons, tabs} = services.howItWorks
   const [active, setActive] = useState(0)
   const [shown, setShown] = useState(0)
-  const [fading, setFading] = useState(false)
+  const [leaving, setLeaving] = useState(false)
   const tabRefs = useRef<(HTMLButtonElement | null)[]>([])
-  const fadeTimer = useRef<number | undefined>(undefined)
+  const swapTimer = useRef<number | undefined>(undefined)
 
-  useEffect(() => () => window.clearTimeout(fadeTimer.current), [])
+  useEffect(() => () => window.clearTimeout(swapTimer.current), [])
 
   const select = (index: number) => {
     if (index === active) return
     setActive(index)
-    window.clearTimeout(fadeTimer.current)
+    window.clearTimeout(swapTimer.current)
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       setShown(index)
       return
     }
-    setFading(true)
-    fadeTimer.current = window.setTimeout(() => {
+    setLeaving(true)
+    swapTimer.current = window.setTimeout(() => {
       setShown(index)
-      setFading(false)
-    }, FADE_MS)
+      setLeaving(false)
+    }, LEAVE_MS + LEAVE_STAGGER_MS * (moons.length - 1))
   }
 
   const onKeyDown = (event: KeyboardEvent) => {
@@ -95,11 +107,16 @@ export default function HowSessionsWork() {
           role="tabpanel"
           aria-labelledby={`how-tab-${tabs[shown].id}`}
           className={styles.panel}
-          data-fading={fading || undefined}
+          style={motion}
+          data-leaving={leaving || undefined}
         >
           <StepsReveal className={styles.steps}>
             {moons.map((moon, index) => (
-              <li key={moon} className={styles.step}>
+              <li
+                key={moon}
+                className={styles.step}
+                style={{"--i": index, "--ri": moons.length - 1 - index} as CSSProperties}
+              >
                 <span className={styles.moon}>
                   <Image
                     src={moon}
