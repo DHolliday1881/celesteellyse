@@ -2,7 +2,7 @@
 .how {
   max-width: var(--container);
   margin: 0 auto;
-  padding: var(--space-xl) var(--gutter);
+  padding: clamp(7.5rem, 14vw, 11.25rem) var(--gutter) clamp(6.875rem, 11vw, 9.375rem);
   display: flex;
   flex-direction: column;
   gap: clamp(3rem, 6vw, 4.5rem);

@@ -82,7 +82,8 @@
 
 .page > footer {
   z-index: 2;
-  margin-top: clamp(14rem, 30vw, 24rem);
+  margin-top: clamp(21.25rem, 30vw, 27.5rem);
+  padding-top: 0;
   border-top: 0;
   text-shadow: 0 1px 3px rgba(7, 15, 29, 0.55), 0 2px 22px rgba(7, 15, 29, 0.6);
 }
@@ -93,7 +94,7 @@
   flex-direction: column;
   align-items: center;
   gap: 1.25rem;
-  padding: 10rem var(--gutter) var(--space-xl);
+  padding: 9rem var(--gutter) clamp(9.375rem, 15vw, 13.75rem);
   text-align: center;
 }
 
@@ -119,6 +120,6 @@
 /* Tablet and up */
 @media (min-width: 48rem) {
   .title {
-    padding-top: 12rem;
+    padding-top: 14rem;
   }
 }
