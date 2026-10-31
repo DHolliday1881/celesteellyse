@@ -28,12 +28,10 @@ export const images = {
   bookYou: "/images/book-you.jpg",
   servicesClouds: "/images/services-clouds.jpg",
   servicesOcean: "/images/services-ocean.jpg",
-  moons: [
-    "/images/crescent-moon.png",
-    "/images/quarter-moon.png",
-    "/images/waxing-moon.png",
-    "/images/full-moon.png",
-  ],
+  moonCrescent: "/images/crescent-moon.png",
+  moonQuarter: "/images/quarter-moon.png",
+  moonWaxing: "/images/waxing-moon.png",
+  moonFull: "/images/full-moon.png",
 }
 
 // Home
@@ -150,13 +148,49 @@ export const services = {
     },
   ] satisfies ServiceGroup[],
   howItWorks: {
-    eyebrow: "How it works",
-    heading: "How sessions work",
-    steps: [
-      {title: "Book and pay", body: "Choose your session and book it here."},
-      {title: "Share their details", body: "Your animal's details and a photo with their eyes visible."},
-      {title: "I tune in", body: "I sit quietly with your animal and listen."},
-      {title: "Your session arrives", body: "Your written session arrives by email within 7 days."},
+    label: "How sessions work",
+    tabs: [
+      {
+        id: "animal-communication",
+        label: "Animal communication",
+        moons: [
+          {src: images.moonCrescent, mirrored: false},
+          {src: images.moonQuarter, mirrored: false},
+          {src: images.moonWaxing, mirrored: false},
+          {src: images.moonFull, mirrored: false},
+        ],
+        steps: [
+          {title: "Book and pay", body: "Choose your session and book it here."},
+          {
+            title: "Share their details",
+            body: "Their name, age, who they live with, any questions, and a photo with their eyes visible.",
+          },
+          {title: "I tune in", body: "I sit quietly with your animal and listen."},
+          {title: "Your session arrives", body: "Your written session arrives by email within 7 days."},
+        ],
+      },
+      {
+        id: "reiki",
+        label: "Reiki",
+        moons: [
+          {src: images.moonFull, mirrored: false},
+          {src: images.moonWaxing, mirrored: true},
+          {src: images.moonQuarter, mirrored: true},
+          {src: images.moonCrescent, mirrored: true},
+        ],
+        steps: [
+          {title: "Book and pay", body: "Choose a time that works for you."},
+          {
+            title: "Share the details",
+            body: "Your name, or your animal's, a photo, and anything you'd like support with.",
+          },
+          {
+            title: "Rest while I send Reiki",
+            body: "I'll text you right before I begin. Settle somewhere quiet and comfortable, or let your animal rest where they like.",
+          },
+          {title: "Your summary", body: "A short email afterward with what I noticed."},
+        ],
+      },
     ],
   },
   faq: {
