@@ -1,6 +1,6 @@
 import type {Metadata} from "next"
 import {Jost, Raleway} from "next/font/google"
-import Link from "next/link"
+import SiteNav from "@/components/SiteNav"
 import "./globals.css"
 
 const raleway = Raleway({subsets: ["latin"], variable: "--font-raleway"})
@@ -16,10 +16,7 @@ export default function RootLayout({children}: LayoutProps<"/">) {
   return (
     <html lang="en" className={`${raleway.variable} ${jost.variable}`}>
       <body>
-        <nav>
-          <Link href="/">Home</Link>
-          <Link href="/services">Services</Link>
-        </nav>
+        <SiteNav />
         {children}
       </body>
     </html>
