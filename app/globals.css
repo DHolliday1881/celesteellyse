@@ -58,6 +58,7 @@
 
 html {
   -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
 }
 
 body {
@@ -200,9 +201,13 @@ details[open] > summary .toggle-icon::after {
 }
 
 /* Accessibility */
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
 :focus-visible {
-  outline: 2px solid var(--periwinkle);
-  outline-offset: 3px;
+  outline: 2px solid rgba(149, 163, 236, 0.7);
+  outline-offset: 4px;
 }
 
 @media (prefers-reduced-motion: reduce) {
