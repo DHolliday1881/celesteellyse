@@ -25,9 +25,16 @@
 
 .clouds {
   top: 0;
-  height: clamp(35rem, 55vw + 20rem, 47.5rem);
-  background: linear-gradient(180deg, rgba(11, 18, 38, 0.6) 0%, rgba(18, 28, 60, 0.45) 55%, transparent 100%);
-  mask-image: linear-gradient(180deg, #000 35%, transparent 100%);
+  z-index: -1;
+  height: 51.25rem;
+  overflow: hidden;
+  background: linear-gradient(180deg, #0b1226 0%, #121c3c 55%, rgba(18, 28, 60, 0) 100%);
+  mask-image: linear-gradient(180deg, #000 55%, transparent 100%);
+}
+
+.cloudsPhoto {
+  position: absolute;
+  inset: calc(var(--cloud-blur) * -3.75);
 }
 
 .ocean {
@@ -43,8 +50,7 @@
 
 .clouds img {
   object-position: 50% 70%;
-  scale: 1.1;
-  filter: blur(var(--cloud-blur)) brightness(0.85) saturate(0.6) contrast(0.85);
+  filter: blur(var(--cloud-blur)) brightness(calc(1 - var(--cloud-overlay))) saturate(0.6) contrast(0.85);
   opacity: var(--cloud-opacity);
 }
 
@@ -60,9 +66,7 @@
 }
 
 .clouds::after {
-  background:
-    radial-gradient(ellipse 70% 60% at 50% 45%, var(--cloud-tint), transparent 75%),
-    rgba(7, 15, 29, var(--cloud-overlay));
+  background: var(--cloud-tint);
 }
 
 .ocean::after {
@@ -119,6 +123,10 @@
 
 /* Tablet and up */
 @media (min-width: 48rem) {
+  .clouds {
+    height: 62.5rem;
+  }
+
   .title {
     padding-top: 14rem;
   }
