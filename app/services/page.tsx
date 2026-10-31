@@ -3,9 +3,12 @@ import Image from "next/image"
 import Faq from "@/components/services/Faq"
 import HowSessionsWork from "@/components/services/HowSessionsWork"
 import ServiceList from "@/components/services/ServiceList"
+import NightSkyLoader from "@/components/NightSkyLoader"
 import SiteFooter from "@/components/SiteFooter"
 import {images, services} from "@/content/site"
 import styles from "./page.module.css"
+
+const OCEAN_ID = "services-ocean"
 
 export const metadata: Metadata = {
   title: "Services · Celeste Ellyse",
@@ -15,10 +18,11 @@ export const metadata: Metadata = {
 export default function ServicesPage() {
   return (
     <div className={styles.page}>
+      <NightSkyLoader fadeTargetId={OCEAN_ID} />
       <div className={styles.clouds} aria-hidden="true">
         <Image src={images.servicesClouds} alt="" fill preload sizes="100vw" />
       </div>
-      <div className={styles.ocean} aria-hidden="true">
+      <div id={OCEAN_ID} className={styles.ocean} aria-hidden="true">
         <Image src={images.servicesOcean} alt="" fill sizes="100vw" />
       </div>
 
