@@ -149,42 +149,26 @@ export const services = {
   ] satisfies ServiceGroup[],
   howItWorks: {
     eyebrow: "How it works",
-    heading: "How sessions work",
-    moons: [
-      {src: images.moonCrescent, flips: true},
-      {src: images.moonQuarter, flips: true},
-      {src: images.moonWaxing, flips: true},
-      {src: images.moonFull, flips: false},
-    ],
+    heading: "Four steps, start to finish",
+    moons: [images.moonCrescent, images.moonQuarter, images.moonWaxing, images.moonFull],
     tabs: [
       {
         id: "animal-communication",
         label: "Animal communication",
-        mirrored: false,
         steps: [
           {title: "Book and pay", body: "Choose your session and book it here."},
-          {
-            title: "Share their details",
-            body: "Their name, age, who they live with, any questions, and a photo with their eyes visible.",
-          },
+          {title: "Share their details", body: "Their name and a photo with their eyes visible."},
           {title: "I tune in", body: "I sit quietly with your animal and listen."},
           {title: "Your session arrives", body: "Your written session arrives by email within 7 days."},
         ],
       },
       {
-        id: "reiki",
-        label: "Reiki",
-        mirrored: true,
+        id: "distance-reiki",
+        label: "Distance Reiki",
         steps: [
           {title: "Book and pay", body: "Choose a time that works for you."},
-          {
-            title: "Share the details",
-            body: "Your name, or your animal's, a photo, and anything you'd like support with.",
-          },
-          {
-            title: "Rest while I send Reiki",
-            body: "I'll text you right before I begin. Settle somewhere quiet and comfortable, or let your animal rest where they like.",
-          },
+          {title: "Share the details", body: "Your name, or your animal's, and a photo."},
+          {title: "Rest while I send Reiki", body: "I'll text before I begin. Settle somewhere quiet."},
           {title: "Your summary", body: "A short email afterward with what I noticed."},
         ],
       },
