@@ -1,5 +1,6 @@
 import type {Metadata} from "next"
 import Image from "next/image"
+import ServiceList from "@/components/services/ServiceList"
 import SiteFooter from "@/components/SiteFooter"
 import {images, services} from "@/content/site"
 import styles from "./page.module.css"
@@ -25,6 +26,7 @@ export default function ServicesPage() {
           <h1 className={styles.heading}>{services.title}</h1>
           <span className={styles.rule} aria-hidden="true" />
         </header>
+        <ServiceList groups={services.groups} />
       </main>
 
       <SiteFooter />
