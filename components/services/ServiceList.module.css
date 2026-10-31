@@ -1,0 +1,159 @@
+/* Groups */
+.groups {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.group {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(3.5rem, 7vw, 5rem);
+  scroll-margin-top: 6rem;
+}
+
+.groupName {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  color: var(--lavender);
+}
+
+.groupName::before,
+.groupName::after {
+  content: "";
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--periwinkle);
+}
+
+/* Rows */
+.rows {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(3.5rem, 7vw, 5rem);
+  padding: 0;
+  list-style: none;
+}
+
+.row {
+  display: grid;
+  gap: 1rem;
+}
+
+.intro {
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+  min-width: 0;
+}
+
+.name {
+  font-size: clamp(1.5rem, 3.5vw, 2rem);
+  line-height: 1.2;
+}
+
+.summary {
+  max-width: var(--measure);
+  color: var(--ink-soft);
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.375rem;
+}
+
+.price {
+  color: var(--coral);
+  font-size: 1.875rem;
+  font-weight: 300;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+/* Details toggle */
+.toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-height: var(--tap);
+  color: var(--lavender);
+  font-family: var(--font-label);
+  font-size: var(--text-label);
+  font-weight: 500;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  list-style: none;
+  cursor: pointer;
+}
+
+.toggle::-webkit-details-marker {
+  display: none;
+}
+
+.whenOpen,
+.details[open] .whenClosed {
+  display: none;
+}
+
+.details[open] .whenOpen {
+  display: inline;
+}
+
+/* Details content */
+.parts {
+  display: grid;
+  gap: 1.375rem;
+  padding-top: 1rem;
+}
+
+.part {
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+}
+
+.partLabel {
+  color: var(--periwinkle);
+  font-family: var(--font-label);
+  font-size: 0.625rem;
+  font-weight: 500;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+}
+
+.partBody {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 0.9375rem;
+}
+
+/* Tablet and up: price and button beside the name */
+@media (min-width: 48rem) {
+  .row {
+    grid-template-columns: minmax(0, 1fr) auto;
+    column-gap: 2rem;
+    row-gap: 0.75rem;
+    align-items: center;
+  }
+
+  .actions {
+    justify-content: flex-end;
+  }
+
+  .details {
+    grid-column: 1 / -1;
+  }
+
+  .parts {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 2.25rem;
+  }
+}
