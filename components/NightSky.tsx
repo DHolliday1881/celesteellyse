@@ -20,6 +20,10 @@ const SCROLL_PARALLAX = 0.06 // shift from the top to the bottom of the page
 const MOUSE_PARALLAX = 0.015 // shift from the centre to the edge of the screen
 const PARALLAX_EASE = 2.5 // how fast it catches up (higher = snappier)
 
+// Thinning: share of stars that fade away by the bottom of the page, faintest first (0 = none, 1 = all)
+const SCROLL_THIN = 0.7
+const THIN_SOFTNESS = 0.08 // how gradually each star fades out (higher = softer)
+
 // Drift: sideways movement of the whole sky, in screen widths per minute
 const DRIFT_SPEED = 0.02
 
@@ -47,6 +51,7 @@ const vertexShader = /* glsl */ `
   attribute float aSize;
   attribute float aSpeed;
   attribute float aPhase;
+  attribute float aThreshold;
   attribute vec3 aColor;
 
   uniform float uTime;
@@ -56,10 +61,12 @@ const vertexShader = /* glsl */ `
   uniform vec2 uParallax;
   uniform float uPixelRatio;
   uniform float uMinBrightness;
+  uniform float uThin;
 
   varying vec3 vColor;
   varying float vBrightness;
   varying float vGlow;
+  varying float vVisible;
 
   void main() {
     float depth = position.z;
@@ -79,6 +86,7 @@ const vertexShader = /* glsl */ `
     vBrightness = mix(uMinBrightness, 1.0, wave);
     vColor = aColor;
     vGlow = step(${(GLOW_STAR_SIZE - 0.5).toFixed(1)}, aSize);
+    vVisible = smoothstep(uThin - ${THIN_SOFTNESS.toFixed(3)}, uThin, aThreshold);
   }
 `
 
@@ -86,6 +94,7 @@ const fragmentShader = /* glsl */ `
   varying vec3 vColor;
   varying float vBrightness;
   varying float vGlow;
+  varying float vVisible;
 
   void main() {
     float r = length(gl_PointCoord - 0.5) * 2.0;
@@ -93,7 +102,7 @@ const fragmentShader = /* glsl */ `
     float disc = 1.0 - smoothstep(0.35, 1.0, r);
     float core = 1.0 - smoothstep(0.0, 0.3, r);
     float halo = exp(-r * r * 5.0) * 0.45;
-    float alpha = mix(disc, core + halo, vGlow) * vBrightness;
+    float alpha = mix(disc, core + halo, vGlow) * vBrightness * vVisible;
     gl_FragColor = vec4(vColor * alpha, alpha);
   }
 `
@@ -144,6 +153,7 @@ function buildStars(count: number) {
   geometry.setAttribute("aSpeed", new THREE.BufferAttribute(speeds, 1))
   geometry.setAttribute("aPhase", new THREE.BufferAttribute(phases, 1))
   geometry.setAttribute("aColor", new THREE.BufferAttribute(colors, 3))
+  geometry.setAttribute("aThreshold", new THREE.BufferAttribute(fadeOrder(sizes, random), 1))
   return geometry
 }
 
@@ -157,7 +167,20 @@ function createUniforms() {
     uParallax: {value: new THREE.Vector2()},
     uPixelRatio: {value: 1},
     uMinBrightness: {value: TWINKLE_MIN_BRIGHTNESS},
+    uThin: {value: 0},
   }
+}
+
+/** Spreads stars evenly from 0 to 1 by size with some randomness, so faint stars thin out first. */
+function fadeOrder(sizes: Float32Array, random: () => number) {
+  const count = sizes.length
+  const order = Array.from(sizes, (size, i) => ({i, key: size / STAR_SIZE_MAX + random() * 0.6}))
+  order.sort((a, b) => a.key - b.key)
+  const thresholds = new Float32Array(count)
+  order.forEach(({i}, rank) => {
+    thresholds[i] = sizes[i] >= GLOW_STAR_SIZE ? 2 : (rank + 1) / count
+  })
+  return thresholds
 }
 
 /** Subscribes to a media query for useSyncExternalStore. */
@@ -184,6 +207,7 @@ function Stars({count, still, mouse}: {count: number; still: boolean; mouse: boo
 
   const target = useRef(new THREE.Vector2())
   const mouseTarget = useRef(new THREE.Vector2())
+  const thinTarget = useRef(0)
 
   useEffect(() => () => geometry.dispose(), [geometry])
   useEffect(() => {
@@ -197,7 +221,9 @@ function Stars({count, still, mouse}: {count: number; still: boolean; mouse: boo
     if (still) return
     const onScroll = () => {
       const scrollable = document.documentElement.scrollHeight - window.innerHeight
-      target.current.y = scrollable > 0 ? (window.scrollY / scrollable) * SCROLL_PARALLAX : 0
+      const progress = scrollable > 0 ? window.scrollY / scrollable : 0
+      target.current.y = progress * SCROLL_PARALLAX
+      thinTarget.current = progress * SCROLL_THIN
     }
     const onPointer = (event: PointerEvent) => {
       if (event.pointerType !== "mouse") return
@@ -224,6 +250,7 @@ function Stars({count, still, mouse}: {count: number; still: boolean; mouse: boo
     const parallax = u.uParallax.value as THREE.Vector2
     parallax.x += (target.current.x + mouseTarget.current.x - parallax.x) * ease
     parallax.y += (target.current.y + mouseTarget.current.y - parallax.y) * ease
+    u.uThin.value += (thinTarget.current - u.uThin.value) * ease
   })
 
   return (
