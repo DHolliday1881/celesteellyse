@@ -1,3 +1,4 @@
+import About from "@/components/home/About"
 import Hero from "@/components/home/Hero"
 import SiteFooter from "@/components/SiteFooter"
 
@@ -7,6 +8,7 @@ export default function Home() {
     <>
       <main>
         <Hero />
+        <About />
       </main>
       <SiteFooter />
     </>
