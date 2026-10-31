@@ -1,5 +1,6 @@
 import type {Metadata} from "next"
 import Image from "next/image"
+import HowSessionsWork from "@/components/services/HowSessionsWork"
 import ServiceList from "@/components/services/ServiceList"
 import SiteFooter from "@/components/SiteFooter"
 import {images, services} from "@/content/site"
@@ -27,6 +28,7 @@ export default function ServicesPage() {
           <span className={styles.rule} aria-hidden="true" />
         </header>
         <ServiceList groups={services.groups} />
+        <HowSessionsWork />
       </main>
 
       <SiteFooter />
