@@ -21,7 +21,7 @@ const motion = {
   "--leave-stagger": `${LEAVE_STAGGER_MS}ms`,
 } as CSSProperties
 
-/** How it works: a horizon-line switch between Animal communication and Distance Reiki over a dusk sky. */
+/** How it works: a horizon-line switch between Animal communication and Distance Reiki. */
 export default function HowSessionsWork() {
   const {eyebrow, heading, moons, tabs} = services.howItWorks
   const [active, setActive] = useState(0)
@@ -63,8 +63,6 @@ export default function HowSessionsWork() {
 
   return (
     <section className={styles.how} aria-labelledby="how-heading">
-      <div className={styles.sky} aria-hidden="true" />
-
       <div className={styles.inner}>
         <header className={styles.head}>
           <p className={`label ${styles.eyebrow}`}>{eyebrow}</p>
