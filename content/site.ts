@@ -260,7 +260,7 @@ export const services = {
         ],
       },
       {
-        label: "Good to know",
+        label: "Policies",
         items: [
           {
             question: "Are you a vet or doctor?",
