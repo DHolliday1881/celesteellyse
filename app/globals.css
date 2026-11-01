@@ -17,7 +17,7 @@
   --font-label: var(--font-jost), system-ui, sans-serif;
 
   /* Image treatments */
-  --hero-blur: 4px;
+  --hero-blur: 2px;
   --hero-overlay: 0.35;
   --cloud-overlay: 0.15;
   --cloud-tint: rgba(40, 58, 120, 0.22);
