@@ -4,6 +4,7 @@ export const brand = {
   email: "hello@celesteellyse.com",
   disclaimer:
     "Animal communication and Reiki are complementary practices and not a substitute for veterinary, medical or psychological care.",
+  careNote: "I'm not a veterinarian or doctor. Sessions don't replace professional care.",
 }
 
 // Social

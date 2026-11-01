@@ -56,3 +56,8 @@
   font-size: 0.8125rem;
   line-height: 1.6;
 }
+
+.disclaimer + .disclaimer {
+  margin-top: -0.75rem;
+  padding-top: 0;
+}
