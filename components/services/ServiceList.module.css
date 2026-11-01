@@ -1,0 +1,268 @@
+/* Groups */
+.groups {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+  display: flex;
+  flex-direction: column;
+  gap: clamp(6rem, 12vw, 9.375rem);
+}
+
+.group {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(3.5rem, 7vw, 5rem);
+  scroll-margin-top: 6rem;
+}
+
+.groupName {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  color: var(--lavender);
+}
+
+.groupName::before,
+.groupName::after {
+  content: "";
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--periwinkle);
+}
+
+/* Rows */
+.rows {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  list-style: none;
+}
+
+.row {
+  display: flex;
+  flex-direction: column;
+}
+
+.numeral {
+  padding: 2.5rem 0 1rem;
+  color: var(--lavender);
+  text-align: center;
+}
+
+.row:first-child .numeral {
+  padding-top: 0;
+}
+
+.intro {
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+  min-width: 0;
+}
+
+.name {
+  font-size: clamp(1.5rem, 3.5vw, 2rem);
+  line-height: 1.2;
+}
+
+.summary {
+  max-width: var(--measure);
+  color: var(--ink-soft);
+}
+
+.details {
+  margin-top: 0.5rem;
+}
+
+.note {
+  max-width: var(--measure);
+  margin-top: 1.5rem;
+  color: var(--ink-faint);
+  font-size: var(--text-sm);
+  font-style: italic;
+}
+
+/* Price rows */
+.actions {
+  --book-width: 150px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 0.75rem;
+}
+
+.details[open] + .actions {
+  margin-top: 1.75rem;
+}
+
+.option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 6px 6px 6px 1.25rem;
+  border-radius: 999px;
+  background: var(--glass-fill-strong);
+  box-shadow: inset 0 0 0 1px var(--glass-edge);
+  backdrop-filter: blur(var(--glass-blur));
+}
+
+.priceLine {
+  display: flex;
+  align-items: baseline;
+  gap: 0.625rem;
+  min-width: 7.5rem;
+}
+
+.price {
+  color: var(--coral);
+  font-size: 1.5rem;
+  font-weight: 300;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.duration {
+  color: var(--periwinkle);
+  font-family: var(--font-label);
+  font-size: 0.625rem;
+  font-weight: 500;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.book {
+  flex: 1 1 auto;
+  max-width: var(--book-width);
+  min-height: 36px;
+  padding: 0 1.5rem;
+}
+
+/* Details toggle */
+.toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-height: var(--tap);
+  color: var(--lavender);
+  font-family: var(--font-label);
+  font-size: var(--text-label);
+  font-weight: 500;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  list-style: none;
+  cursor: pointer;
+}
+
+.toggle::-webkit-details-marker {
+  display: none;
+}
+
+.whenOpen,
+.details[open] .whenClosed {
+  display: none;
+}
+
+.details[open] .whenOpen {
+  display: inline;
+}
+
+/* Details content */
+.parts {
+  display: grid;
+  gap: 1.375rem;
+  padding-top: 1rem;
+}
+
+.part {
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+}
+
+.partLabel {
+  color: var(--periwinkle);
+  font-family: var(--font-label);
+  font-size: 0.625rem;
+  font-weight: 500;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+}
+
+.partBody {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 0.9375rem;
+}
+
+/* Tablet and up: price and button beside the name */
+@media (min-width: 48rem) {
+  .rows {
+    gap: clamp(3.5rem, 7vw, 5rem);
+  }
+
+  .row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas:
+      "intro actions"
+      "details details";
+    column-gap: 2rem;
+    row-gap: 0.75rem;
+    align-items: center;
+  }
+
+  .numeral {
+    display: none;
+  }
+
+  .intro {
+    grid-area: intro;
+  }
+
+  .details {
+    grid-area: details;
+    margin-top: 0;
+  }
+
+  .actions,
+  .details[open] + .actions {
+    grid-area: actions;
+    gap: 1.5rem;
+    margin-top: 0;
+  }
+
+  .option {
+    justify-content: flex-end;
+    padding: 0;
+    border-radius: 0;
+    background: none;
+    box-shadow: none;
+    backdrop-filter: none;
+    gap: 1.375rem;
+  }
+
+  .priceLine {
+    min-width: 0;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.5rem;
+  }
+
+  .price {
+    font-size: 1.875rem;
+  }
+
+  .book {
+    flex: none;
+    width: var(--book-width);
+  }
+
+  .parts {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 2.25rem;
+  }
+}

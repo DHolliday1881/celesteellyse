@@ -1,0 +1,122 @@
+/* Layout */
+.faq {
+  padding: clamp(4rem, 9vw, 7rem) var(--gutter) 0;
+}
+
+/* Card */
+.card {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: clamp(2.25rem, 6vw, 3.5rem) clamp(1.5rem, 5vw, 3.5rem);
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1.75rem, 4vw, 2.5rem);
+  border-radius: 28px;
+  background: var(--glass-fill-strong);
+  box-shadow: inset 0 0 0 1px var(--glass-edge);
+  backdrop-filter: blur(var(--glass-blur));
+}
+
+.head {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  text-align: center;
+}
+
+.eyebrow {
+  color: var(--lavender);
+}
+
+/* Groups */
+.groups {
+  display: grid;
+  gap: 2.5rem;
+}
+
+.group {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.groupLabel {
+  color: var(--lavender);
+}
+
+/* Items */
+.items {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.question {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: start;
+  gap: 1.25rem;
+  padding: 4px 0;
+  font-size: 1.125rem;
+  line-height: 1.4;
+  list-style: none;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.question::-webkit-details-marker {
+  display: none;
+}
+
+.question :global(.toggle-icon) {
+  margin-top: calc((1.4em - 22px) / 2);
+}
+
+.item[open] .question {
+  color: var(--lavender);
+}
+
+.item {
+  interpolate-size: allow-keywords;
+}
+
+.item::details-content {
+  block-size: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition:
+    block-size 0.45s cubic-bezier(0.2, 0.7, 0.2, 1),
+    opacity 0.45s ease,
+    content-visibility 0.45s allow-discrete;
+}
+
+.item[open]::details-content {
+  block-size: auto;
+  opacity: 1;
+}
+
+.answer {
+  max-width: 34rem;
+  padding: 0.5rem 0 0.75rem;
+  color: #E0E4F2;
+  font-size: 0.9375rem;
+  line-height: 1.7;
+}
+
+/* Tablet and up: two columns */
+@media (min-width: 48rem) {
+  .question {
+    align-items: center;
+  }
+
+  .question :global(.toggle-icon) {
+    margin-top: 0;
+  }
+
+  .groups {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(2.5rem, 5vw, 4rem);
+    align-items: start;
+  }
+}

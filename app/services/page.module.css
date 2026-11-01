@@ -1,0 +1,142 @@
+/* Sky */
+.page {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: linear-gradient(
+    180deg,
+    var(--navy-deep) 0%,
+    var(--navy-deep) 12%,
+    var(--navy) 30%,
+    #101c3c 50%,
+    #1a2750 70%,
+    #263662 100%
+  );
+}
+
+.clouds,
+.ocean {
+  position: absolute;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  pointer-events: none;
+  overflow-anchor: none; /* browsers otherwise anchor scroll to the bottom-pinned ocean and shift the page up */
+}
+
+.clouds {
+  top: 0;
+  z-index: -1;
+  height: 51.25rem;
+  overflow: hidden;
+  background: linear-gradient(180deg, #0b1226 0%, #121c3c 55%, rgba(18, 28, 60, 0) 100%);
+  mask-image: linear-gradient(180deg, #000 55%, transparent 100%);
+}
+
+.cloudsPhoto {
+  position: absolute;
+  inset: calc(var(--cloud-blur) * -3.75);
+}
+
+.ocean {
+  bottom: 0;
+  height: clamp(64rem, 150vh, 92rem);
+  mask-image: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgba(0, 0, 0, 0.2) 12%,
+    rgba(0, 0, 0, 0.55) 24%,
+    rgba(0, 0, 0, 0.85) 36%,
+    #000 48%
+  );
+}
+
+.clouds img,
+.ocean img {
+  object-fit: cover;
+}
+
+.clouds img {
+  object-position: 50% 70%;
+  filter: blur(var(--cloud-blur)) brightness(calc(1 - var(--cloud-overlay))) saturate(0.6) contrast(0.85);
+  opacity: var(--cloud-opacity);
+}
+
+.ocean img {
+  object-position: 40% 50%;
+}
+
+.clouds::after,
+.ocean::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+
+.clouds::after {
+  background: var(--cloud-tint);
+}
+
+.ocean::after {
+  background: linear-gradient(
+    180deg,
+    rgba(26, 39, 80, 0.85) 0%,
+    rgba(26, 39, 80, calc(var(--ocean-overlay) * 1.2)) 25%,
+    rgba(24, 38, 78, calc(var(--ocean-overlay) * 0.6)) 60%,
+    rgba(7, 15, 29, calc(var(--ocean-overlay) * 1.6)) 100%
+  );
+}
+
+/* Content */
+.main {
+  position: relative;
+  z-index: 2;
+}
+
+.page > footer {
+  z-index: 2;
+  margin-top: clamp(21.25rem, 30vw, 27.5rem);
+  padding-top: 0;
+  border-top: 0;
+  text-shadow: 0 1px 3px rgba(7, 15, 29, 0.55), 0 2px 22px rgba(7, 15, 29, 0.6);
+}
+
+/* Title */
+.title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+  padding: 9rem var(--gutter) clamp(9.375rem, 15vw, 13.75rem);
+  text-align: center;
+}
+
+.eyebrow {
+  color: var(--lavender);
+}
+
+.heading {
+  padding-left: 0.2em;
+  font-size: clamp(2.5rem, 8vw, 4.5rem);
+  line-height: 1.05;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.rule {
+  width: 32px;
+  height: 1px;
+  background: var(--moon-white);
+  opacity: 0.4;
+}
+
+/* Tablet and up */
+@media (min-width: 48rem) {
+  .clouds {
+    height: 62.5rem;
+  }
+
+  .title {
+    padding-top: 14rem;
+  }
+}
