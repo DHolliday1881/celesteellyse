@@ -24,7 +24,7 @@ export default function Faq() {
                       <span>{item.question}</span>
                       <span className="toggle-icon" aria-hidden="true" />
                     </summary>
-                    <p className={`reveal ${styles.answer}`}>{item.answer}</p>
+                    <p className={styles.answer}>{item.answer}</p>
                   </details>
                 ))}
               </div>

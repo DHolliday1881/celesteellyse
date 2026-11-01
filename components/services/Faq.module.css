@@ -73,10 +73,29 @@
   color: var(--lavender);
 }
 
+.item {
+  interpolate-size: allow-keywords;
+}
+
+.item::details-content {
+  block-size: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition:
+    block-size 0.45s cubic-bezier(0.2, 0.7, 0.2, 1),
+    opacity 0.45s ease,
+    content-visibility 0.45s allow-discrete;
+}
+
+.item[open]::details-content {
+  block-size: auto;
+  opacity: 1;
+}
+
 .answer {
   max-width: 34rem;
   padding: 0.5rem 0 0.75rem;
-  color: var(--ink-soft);
+  color: #E0E4F2;
   font-size: 0.9375rem;
   line-height: 1.7;
 }
