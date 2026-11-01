@@ -34,6 +34,7 @@
 
 .portrait img {
   object-fit: cover;
+  object-position: 65% 50%;
 }
 
 /* Text */

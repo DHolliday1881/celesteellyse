@@ -23,7 +23,7 @@ export const nav = [
 // Images
 export const images = {
   homeHero: "/images/home-hero.jpg",
-  aboutPortrait: "/images/about-portrait.jpg",
+  aboutPortrait: "/images/about-portrait.png",
   bookAnimal: "/images/book-animal.jpg",
   bookYou: "/images/book-you.jpg",
   servicesClouds: "/images/services-clouds.jpg",
