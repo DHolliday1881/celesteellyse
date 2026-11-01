@@ -1,5 +1,4 @@
 import About from "@/components/home/About"
-import BookWithMe from "@/components/home/BookWithMe"
 import Hero from "@/components/home/Hero"
 import SiteFooter from "@/components/SiteFooter"
 
@@ -10,7 +9,6 @@ export default function Home() {
       <main>
         <Hero />
         <About />
-        <BookWithMe />
       </main>
       <SiteFooter />
     </>
