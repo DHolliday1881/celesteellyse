@@ -6,15 +6,15 @@ export default function SiteFooter() {
   return (
     <footer className={styles.footer}>
       <p className={styles.name}>{brand.name}</p>
-      <div className={styles.contact}>
-        <a href={`mailto:${brand.email}`} className={styles.emailLink}>
+      <a href={`mailto:${brand.email}`} className={styles.contact}>
+        <span className={styles.emailLink}>
           {brand.emailPrompt}
           <span className={styles.arrow} aria-hidden="true">
             →
           </span>
-        </a>
-        <p className={styles.address}>{brand.email}</p>
-      </div>
+        </span>
+        <span className={styles.address}>{brand.email}</span>
+      </a>
       <ul className={styles.social}>
         {social.map((item) => (
           <li key={item.href}>
