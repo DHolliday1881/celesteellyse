@@ -83,6 +83,12 @@
   font-size: var(--text-label);
   letter-spacing: 0.22em;
   text-transform: uppercase;
+  transition: text-shadow 0.35s ease;
+}
+
+.socialLink:hover,
+.socialLink:focus-visible {
+  text-shadow: var(--link-glow);
 }
 
 .disclaimer {
