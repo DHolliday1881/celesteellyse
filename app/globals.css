@@ -19,7 +19,10 @@
   /* Image treatments */
   --hero-blur: 4px;
   --hero-overlay: 0.35;
-  --sky-overlay: 0.25;
+  --cloud-overlay: 0.15;
+  --cloud-tint: rgba(40, 58, 120, 0.22);
+  --cloud-blur: 16px;
+  --cloud-opacity: 0.6;
   --ocean-overlay: 0.45;
 
   /* Type scale */
@@ -58,6 +61,7 @@
 
 html {
   -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
 }
 
 body {
@@ -200,9 +204,13 @@ details[open] > summary .toggle-icon::after {
 }
 
 /* Accessibility */
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
 :focus-visible {
-  outline: 2px solid var(--periwinkle);
-  outline-offset: 3px;
+  outline: 2px solid rgba(149, 163, 236, 0.7);
+  outline-offset: 4px;
 }
 
 @media (prefers-reduced-motion: reduce) {

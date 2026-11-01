@@ -5,7 +5,7 @@
   padding: 0 var(--gutter);
   display: flex;
   flex-direction: column;
-  gap: var(--space-xl);
+  gap: clamp(6rem, 12vw, 9.375rem);
 }
 
 .group {

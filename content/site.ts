@@ -23,12 +23,15 @@ export const nav = [
 // Images
 export const images = {
   homeHero: "/images/home-hero.jpg",
-  aboutPortrait: "/images/about-portrait.jpg",
+  aboutPortrait: "/images/about-portrait.png",
   bookAnimal: "/images/book-animal.jpg",
   bookYou: "/images/book-you.jpg",
   servicesClouds: "/images/services-clouds.jpg",
   servicesOcean: "/images/services-ocean.jpg",
-  moons: ["/images/moon-1.png", "/images/moon-2.png", "/images/moon-3.png", "/images/moon-4.png"],
+  moonCrescent: "/images/crescent-moon.png",
+  moonQuarter: "/images/quarter-moon.png",
+  moonWaxing: "/images/waxing-moon.png",
+  moonFull: "/images/full-moon.png",
 }
 
 // Home
@@ -146,12 +149,29 @@ export const services = {
   ] satisfies ServiceGroup[],
   howItWorks: {
     eyebrow: "How it works",
-    heading: "How sessions work",
-    steps: [
-      {title: "Book and pay", body: "Choose your session and book it here."},
-      {title: "Share their details", body: "Your animal's details and a photo with their eyes visible."},
-      {title: "I tune in", body: "I sit quietly with your animal and listen."},
-      {title: "Your session arrives", body: "Your written session arrives by email within 7 days."},
+    heading: "Four steps, start to finish",
+    moons: [images.moonCrescent, images.moonQuarter, images.moonWaxing, images.moonFull],
+    tabs: [
+      {
+        id: "animal-communication",
+        label: "Animal communication",
+        steps: [
+          {title: "Book and pay", body: "Choose your session and book it here."},
+          {title: "Share their details", body: "Their name and a photo with their eyes visible."},
+          {title: "I tune in", body: "I sit quietly with your animal and listen."},
+          {title: "Your session arrives", body: "Your written session arrives by email within 7 days."},
+        ],
+      },
+      {
+        id: "distance-reiki",
+        label: "Distance Reiki",
+        steps: [
+          {title: "Book and pay", body: "Choose a time that works for you."},
+          {title: "Share the details", body: "Your name, or your animal's, and a photo."},
+          {title: "Rest while I send Reiki", body: "I'll text before I begin. Settle somewhere quiet."},
+          {title: "Your summary", body: "A short email afterward with what I noticed."},
+        ],
+      },
     ],
   },
   faq: {
