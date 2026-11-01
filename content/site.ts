@@ -26,7 +26,7 @@ export const images = {
   aboutPortrait: "/images/about-portrait.png",
   bookAnimal: "/images/book-animal.jpg",
   bookYou: "/images/book-you.jpg",
-  servicesClouds: "/images/services-clouds.jpg",
+  servicesClouds: "/images/night-clouds.jpeg",
   servicesOcean: "/images/services-ocean.jpg",
   moonCrescent: "/images/crescent-moon.png",
   moonQuarter: "/images/quarter-moon.png",
@@ -73,21 +73,23 @@ export const home = {
 // Services
 export type ServiceDetail = {label: string; body: string}
 
+export type BookingOption = {price: string; duration: string; url: string}
+
 export type Service = {
   id: string
   name: string
   summary: string
-  price: string
-  bookingUrl: string
+  options: BookingOption[]
   details: ServiceDetail[]
+  note?: string
 }
 
 export type ServiceGroup = {id: string; name: string; services: Service[]}
 
-const detailsPlaceholder: ServiceDetail[] = [
-  {label: "What it is", body: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore."},
-  {label: "How it works", body: "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo."},
-  {label: "What you receive", body: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla."},
+const details = (whatItIs: string, howItWorks: string, whatYouReceive: string): ServiceDetail[] => [
+  {label: "What it is", body: whatItIs},
+  {label: "How it works", body: howItWorks},
+  {label: "What you receive", body: whatYouReceive},
 ]
 
 export const services = {
@@ -101,34 +103,56 @@ export const services = {
         {
           id: "animal-communication",
           name: "Animal communication",
-          summary: "A written session with your animal, living or passed, with up to 5 of your questions.",
-          price: "$180",
-          bookingUrl: "#",
-          details: detailsPlaceholder,
+          summary:
+            "A written conversation with your animal, living or passed, with up to 5 of your questions. Sessions run 45 to 60 minutes.",
+          options: [
+            {
+              price: "$180",
+              duration: "45 min",
+              url: "https://cal.com/celesteellyse/animal-communication",
+            },
+          ],
+          details: details(
+            "I connect with your animal and write down everything they share through words, images, and feelings: who they are, how they feel, and their answers to your questions. For animals who have passed, it's a chance to hear from them again.",
+            "When you book, share their name and your questions, plus their age and who they live with if they're living. Then reply to your confirmation email with a clear photo, eyes visible.",
+            "Your written session by email within 7 days: what your animal shared, what they showed me, and their answers to each of your questions. It's yours to keep and come back to whenever you want to hear from them again.",
+          ),
+          note: "Want to add Reiki? Book Animal Reiki separately. Many people like it after their session arrives.",
         },
         {
           id: "two-animal-session",
           name: "Two-animal session",
-          summary: "Both animals in one written session, up to 3 questions each.",
-          price: "$240",
-          bookingUrl: "#",
-          details: detailsPlaceholder,
-        },
-        {
-          id: "animal-communication-reiki",
-          name: "Animal communication + Reiki",
-          summary: "A written session plus up to 20 minutes of distance Reiki for your animal.",
-          price: "$225",
-          bookingUrl: "#",
-          details: detailsPlaceholder,
+          summary:
+            "Two animals in one written session, living or passed, with up to 3 questions each. Sessions run 60 to 75 minutes.",
+          options: [
+            {
+              price: "$240",
+              duration: "60 min",
+              url: "https://cal.com/celesteellyse/two-animal-session",
+            },
+          ],
+          details: details(
+            "The same written conversation, with two animals. They can share a home, or one can be here and one passed.",
+            "When you book, share each animal's name and your questions. For living animals, also tell me their age and who they live with. Then reply to your confirmation email with a clear photo of each, eyes visible.",
+            "One written session by email within 7 days, with each animal in their own voice and their answers to your questions. Yours to keep and come back to.",
+          ),
         },
         {
           id: "animal-reiki",
           name: "Animal Reiki",
-          summary: "Up to 20 minutes of distance Reiki while your animal rests at home.",
-          price: "$50",
-          bookingUrl: "#",
-          details: detailsPlaceholder,
+          summary: "Distance Reiki while your animal rests at home. Sessions run 20 to 25 minutes.",
+          options: [
+            {
+              price: "$50",
+              duration: "20 min",
+              url: "https://cal.com/celesteellyse/animal-reiki",
+            },
+          ],
+          details: details(
+            "Gentle energy work for calm and balance. It's lovely during stressful stretches, recovery, older age, or big changes, or as a follow-up after a communication session. Animals carry a different energy than people, so Reiki meets them differently, and a shorter session is all they need.",
+            "Pick a time, and share your animal's name and a photo. Your animal can rest wherever they like, with no need to keep them still. I'll text you right before I begin.",
+            "A follow-up by email or phone call, sharing what I felt and saw during the session, how your animal took in the energy, and anything that stood out.",
+          ),
         },
       ],
     },
@@ -138,11 +162,25 @@ export const services = {
       services: [
         {
           id: "distance-reiki",
-          name: "Distance Reiki for people",
-          summary: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.",
-          price: "Price TBD",
-          bookingUrl: "#",
-          details: detailsPlaceholder,
+          name: "Distance Reiki",
+          summary: "Reiki from a distance while you rest somewhere comfortable.",
+          options: [
+            {
+              price: "$100",
+              duration: "45 min",
+              url: "https://cal.com/celesteellyse/distance-reiki",
+            },
+            {
+              price: "$80",
+              duration: "30 min",
+              url: "https://cal.com/celesteellyse/distance-reiki-30",
+            },
+          ],
+          details: details(
+            "Gentle energy work, sent to you wherever you are. It's lovely when you're stressed, grieving, worn out, or in the middle of a big change. Some people feel warmth or deep calm during the session, and some notice the shift in the days after.",
+            "Pick a time and tell me where you'll be. Lie down somewhere quiet, and I'll text you before I begin. All you have to do is rest.",
+            "A follow-up by email or phone call, sharing what I felt and saw during your session and anything that stood out. Go easy on yourself afterward. Many people like a little quiet time.",
+          ),
         },
       ],
     },

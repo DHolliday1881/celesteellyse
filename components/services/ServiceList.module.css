@@ -36,14 +36,23 @@
 .rows {
   display: flex;
   flex-direction: column;
-  gap: clamp(3.5rem, 7vw, 5rem);
   padding: 0;
   list-style: none;
 }
 
 .row {
-  display: grid;
-  gap: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.numeral {
+  padding: 2.5rem 0 1rem;
+  color: var(--lavender);
+  text-align: center;
+}
+
+.row:first-child .numeral {
+  padding-top: 0;
 }
 
 .intro {
@@ -63,19 +72,73 @@
   color: var(--ink-soft);
 }
 
+.details {
+  margin-top: 0.5rem;
+}
+
+.note {
+  max-width: var(--measure);
+  margin-top: 1rem;
+  color: var(--ink-faint);
+  font-size: var(--text-sm);
+  font-style: italic;
+}
+
+/* Price rows */
 .actions {
+  --book-width: 150px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 0.75rem;
+}
+
+.details[open] + .actions {
+  margin-top: 1.75rem;
+}
+
+.option {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 1.375rem;
+  gap: 1rem;
+  padding: 6px 6px 6px 1.25rem;
+  border-radius: 999px;
+  background: var(--glass-fill-strong);
+  box-shadow: inset 0 0 0 1px var(--glass-edge);
+  backdrop-filter: blur(var(--glass-blur));
+}
+
+.priceLine {
+  display: flex;
+  align-items: baseline;
+  gap: 0.625rem;
+  min-width: 7.5rem;
 }
 
 .price {
   color: var(--coral);
-  font-size: 1.875rem;
+  font-size: 1.5rem;
   font-weight: 300;
   line-height: 1;
   white-space: nowrap;
+}
+
+.duration {
+  color: var(--periwinkle);
+  font-family: var(--font-label);
+  font-size: 0.625rem;
+  font-weight: 500;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.book {
+  flex: 1 1 auto;
+  max-width: var(--book-width);
+  min-height: 36px;
+  padding: 0 1.5rem;
 }
 
 /* Details toggle */
@@ -137,19 +200,65 @@
 
 /* Tablet and up: price and button beside the name */
 @media (min-width: 48rem) {
+  .rows {
+    gap: clamp(3.5rem, 7vw, 5rem);
+  }
+
   .row {
+    display: grid;
     grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas:
+      "intro actions"
+      "details details";
     column-gap: 2rem;
     row-gap: 0.75rem;
     align-items: center;
   }
 
-  .actions {
-    justify-content: flex-end;
+  .numeral {
+    display: none;
+  }
+
+  .intro {
+    grid-area: intro;
   }
 
   .details {
-    grid-column: 1 / -1;
+    grid-area: details;
+    margin-top: 0;
+  }
+
+  .actions,
+  .details[open] + .actions {
+    grid-area: actions;
+    gap: 1.5rem;
+    margin-top: 0;
+  }
+
+  .option {
+    justify-content: flex-end;
+    padding: 0;
+    border-radius: 0;
+    background: none;
+    box-shadow: none;
+    backdrop-filter: none;
+    gap: 1.375rem;
+  }
+
+  .priceLine {
+    min-width: 0;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.5rem;
+  }
+
+  .price {
+    font-size: 1.875rem;
+  }
+
+  .book {
+    flex: none;
+    width: var(--book-width);
   }
 
   .parts {
