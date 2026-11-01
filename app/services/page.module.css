@@ -98,7 +98,6 @@
   z-index: 2;
   margin-top: clamp(21.25rem, 30vw, 27.5rem);
   padding-top: 0;
-  border-top: 0;
   text-shadow: 0 1px 3px rgba(7, 15, 29, 0.55), 0 2px 22px rgba(7, 15, 29, 0.6);
 }
 

@@ -10,7 +10,6 @@
   /* Supporting text tones */
   --ink-soft: #C9CFE4;
   --ink-faint: #9AA4C2;
-  --hairline: rgba(243, 241, 234, 0.12);
 
   /* Fonts */
   --font-body: var(--font-raleway), system-ui, sans-serif;
