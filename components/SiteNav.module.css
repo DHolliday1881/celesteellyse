@@ -19,7 +19,7 @@
   gap: 0.75rem;
   min-height: var(--tap);
   font-size: 0.8125rem;
-  font-weight: 300;
+  font-weight: 500;
   letter-spacing: 0.32em;
   text-transform: uppercase;
 }
@@ -29,6 +29,7 @@
   height: 20px;
   border-radius: 50%;
   box-shadow: -5px 3px 0 0 var(--moon-white);
+  translate: 0 -3px;
 }
 
 .toggle {
@@ -82,6 +83,7 @@
   min-height: var(--tap);
   font-family: var(--font-label);
   font-size: 0.875rem;
+  font-weight: 500;
   letter-spacing: 0.24em;
   text-transform: uppercase;
 }
