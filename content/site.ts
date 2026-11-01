@@ -11,8 +11,6 @@ export const social = [
   {label: "TikTok", href: "https://tiktok.com/@celeste.ellyse"},
 ]
 
-export const socialHandle = "@celeste.ellyse"
-
 // Navigation
 export const nav = [
   {label: "Home", href: "/"},

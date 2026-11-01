@@ -1,4 +1,4 @@
-import {brand, social, socialHandle} from "@/content/site"
+import {brand, social} from "@/content/site"
 import styles from "./SiteFooter.module.css"
 
 /** Shared footer: name, email, socials and the care disclaimer. */
@@ -18,7 +18,6 @@ export default function SiteFooter() {
           </li>
         ))}
       </ul>
-      <p className={styles.handle}>{socialHandle}</p>
       <p className={styles.disclaimer}>{brand.disclaimer}</p>
     </footer>
   )
