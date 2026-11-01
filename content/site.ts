@@ -154,7 +154,7 @@ export const services = {
           details: details(
             "Gentle energy work for calm and balance. It's lovely during stressful stretches, recovery, older age, or big changes, or as a follow-up after a communication session. Animals carry a different energy than people, so Reiki meets them differently, and a shorter session is all they need.",
             "Pick a time, and share your animal's name and a photo. Your animal can rest wherever they like, with no need to keep them still. I'll text you right before I begin.",
-            "A follow-up by email or phone call, sharing what I felt and saw during the session, how your animal took in the energy, and anything that stood out.",
+            "A follow-up by email or phone call, sharing what I felt and saw during the session.",
           ),
         },
       ],
@@ -182,7 +182,7 @@ export const services = {
           details: details(
             "Gentle energy work, sent to you wherever you are. It's lovely when you're stressed, grieving, worn out, or in the middle of a big change. Some people feel warmth or deep calm during the session, and some notice the shift in the days after.",
             "Pick a time and tell me where you'll be. Lie down somewhere quiet, and I'll text you before I begin. All you have to do is rest.",
-            "A follow-up by email or phone call, sharing what I felt and saw during your session and anything that stood out. Go easy on yourself afterward. Many people like a little quiet time.",
+            "A follow-up by email or phone call, sharing what I felt and saw during your session.",
           ),
         },
       ],
@@ -197,9 +197,9 @@ export const services = {
         id: "animal-communication",
         label: "Animal communication",
         steps: [
-          {title: "Book and pay", body: "Choose your session and book it here."},
-          {title: "Share their details", body: "Their name and a photo with their eyes visible."},
-          {title: "I tune in", body: "I sit quietly with your animal and listen."},
+          {title: "Book and pay", body: "Pick your session and any open time to hold your spot."},
+          {title: "Share their details", body: "Their name, your questions, and a clear photo with their eyes visible."},
+          {title: "I tune in", body: "I sit quietly with your animal and write down everything they share."},
           {title: "Your session arrives", body: "Your written session arrives by email within 7 days."},
         ],
       },
@@ -207,10 +207,19 @@ export const services = {
         id: "distance-reiki",
         label: "Distance Reiki",
         steps: [
-          {title: "Book and pay", body: "Choose a time that works for you."},
-          {title: "Share the details", body: "Your name, or your animal's, and a photo."},
-          {title: "Rest while I send Reiki", body: "I'll text before I begin. Settle somewhere quiet."},
-          {title: "Your summary", body: "A short email afterward with what I noticed."},
+          {title: "Book a time", body: "Pick the time that works best for you."},
+          {
+            title: "Tell me who it's for",
+            body: "For you, your name and the city you'll be in. For your animal, their name and a photo.",
+          },
+          {
+            title: "Rest",
+            body: "I'll text you before I begin. Lie down somewhere quiet, or let your animal rest wherever they like.",
+          },
+          {
+            title: "Afterward",
+            body: "A follow-up by email or phone call, sharing what I felt and saw during your session.",
+          },
         ],
       },
     ],
