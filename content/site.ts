@@ -2,6 +2,7 @@
 export const brand = {
   name: "Celeste Ellyse",
   email: "hello@celesteellyse.com",
+  emailPrompt: "Questions? Email me",
   disclaimer: "I'm not a veterinarian or doctor. Sessions don't replace professional care.",
 }
 
