@@ -21,6 +21,7 @@
   right: 0;
   z-index: 1;
   pointer-events: none;
+  overflow-anchor: none; /* browsers otherwise anchor scroll to the bottom-pinned ocean and shift the page up */
 }
 
 .clouds {
@@ -39,14 +40,14 @@
 
 .ocean {
   bottom: 0;
-  height: clamp(56rem, 130vh, 80rem);
+  height: clamp(64rem, 150vh, 92rem);
   mask-image: linear-gradient(
     180deg,
     transparent 0%,
-    rgba(0, 0, 0, 0.2) 18%,
-    rgba(0, 0, 0, 0.55) 34%,
-    rgba(0, 0, 0, 0.85) 48%,
-    #000 60%
+    rgba(0, 0, 0, 0.2) 12%,
+    rgba(0, 0, 0, 0.55) 24%,
+    rgba(0, 0, 0, 0.85) 36%,
+    #000 48%
   );
 }
 
@@ -79,8 +80,8 @@
 .ocean::after {
   background: linear-gradient(
     180deg,
-    rgba(26, 39, 80, 0.95) 0%,
-    rgba(26, 39, 80, calc(var(--ocean-overlay) * 1.5)) 30%,
+    rgba(26, 39, 80, 0.85) 0%,
+    rgba(26, 39, 80, calc(var(--ocean-overlay) * 1.2)) 25%,
     rgba(24, 38, 78, calc(var(--ocean-overlay) * 0.6)) 60%,
     rgba(7, 15, 29, calc(var(--ocean-overlay) * 1.6)) 100%
   );
