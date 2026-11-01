@@ -49,6 +49,7 @@ export const home = {
     ],
     signOff: "I’m glad you found your way here.",
     portraitAlt: "Portrait of Celeste",
+    cta: {label: "See sessions", href: "/services"},
   },
   book: {
     eyebrow: "Sessions",

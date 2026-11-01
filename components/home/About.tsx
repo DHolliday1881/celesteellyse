@@ -1,10 +1,11 @@
 import Image from "next/image"
+import Link from "next/link"
 import {home, images} from "@/content/site"
 import styles from "./About.module.css"
 
 /** About me: arched portrait with a soft glow and crescent beside a short intro. */
 export default function About() {
-  const {eyebrow, heading, body, signOff, portraitAlt} = home.about
+  const {eyebrow, heading, body, signOff, portraitAlt, cta} = home.about
 
   return (
     <section id="about" className={styles.about} aria-labelledby="about-heading">
@@ -29,6 +30,9 @@ export default function About() {
           ))}
           <p className={styles.signOff}>{signOff}</p>
         </div>
+        <Link href={cta.href} className={`button button-tall ${styles.cta}`}>
+          {cta.label}
+        </Link>
       </div>
     </section>
   )

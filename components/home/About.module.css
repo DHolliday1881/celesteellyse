@@ -94,6 +94,10 @@
   color: var(--moon-white);
 }
 
+.cta {
+  margin-top: 0.75rem;
+}
+
 /* Tablet and up: side by side */
 @media (min-width: 48rem) {
   .about {
