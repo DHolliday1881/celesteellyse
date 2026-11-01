@@ -92,6 +92,8 @@ const details = (whatItIs: string, howItWorks: string, whatYouReceive: string): 
   {label: "What you receive", body: whatYouReceive},
 ]
 
+const addReikiNote = "Want to add Reiki? Book Animal Reiki separately. Many people like it after their session arrives."
+
 export const services = {
   eyebrow: "Sessions for animals & people",
   title: "Services",
@@ -117,7 +119,7 @@ export const services = {
             "When you book, share their name and your questions, plus their age and who they live with if they're living. Then reply to your confirmation email with a clear photo, eyes visible.",
             "Your written session by email within 7 days: what your animal shared, what they showed me, and their answers to each of your questions. It's yours to keep and come back to whenever you want to hear from them again.",
           ),
-          note: "Want to add Reiki? Book Animal Reiki separately. Many people like it after their session arrives.",
+          note: addReikiNote,
         },
         {
           id: "two-animal-session",
@@ -136,6 +138,7 @@ export const services = {
             "When you book, share each animal's name and your questions. For living animals, also tell me their age and who they live with. Then reply to your confirmation email with a clear photo of each, eyes visible.",
             "One written session by email within 7 days, with each animal in their own voice and their answers to your questions. Yours to keep and come back to.",
           ),
+          note: addReikiNote,
         },
         {
           id: "animal-reiki",
