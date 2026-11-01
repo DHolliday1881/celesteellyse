@@ -4,7 +4,7 @@ import styles from "./About.module.css"
 
 /** About me: tall arched portrait beside a short intro. */
 export default function About() {
-  const {eyebrow, heading, body, portraitAlt} = home.about
+  const {eyebrow, heading, body, signOff, portraitAlt} = home.about
 
   return (
     <section id="about" className={styles.about} aria-labelledby="about-heading">
@@ -19,7 +19,12 @@ export default function About() {
         <h2 id="about-heading" className={styles.heading}>
           {heading}
         </h2>
-        <p className={styles.body}>{body}</p>
+        <div className={styles.body}>
+          {body.map((paragraph) => (
+            <p key={paragraph}>{paragraph}</p>
+          ))}
+          <p className={styles.signOff}>{signOff}</p>
+        </div>
       </div>
     </section>
   )
