@@ -34,18 +34,14 @@ export default function ServiceList({groups}: {groups: ServiceGroup[]}) {
                     <span className={styles.whenOpen}>Close details</span>
                   </summary>
                   <dl className={`reveal ${styles.parts}`}>
-                    {service.details.map((part, p) => (
+                    {service.details.map((part) => (
                       <div key={part.label} className={styles.part}>
                         <dt className={styles.partLabel}>{part.label}</dt>
-                        <dd className={styles.partBody}>
-                          {part.body}
-                          {service.note && p === service.details.length - 1 && (
-                            <p className={styles.note}>{service.note}</p>
-                          )}
-                        </dd>
+                        <dd className={styles.partBody}>{part.body}</dd>
                       </div>
                     ))}
                   </dl>
+                  {service.note && <p className={`reveal ${styles.note}`}>{service.note}</p>}
                 </details>
 
                 <div className={styles.actions}>
