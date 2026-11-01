@@ -26,7 +26,7 @@ export const images = {
   aboutPortrait: "/images/about-portrait.png",
   bookAnimal: "/images/book-animal.jpg",
   bookYou: "/images/book-you.jpg",
-  servicesClouds: "/images/services-clouds.jpg",
+  servicesClouds: "/images/night-clouds.jpeg",
   servicesOcean: "/images/services-ocean.jpg",
   moonCrescent: "/images/crescent-moon.png",
   moonQuarter: "/images/quarter-moon.png",
