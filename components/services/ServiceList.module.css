@@ -137,7 +137,6 @@
 .book {
   flex: 1 1 auto;
   max-width: var(--book-width);
-  min-height: 36px;
   padding: 0 1.5rem;
 }
 
