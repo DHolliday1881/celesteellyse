@@ -1,5 +1,6 @@
 /* Footer */
 .footer {
+  --link-glow: 0 0 14px rgba(149, 163, 236, 0.65);
   position: relative;
   max-width: var(--container);
   margin: 0 auto;
@@ -37,10 +38,13 @@
 }
 
 .arrow {
+  display: inline-block;
   color: var(--periwinkle);
   font-family: var(--font-label);
   font-size: 0.9375rem;
   font-weight: 400;
+  transform-origin: left center;
+  transition: translate 0.35s ease, scale 0.35s ease;
 }
 
 .address {
@@ -49,6 +53,19 @@
   font-size: 0.8125rem;
   font-weight: 400;
   letter-spacing: 0.06em;
+  transition: translate 0.35s ease, text-shadow 0.35s ease;
+}
+
+.contact:hover .arrow,
+.contact:focus-visible .arrow {
+  translate: 4px 0;
+  scale: 1.35 1;
+}
+
+.contact:hover .address,
+.contact:focus-visible .address {
+  translate: 0 -2px;
+  text-shadow: var(--link-glow);
 }
 
 .social {
