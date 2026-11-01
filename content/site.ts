@@ -20,7 +20,7 @@ export const nav = [
 
 // Images
 export const images = {
-  homeHero: "/images/home-hero.jpg",
+  homeHero: "/images/jungle-sunset.jpeg",
   aboutPortrait: "/images/about-portrait.png",
   bookAnimal: "/images/book-animal.jpg",
   bookYou: "/images/book-you.jpg",
