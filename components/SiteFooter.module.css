@@ -1,5 +1,6 @@
 /* Footer */
 .footer {
+  --link-glow: 0 0 14px rgba(149, 163, 236, 0.65);
   position: relative;
   max-width: var(--container);
   margin: 0 auto;
@@ -9,7 +10,6 @@
   align-items: center;
   gap: 1.25rem;
   text-align: center;
-  border-top: 1px solid var(--hairline);
 }
 
 .name {
@@ -20,10 +20,52 @@
   text-transform: uppercase;
 }
 
-.email {
+.contact {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.emailLink {
   display: flex;
   align-items: center;
+  gap: 10px;
   min-height: var(--tap);
+  color: var(--moon-white);
+  font-size: 1.125rem;
+  font-weight: 300;
+}
+
+.arrow {
+  display: inline-block;
+  color: var(--periwinkle);
+  font-family: var(--font-label);
+  font-size: 0.9375rem;
+  font-weight: 400;
+  transform-origin: left center;
+  transition: translate 0.35s ease, scale 0.35s ease;
+}
+
+.address {
+  color: #B3BEF2;
+  font-family: var(--font-label);
+  font-size: 0.8125rem;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  transition: translate 0.35s ease, text-shadow 0.35s ease;
+}
+
+.contact:hover .arrow,
+.contact:focus-visible .arrow {
+  translate: 4px 0;
+  scale: 1.35 1;
+}
+
+.contact:hover .address,
+.contact:focus-visible .address {
+  translate: 0 -2px;
+  text-shadow: var(--link-glow);
 }
 
 .social {
@@ -41,18 +83,19 @@
   font-size: var(--text-label);
   letter-spacing: 0.22em;
   text-transform: uppercase;
+  transition: text-shadow 0.35s ease;
 }
 
-.handle {
-  margin-top: -0.75rem;
-  color: var(--lavender);
-  font-size: var(--text-sm);
+.socialLink:hover,
+.socialLink:focus-visible {
+  text-shadow: var(--link-glow);
 }
 
 .disclaimer {
-  max-width: 28rem;
+  max-width: 440px;
   padding-top: var(--space-xs);
   color: var(--ink-faint);
   font-size: 0.8125rem;
+  font-weight: 400;
   line-height: 1.6;
 }

@@ -2,6 +2,7 @@
 export const brand = {
   name: "Celeste Ellyse",
   email: "hello@celesteellyse.com",
+  emailPrompt: "Questions? Email me",
   disclaimer: "I'm not a veterinarian or doctor. Sessions don't replace professional care.",
 }
 
@@ -11,8 +12,6 @@ export const social = [
   {label: "TikTok", href: "https://tiktok.com/@celeste.ellyse"},
 ]
 
-export const socialHandle = "@celeste.ellyse"
-
 // Navigation
 export const nav = [
   {label: "Home", href: "/"},
@@ -21,12 +20,12 @@ export const nav = [
 
 // Images
 export const images = {
-  homeHero: "/images/home-hero.jpg",
+  homeHero: "/images/jungle-sunset.jpeg",
   aboutPortrait: "/images/about-portrait.png",
   bookAnimal: "/images/book-animal.jpg",
   bookYou: "/images/book-you.jpg",
   servicesClouds: "/images/night-clouds.jpeg",
-  servicesOcean: "/images/services-ocean.jpg",
+  servicesOcean: "/images/sunset-ocean.jpeg",
   moonCrescent: "/images/crescent-moon.png",
   moonQuarter: "/images/quarter-moon.png",
   moonWaxing: "/images/waxing-moon.png",
@@ -37,14 +36,20 @@ export const images = {
 export const home = {
   hero: {
     eyebrow: "Intuitive · Animal communicator · Reiki master",
-    tagline: "Lorem ipsum dolor sit amet, consectetur.",
+    tagline: "Guided by intuition, rooted in care.",
     cta: {label: "Book a session", href: "/services"},
   },
   about: {
     eyebrow: "About",
     heading: "Hi, I'm Celeste.",
-    body: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.",
+    body: [
+      "I’m an animal communicator and Reiki master based in New York City. I’ve always been drawn to animals and to energy, and my work lets me bring the two together.",
+      "Through animal communication and mediumship, I connect with animals living and passed, sharing who they are, how they feel, and what they want you to know.",
+      "As a Reiki master, I’m trained to work with energy to help people and animals release stress, move through what feels stuck or heavy, and find their way back to calm and balance, wherever they are.",
+    ],
+    signOff: "I’m glad you found your way here.",
     portraitAlt: "Portrait of Celeste",
+    cta: {label: "See sessions", href: "/services"},
   },
   book: {
     eyebrow: "Sessions",

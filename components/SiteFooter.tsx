@@ -1,4 +1,4 @@
-import {brand, social, socialHandle} from "@/content/site"
+import {brand, social} from "@/content/site"
 import styles from "./SiteFooter.module.css"
 
 /** Shared footer: name, email, socials and the care disclaimer. */
@@ -6,8 +6,14 @@ export default function SiteFooter() {
   return (
     <footer className={styles.footer}>
       <p className={styles.name}>{brand.name}</p>
-      <a href={`mailto:${brand.email}`} className={styles.email}>
-        {brand.email}
+      <a href={`mailto:${brand.email}`} className={styles.contact}>
+        <span className={styles.emailLink}>
+          {brand.emailPrompt}
+          <span className={styles.arrow} aria-hidden="true">
+            →
+          </span>
+        </span>
+        <span className={styles.address}>{brand.email}</span>
       </a>
       <ul className={styles.social}>
         {social.map((item) => (
@@ -18,7 +24,6 @@ export default function SiteFooter() {
           </li>
         ))}
       </ul>
-      <p className={styles.handle}>{socialHandle}</p>
       <p className={styles.disclaimer}>{brand.disclaimer}</p>
     </footer>
   )

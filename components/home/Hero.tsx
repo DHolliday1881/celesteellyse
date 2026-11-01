@@ -27,7 +27,7 @@ export default function Hero() {
         </h1>
         <p className={styles.tagline}>{tagline}</p>
         <span className={styles.rule} aria-hidden="true" />
-        <Link href={cta.href} className="button">
+        <Link href={cta.href} className="button button-tall">
           {cta.label}
         </Link>
       </div>
