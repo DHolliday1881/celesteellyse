@@ -25,6 +25,12 @@
   --cloud-opacity: 0.6;
   --ocean-overlay: 0.45;
 
+  /* Night glass */
+  --glass-fill: rgba(10, 20, 36, 0.35);
+  --glass-edge: rgba(149, 163, 236, 0.2);
+  --glass-tint: rgba(149, 163, 236, 0.16);
+  --glass-tint-edge: rgba(243, 241, 234, 0.12);
+
   /* Type scale */
   --text-label: 0.6875rem;
   --text-sm: 0.875rem;
