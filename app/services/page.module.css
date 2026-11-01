@@ -3,15 +3,17 @@
   position: relative;
   isolation: isolate;
   overflow: hidden;
-  background: linear-gradient(
-    180deg,
-    var(--navy-deep) 0%,
-    var(--navy-deep) 12%,
-    var(--navy) 30%,
-    #101c3c 50%,
-    #1a2750 70%,
-    #263662 100%
-  );
+  background:
+    linear-gradient(var(--navy-deep), var(--navy-deep)) bottom / 100% 30rem no-repeat,
+    linear-gradient(
+      180deg,
+      var(--navy-deep) 0%,
+      var(--navy-deep) 12%,
+      var(--navy) 30%,
+      #101c3c 50%,
+      #1a2750 70%,
+      #263662 100%
+    );
 }
 
 .clouds,
@@ -47,7 +49,9 @@
     rgba(0, 0, 0, 0.2) 12%,
     rgba(0, 0, 0, 0.55) 24%,
     rgba(0, 0, 0, 0.85) 36%,
-    #000 48%
+    #000 48%,
+    #000 80%,
+    transparent 100%
   );
 }
 

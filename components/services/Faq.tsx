@@ -1,12 +1,14 @@
 import {services} from "@/content/site"
 import styles from "./Faq.module.css"
 
+export const FAQ_ID = "faq"
+
 /** Questions & policies on a frosted night glass card, in two labelled columns; one answer open at a time. */
 export default function Faq() {
   const {eyebrow, heading, groups} = services.faq
 
   return (
-    <section className={styles.faq} aria-labelledby="faq-heading">
+    <section id={FAQ_ID} className={styles.faq} aria-labelledby="faq-heading">
       <div className={styles.card}>
         <header className={styles.head}>
           <p className={`label ${styles.eyebrow}`}>{eyebrow}</p>
