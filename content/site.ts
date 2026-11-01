@@ -280,7 +280,7 @@ export const services = {
           {
             question: "Cancellations & refunds",
             answer:
-              "Cancel at least 48 hours before your session time for a full refund. Within 48 hours, sessions can't be refunded.",
+              "You can cancel for a full refund up to 48 hours before the time you booked. For written sessions, that's the date you picked when booking. After that, refunds aren't available, but you can still reschedule up to 24 hours before, from your confirmation email.",
           },
           {
             question: "Who can book?",
