@@ -27,6 +27,8 @@
 
   /* Night glass */
   --glass-fill: rgba(10, 20, 36, 0.35);
+  --glass-fill-strong: rgba(10, 20, 36, 0.55);
+  --glass-blur: 16px;
   --glass-edge: rgba(149, 163, 236, 0.2);
   --glass-tint: rgba(149, 163, 236, 0.16);
   --glass-tint-edge: rgba(243, 241, 234, 0.12);
