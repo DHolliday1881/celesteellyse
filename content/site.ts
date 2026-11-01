@@ -228,56 +228,66 @@ export const services = {
   faq: {
     eyebrow: "Good to know",
     heading: "Questions & policies",
-    items: [
+    groups: [
       {
-        question: "Do I need to be there for a written session?",
-        answer:
-          "No. Written sessions aren't live. The time you pick when booking just holds your spot, and your written session arrives by email within 7 days.",
+        label: "Sessions",
+        items: [
+          {
+            question: "Do I need to be there for a written session?",
+            answer:
+              "No. Written sessions aren't live. The time you pick when booking just holds your spot, and your written session arrives by email within 7 days.",
+          },
+          {
+            question: "Can you connect with an animal who has passed?",
+            answer:
+              "Yes. Just share their name and a clear photo of them, and I'll connect with them the same way.",
+          },
+          {
+            question: "What do I need to send you?",
+            answer:
+              "For animal communication: their name, your questions, and a clear photo with their eyes visible. For a living animal, also their age and who they live with. Reply to your confirmation email with the photo. For Animal Reiki: their name and a photo. For Distance Reiki: your name and the city you'll be in.",
+          },
+          {
+            question: "What happens during a Reiki session?",
+            answer:
+              "At your booked time, I'll text you before I begin. Lie down somewhere quiet, or let your animal rest wherever they like. They don't need to stay still. Afterward, I'll follow up by email or phone call with what I felt and saw.",
+          },
+          {
+            question: "Does distance matter?",
+            answer:
+              "Not at all. Every session happens from a distance, wherever you and your animal are.",
+          },
+        ],
       },
       {
-        question: "Can you connect with an animal who has passed?",
-        answer:
-          "Yes. Just share their name and a clear photo of them, and I'll connect with them the same way.",
-      },
-      {
-        question: "What do I need to send you?",
-        answer:
-          "For animal communication: their name, your questions, and a clear photo with their eyes visible. For a living animal, also their age and who they live with. Reply to your confirmation email with the photo. For Animal Reiki: their name and a photo. For Distance Reiki: your name and the city you'll be in.",
-      },
-      {
-        question: "What happens during a Reiki session?",
-        answer:
-          "At your booked time, I'll text you before I begin. Lie down somewhere quiet, or let your animal rest wherever they like. They don't need to stay still. Afterward, I'll follow up by email or phone call with what I felt and saw.",
-      },
-      {
-        question: "Does distance matter?",
-        answer:
-          "Not at all. Every session happens from a distance, wherever you and your animal are.",
-      },
-      {
-        question: "Are you a vet or doctor?",
-        answer:
-          "No. I'm not a veterinarian, doctor, or therapist, and my sessions aren't medical care. I don't diagnose, treat, or give medical advice, and nothing I share replaces care from a professional. If your animal is sick, hurt, or acting differently, please see your vet first, and please don't stop or delay any treatment because of a session. Sessions aren't for emergencies.",
-      },
-      {
-        question: "Can a session change my animal's behavior?",
-        answer:
-          "Animals have their own minds. A session can help you understand what's going on for them, but I can't promise a change or specific answers. For ongoing behavior concerns, a trainer or your vet is a great partner.",
-      },
-      {
-        question: "Do you help find missing animals?",
-        answer:
-          "Not right now. I'm not taking missing animal cases at this time. If your animal is missing, contact local shelters and your microchip company, and post in neighborhood groups.",
-      },
-      {
-        question: "Cancellations & refunds",
-        answer:
-          "Cancel at least 48 hours before your session time for a full refund. Within 48 hours, sessions can't be refunded.",
-      },
-      {
-        question: "Who can book?",
-        answer:
-          "Sessions are for ages 18 and up, and I only connect with an animal when their guardian has asked me to.",
+        label: "Good to know",
+        items: [
+          {
+            question: "Are you a vet or doctor?",
+            answer:
+              "No. I'm not a veterinarian, doctor, or therapist, and my sessions aren't medical care. I don't diagnose, treat, or give medical advice, and nothing I share replaces care from a professional. If your animal is sick, hurt, or acting differently, please see your vet first, and please don't stop or delay any treatment because of a session. Sessions aren't for emergencies.",
+          },
+          {
+            question: "Can a session change my animal's behavior?",
+            answer:
+              "Animals have their own minds. A session can help you understand what's going on for them, but I can't promise a change or specific answers. For ongoing behavior concerns, a trainer or your vet is a great partner.",
+          },
+          {
+            question: "Do you help find missing animals?",
+            answer:
+              "Not right now. I'm not taking missing animal cases at this time. If your animal is missing, contact local shelters and your microchip company, and post in neighborhood groups.",
+          },
+          {
+            question: "Cancellations & refunds",
+            answer:
+              "Cancel at least 48 hours before your session time for a full refund. Within 48 hours, sessions can't be refunded.",
+          },
+          {
+            question: "Who can book?",
+            answer:
+              "Sessions are for ages 18 and up, and I only connect with an animal when their guardian has asked me to.",
+          },
+        ],
       },
     ],
   },
