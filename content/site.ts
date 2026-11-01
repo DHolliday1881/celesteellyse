@@ -36,7 +36,7 @@ export const images = {
 export const home = {
   hero: {
     eyebrow: "Intuitive · Animal communicator · Reiki master",
-    tagline: "Lorem ipsum dolor sit amet, consectetur.",
+    tagline: "Guided by intuition, rooted in care.",
     cta: {label: "Book a session", href: "/services"},
   },
   about: {
