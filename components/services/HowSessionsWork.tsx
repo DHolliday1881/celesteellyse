@@ -21,7 +21,7 @@ const motion = {
   "--leave-stagger": `${LEAVE_STAGGER_MS}ms`,
 } as CSSProperties
 
-/** How it works: a horizon-line switch between Animal communication and Distance Reiki. */
+/** How it works: a pill toggle between Animal communication and Distance Reiki. */
 export default function HowSessionsWork() {
   const {eyebrow, heading, moons, tabs} = services.howItWorks
   const [active, setActive] = useState(0)
@@ -73,10 +73,11 @@ export default function HowSessionsWork() {
           <div
             role="tablist"
             aria-labelledby="how-heading"
-            className={styles.switch}
+            className={styles.toggle}
             style={{"--active": active} as CSSProperties}
             onKeyDown={onKeyDown}
           >
+            <span className={styles.thumb} aria-hidden="true" />
             {tabs.map((tab, index) => (
               <button
                 key={tab.id}
@@ -95,8 +96,6 @@ export default function HowSessionsWork() {
                 {tab.label}
               </button>
             ))}
-            <span className={styles.haze} aria-hidden="true" />
-            <span className={styles.line} aria-hidden="true" />
           </div>
         </header>
 

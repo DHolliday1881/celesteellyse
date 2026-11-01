@@ -6,8 +6,8 @@ import * as THREE from "three"
 import styles from "./NightSky.module.css"
 
 // Star count
-const STAR_COUNT_DESKTOP = 3000 // stars on screens 768px and wider
-const STAR_COUNT_PHONE = 1200 // stars on screens under 768px
+const STAR_COUNT_DESKTOP = 1500 // stars on screens 768px and wider
+const STAR_COUNT_PHONE = 600 // stars on screens under 768px
 const PHONE_MAX_WIDTH = 768
 
 // Twinkle: seconds for one full dim-bright-dim cycle, picked per star
