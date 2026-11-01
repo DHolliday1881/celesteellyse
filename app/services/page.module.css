@@ -81,9 +81,10 @@
   background: linear-gradient(
     180deg,
     rgba(26, 39, 80, 0.85) 0%,
-    rgba(26, 39, 80, calc(var(--ocean-overlay) * 1.2)) 25%,
-    rgba(24, 38, 78, calc(var(--ocean-overlay) * 0.6)) 60%,
-    rgba(7, 15, 29, calc(var(--ocean-overlay) * 1.6)) 100%
+    rgba(26, 39, 80, calc(var(--ocean-overlay) * 0.8)) 25%,
+    rgba(24, 38, 78, calc(var(--ocean-overlay) * 0.15)) 50%,
+    rgba(24, 38, 78, calc(var(--ocean-overlay) * 0.25)) 72%,
+    rgba(7, 15, 29, calc(var(--ocean-overlay) * 1.1)) 100%
   );
 }
 
