@@ -3,7 +3,7 @@ export const brand = {
   name: "Celeste Ellyse",
   email: "hello@celesteellyse.com",
   emailPrompt: "Questions? Email me",
-  disclaimer: "Sessions are for entertainment and personal insight. I'm not a veterinarian or doctor, and sessions don't replace professional care.",
+  disclaimer: "Sessions are for entertainment and personal insight. I’m not a veterinarian or doctor, and sessions don’t replace professional care.",
 }
 
 // Social
@@ -39,7 +39,7 @@ export const home = {
   },
   about: {
     eyebrow: "About",
-    heading: "Hi, I'm Celeste.",
+    heading: "Hi, I’m Celeste.",
     body: [
       "I’m an animal communicator and Reiki master based in New York City. I’ve always been drawn to animals and to energy, and my work lets me bring the two together.",
       "Through animal communication and mediumship, I connect with animals living and passed, sharing who they are, how they feel, and what they want you to know.",
@@ -96,9 +96,9 @@ export const services = {
             },
           ],
           details: details(
-            "I connect with your animal and write down everything they share through words, images, and feelings: who they are, how they feel, and their answers to your questions. For animals who have passed, it's a chance to hear from them again.",
-            "When you book, share their name and your questions, plus their age and who they live with if they're living. Then reply to your confirmation email with a clear photo, eyes visible.",
-            "Your written session by email within 7 days: what your animal shared, what they showed me, and their answers to each of your questions. It's yours to keep and come back to whenever you want to hear from them again.",
+            "I connect with your animal and write down everything they share through words, images, and feelings: who they are, how they feel, and their answers to your questions. For animals who have passed, it’s a chance to hear from them again.",
+            "When you book, share their name and your questions, plus their age and who they live with if they’re living. Then reply to your confirmation email with a clear photo, eyes visible.",
+            "Your written session by email within 7 days: what your animal shared, what they showed me, and their answers to each of your questions. It’s yours to keep and come back to whenever you want to hear from them again.",
           ),
           note: addReikiNote,
         },
@@ -116,7 +116,7 @@ export const services = {
           ],
           details: details(
             "The same written conversation, with two animals. They can share a home, or one can be here and one passed.",
-            "When you book, share each animal's name and your questions. For living animals, also tell me their age and who they live with. Then reply to your confirmation email with a clear photo of each, eyes visible.",
+            "When you book, share each animal’s name and your questions. For living animals, also tell me their age and who they live with. Then reply to your confirmation email with a clear photo of each, eyes visible.",
             "One written session by email within 7 days, with each animal in their own voice and their answers to your questions. Yours to keep and come back to.",
           ),
           note: addReikiNote,
@@ -133,8 +133,8 @@ export const services = {
             },
           ],
           details: details(
-            "Gentle energy work for calm and balance. It's lovely during stressful stretches, recovery, older age, or big changes, or as a follow-up after a communication session. Animals carry a different energy than people, so Reiki meets them differently, and a shorter session is all they need.",
-            "Pick a time, and share your animal's name and a photo. Your animal can rest wherever they like, with no need to keep them still. I'll text you right before I begin.",
+            "Gentle energy work for calm and balance. It’s lovely during stressful stretches, recovery, older age, or big changes, or as a follow-up after a communication session. Animals carry a different energy than people, so Reiki meets them differently, and a shorter session is all they need.",
+            "Pick a time, and share your animal’s name and a photo. Your animal can rest wherever they like, with no need to keep them still. I’ll text you right before I begin.",
             "A follow-up by email or phone call, sharing what I felt and saw during the session.",
           ),
         },
@@ -161,8 +161,8 @@ export const services = {
             },
           ],
           details: details(
-            "Gentle energy work, sent to you wherever you are. It's lovely when you're stressed, grieving, worn out, or in the middle of a big change. Some people feel warmth or deep calm during the session, and some notice the shift in the days after.",
-            "Pick a time and tell me where you'll be. Lie down somewhere quiet, and I'll text you before I begin. All you have to do is rest.",
+            "Gentle energy work, sent to you wherever you are. It’s lovely when you’re stressed, grieving, worn out, or in the middle of a big change. Some people feel warmth or deep calm during the session, and some notice the shift in the days after.",
+            "Pick a time and tell me where you’ll be. Lie down somewhere quiet, and I’ll text you before I begin. All you have to do is rest.",
             "A follow-up by email or phone call, sharing what I felt and saw during your session.",
           ),
         },
@@ -190,12 +190,12 @@ export const services = {
         steps: [
           {title: "Book a time", body: "Pick the time that works best for you."},
           {
-            title: "Tell me who it's for",
-            body: "For you, your name and the city you'll be in. For your animal, their name and a photo.",
+            title: "Tell me who it’s for",
+            body: "For you, your name and the city you’ll be in. For your animal, their name and a photo.",
           },
           {
             title: "Rest",
-            body: "I'll text you before I begin. Lie down somewhere quiet, or let your animal rest wherever they like.",
+            body: "I’ll text you before I begin. Lie down somewhere quiet, or let your animal rest wherever they like.",
           },
           {
             title: "Afterward",
@@ -215,22 +215,22 @@ export const services = {
           {
             question: "Do I need to be there for a written session?",
             answer:
-              "No. Written sessions aren't live. The time you pick when booking just holds your spot, and your written session arrives by email within 7 days.",
+              "No. Written sessions aren’t live. The time you pick when booking just holds your spot, and your written session arrives by email within 7 days.",
           },
           {
             question: "Can you connect with an animal who has passed?",
             answer:
-              "Yes. Just share their name and a clear photo of them, and I'll connect with them the same way.",
+              "Yes. Just share their name and a clear photo of them, and I’ll connect with them the same way.",
           },
           {
             question: "What do I need to send you?",
             answer:
-              "For animal communication: their name, your questions, and a clear photo with their eyes visible. For a living animal, also their age and who they live with. Reply to your confirmation email with the photo. For Animal Reiki: their name and a photo. For Distance Reiki: your name and the city you'll be in.",
+              "For animal communication: their name, your questions, and a clear photo with their eyes visible. For a living animal, also their age and who they live with. Reply to your confirmation email with the photo. For Animal Reiki: their name and a photo. For Distance Reiki: your name and the city you’ll be in.",
           },
           {
             question: "What happens during a Reiki session?",
             answer:
-              "At your booked time, I'll text you before I begin. Lie down somewhere quiet, or let your animal rest wherever they like. They don't need to stay still. Afterward, I'll follow up by email or phone call with what I felt and saw.",
+              "At your booked time, I’ll text you before I begin. Lie down somewhere quiet, or let your animal rest wherever they like. They don’t need to stay still. Afterward, I’ll follow up by email or phone call with what I felt and saw.",
           },
           {
             question: "Does distance matter?",
@@ -245,22 +245,22 @@ export const services = {
           {
             question: "Are you a vet or doctor?",
             answer:
-              "No. I'm not a veterinarian, doctor, or therapist, and my sessions aren't medical care. I don't diagnose, treat, or give medical advice, and nothing I share replaces care from a professional. If your animal is sick, hurt, or acting differently, please see your vet first, and please don't stop or delay any treatment because of a session. Sessions aren't for emergencies. Sessions are offered for entertainment and personal insight.",
+              "No. I’m not a veterinarian, doctor, or therapist, and my sessions aren’t medical care. I don’t diagnose, treat, or give medical advice, and nothing I share replaces care from a professional. If your animal is sick, hurt, or acting differently, please see your vet first, and please don’t stop or delay any treatment because of a session. Sessions aren’t for emergencies. Sessions are offered for entertainment and personal insight.",
           },
           {
-            question: "Can a session change my animal's behavior?",
+            question: "Can a session change my animal’s behavior?",
             answer:
-              "Animals have their own minds. A session can help you understand what's going on for them, but I can't promise a change or specific answers. For ongoing behavior concerns, a trainer or your vet is a great partner.",
+              "Animals have their own minds. A session can help you understand what’s going on for them, but I can’t promise a change or specific answers. For ongoing behavior concerns, a trainer or your vet is a great partner.",
           },
           {
             question: "Do you help find missing animals?",
             answer:
-              "Not right now. I'm not taking missing animal cases at this time. If your animal is missing, contact local shelters and your microchip company, and post in neighborhood groups.",
+              "Not right now. I’m not taking missing animal cases at this time. If your animal is missing, contact local shelters and your microchip company, and post in neighborhood groups.",
           },
           {
             question: "Cancellations & refunds",
             answer:
-              "You can cancel for a full refund up to 48 hours before the time you booked. For written sessions, that's the date you picked when booking. After that, refunds aren't available, but you can still reschedule up to 24 hours before, from your confirmation email.",
+              "You can cancel for a full refund up to 48 hours before the time you booked. For written sessions, that’s the date you picked when booking. After that, refunds aren’t available, but you can still reschedule up to 24 hours before, from your confirmation email.",
           },
           {
             question: "Who can book?",
