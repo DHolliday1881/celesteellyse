@@ -7,8 +7,10 @@ const raleway = Raleway({subsets: ["latin"], variable: "--font-raleway"})
 const jost = Jost({subsets: ["latin"], variable: "--font-jost"})
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://celesteellyse.com"),
   title: "Celeste Ellyse",
-  description: "Animal communication sessions.",
+  description:
+    "Animal communication, animal mediumship, and Reiki with Celeste Ellyse, an animal communicator and Reiki master in New York City. Written sessions and distance Reiki for animals and people.",
 }
 
 /** Root layout: loads brand fonts and wraps every page. */

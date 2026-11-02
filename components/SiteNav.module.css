@@ -1,14 +1,35 @@
 /* Bar */
 .header {
-  position: absolute;
+  --nav-shift: 0.6s cubic-bezier(0.65, 0, 0.35, 1);
+  position: fixed;
   inset: 0 0 auto;
   z-index: 10;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: var(--space-md);
-  padding: 1.25rem var(--gutter);
+  padding: 1.25rem max(var(--gutter), (100% - var(--container)) / 2 + var(--gutter));
   text-shadow: 0 1px 10px rgba(7, 15, 29, 0.5);
+  transition: padding-block var(--nav-shift);
+}
+
+.header[data-scrolled="true"] {
+  padding-block: 0.375rem;
+}
+
+/* Frosted glass, on a layer so the fixed phone menu isn't trapped by backdrop-filter */
+.header::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  backdrop-filter: blur(var(--glass-blur));
+  opacity: 0;
+  transition: opacity var(--nav-shift);
+}
+
+.header[data-scrolled="true"]::before {
+  opacity: 1;
 }
 
 .name {
@@ -27,6 +48,7 @@
 .moon {
   width: 20px;
   height: 20px;
+  margin-left: 5px;
   border-radius: 50%;
   box-shadow: -5px 3px 0 0 var(--moon-white);
   translate: 0 -3px;
@@ -35,16 +57,61 @@
 .toggle {
   position: relative;
   z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  min-width: var(--tap);
   min-height: var(--tap);
   padding: 0;
   border: 0;
   background: none;
-  font-family: var(--font-label);
-  font-size: var(--text-label);
-  font-weight: 500;
-  letter-spacing: 0.24em;
-  text-transform: uppercase;
+  color: inherit;
   cursor: pointer;
+}
+
+/* Menu icon: hamburger that draws into an X */
+.icon {
+  width: 18px;
+  height: 18px;
+  overflow: visible;
+  filter: drop-shadow(0 1px 6px rgba(7, 15, 29, 0.5));
+}
+
+.icon path {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: var(--length) var(--total-length);
+  stroke-dashoffset: var(--offset);
+  transition: 0.8s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+
+.outer {
+  --length: 24;
+  --offset: -50.228;
+  --total-length: 111.228;
+}
+
+.middle {
+  --length: 24;
+  --offset: -38;
+  --total-length: 99;
+}
+
+.toggle[aria-expanded="true"] path {
+  translate: 30px 0;
+}
+
+.toggle[aria-expanded="true"] .outer {
+  --length: 22.627;
+  --offset: -16.971;
+}
+
+.toggle[aria-expanded="true"] .middle {
+  --length: 0;
+  --offset: -20;
 }
 
 /* Phone menu panel */
@@ -66,6 +133,10 @@
 .menu[data-open="true"] {
   opacity: 1;
   visibility: visible;
+}
+
+:global(html):has(.menu[data-open="true"]) {
+  overflow: hidden;
 }
 
 .links {
@@ -110,8 +181,16 @@
     padding-block: 1.75rem;
   }
 
+  .header[data-scrolled="true"] {
+    padding-block: 0.75rem;
+  }
+
   .toggle {
     display: none;
+  }
+
+  :global(html):has(.menu[data-open="true"]) {
+    overflow: visible;
   }
 
   .menu,

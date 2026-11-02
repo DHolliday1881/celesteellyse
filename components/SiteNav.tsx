@@ -2,14 +2,26 @@
 
 import Link from "next/link"
 import {usePathname} from "next/navigation"
-import {useEffect, useState} from "react"
+import {useEffect, useRef, useState} from "react"
 import {brand, nav, social} from "@/content/site"
 import styles from "./SiteNav.module.css"
 
-/** Top navigation: name on the left, links on the right, a menu panel on phones. */
+/** Sticky top navigation: name on the left, links on the right, a menu panel on phones; frosts once scrolled past its own height, or half a screen on Home. */
 export default function SiteNav() {
   const pathname = usePathname()
   const [open, setOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
+  const header = useRef<HTMLElement>(null)
+
+  useEffect(() => {
+    const onScroll = () => {
+      const threshold = pathname === "/" ? window.innerHeight / 2 : (header.current?.offsetHeight ?? 0)
+      setScrolled(window.scrollY > threshold)
+    }
+    onScroll()
+    window.addEventListener("scroll", onScroll, {passive: true})
+    return () => window.removeEventListener("scroll", onScroll)
+  }, [pathname])
 
   useEffect(() => {
     if (!open) return
@@ -21,7 +33,7 @@ export default function SiteNav() {
   const close = () => setOpen(false)
 
   return (
-    <header className={styles.header}>
+    <header ref={header} className={styles.header} data-scrolled={scrolled}>
       <Link href="/" className={styles.name} onClick={close}>
         <span className={styles.moon} aria-hidden="true" />
         {brand.name}
@@ -32,9 +44,14 @@ export default function SiteNav() {
         className={styles.toggle}
         aria-expanded={open}
         aria-controls="site-menu"
+        aria-label="Menu"
         onClick={() => setOpen(!open)}
       >
-        {open ? "Close" : "Menu"}
+        <svg className={styles.icon} viewBox="38 38 24 24" aria-hidden="true">
+          <path className={styles.outer} d="M0 70l28-28c2-2 2-2 7-2h64" />
+          <path className={styles.middle} d="M0 50h99" />
+          <path className={styles.outer} d="M0 30l28 28c2 2 2 2 7 2h64" />
+        </svg>
       </button>
 
       <nav id="site-menu" className={styles.menu} data-open={open} aria-label="Main">
