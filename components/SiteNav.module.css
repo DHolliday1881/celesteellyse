@@ -135,6 +135,10 @@
   visibility: visible;
 }
 
+:global(html):has(.menu[data-open="true"]) {
+  overflow: hidden;
+}
+
 .links {
   display: flex;
   flex-direction: column;
@@ -183,6 +187,10 @@
 
   .toggle {
     display: none;
+  }
+
+  :global(html):has(.menu[data-open="true"]) {
+    overflow: visible;
   }
 
   .menu,
