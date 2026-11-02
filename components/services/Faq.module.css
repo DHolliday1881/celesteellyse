@@ -26,7 +26,7 @@
 }
 
 .eyebrow {
-  color: var(--lavender);
+  color: var(--periwinkle);
 }
 
 /* Groups */
@@ -42,7 +42,7 @@
 }
 
 .groupLabel {
-  color: var(--lavender);
+  color: var(--periwinkle);
 }
 
 /* Items */
@@ -74,7 +74,7 @@
 }
 
 .item[open] .question {
-  color: var(--lavender);
+  color: var(--periwinkle);
 }
 
 .item {

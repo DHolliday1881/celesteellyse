@@ -3,7 +3,6 @@
   --navy: #0A1424;
   --navy-deep: #070F1D;
   --periwinkle: #95A3EC;
-  --lavender: #B3AEEA;
   --moon-white: #F3F1EA;
   --coral: #FF8A73;
 
@@ -168,9 +167,9 @@ a {
   flex: none;
   width: 22px;
   height: 22px;
-  border: 1px solid rgba(179, 174, 234, 0.5);
+  border: 1px solid rgba(149, 163, 236, 0.5);
   border-radius: 50%;
-  color: var(--lavender);
+  color: var(--periwinkle);
 }
 
 .toggle-icon::before,

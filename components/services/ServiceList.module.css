@@ -20,7 +20,7 @@
   align-items: center;
   justify-content: center;
   gap: 1rem;
-  color: var(--lavender);
+  color: var(--periwinkle);
 }
 
 .groupName::before,
@@ -47,7 +47,7 @@
 
 .numeral {
   padding: 2.5rem 0 1rem;
-  color: var(--lavender);
+  color: var(--periwinkle);
   text-align: center;
 }
 
@@ -146,7 +146,7 @@
   align-items: center;
   gap: 0.75rem;
   min-height: var(--tap);
-  color: var(--lavender);
+  color: var(--periwinkle);
   font-family: var(--font-label);
   font-size: var(--text-label);
   font-weight: 500;
