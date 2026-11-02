@@ -30,8 +30,12 @@ export default function ServiceList({groups}: {groups: ServiceGroup[]}) {
                 <details className={styles.details}>
                   <summary className={styles.toggle}>
                     <span className="toggle-icon" aria-hidden="true" />
-                    <span className={styles.whenClosed}>Details</span>
-                    <span className={styles.whenOpen}>Close details</span>
+                    <span className={styles.whenClosed}>
+                      Details<span className="visually-hidden"> for {service.name}</span>
+                    </span>
+                    <span className={styles.whenOpen}>
+                      Close details<span className="visually-hidden"> for {service.name}</span>
+                    </span>
                   </summary>
                   <dl className={`reveal ${styles.parts}`}>
                     {service.details.map((part) => (
