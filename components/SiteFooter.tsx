@@ -20,6 +20,7 @@ export default function SiteFooter() {
           <li key={item.href}>
             <a href={item.href} className={styles.socialLink} target="_blank" rel="noopener noreferrer">
               {item.label}
+              <span className="visually-hidden"> (opens in a new tab)</span>
             </a>
           </li>
         ))}

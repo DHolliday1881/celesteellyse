@@ -6,6 +6,7 @@
   display: grid;
   gap: var(--space-lg);
   align-items: center;
+  overflow-x: clip;
 }
 
 /* Portrait */
@@ -72,7 +73,7 @@
 }
 
 .eyebrow {
-  color: var(--lavender);
+  color: var(--periwinkle);
 }
 
 .heading {

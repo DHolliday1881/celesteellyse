@@ -48,7 +48,7 @@
 }
 
 .address {
-  color: #B3BEF2;
+  color: var(--periwinkle);
   font-family: var(--font-label);
   font-size: 0.8125rem;
   font-weight: 400;
