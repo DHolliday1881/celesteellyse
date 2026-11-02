@@ -32,9 +32,14 @@ export default function SiteNav() {
         className={styles.toggle}
         aria-expanded={open}
         aria-controls="site-menu"
+        aria-label="Menu"
         onClick={() => setOpen(!open)}
       >
-        {open ? "Close" : "Menu"}
+        <svg className={styles.icon} viewBox="38 38 24 24" aria-hidden="true">
+          <path className={styles.outer} d="M0 70l28-28c2-2 2-2 7-2h64" />
+          <path className={styles.middle} d="M0 50h99" />
+          <path className={styles.outer} d="M0 30l28 28c2 2 2 2 7 2h64" />
+        </svg>
       </button>
 
       <nav id="site-menu" className={styles.menu} data-open={open} aria-label="Main">

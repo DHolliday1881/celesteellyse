@@ -36,16 +36,61 @@
 .toggle {
   position: relative;
   z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  min-width: var(--tap);
   min-height: var(--tap);
   padding: 0;
   border: 0;
   background: none;
-  font-family: var(--font-label);
-  font-size: var(--text-label);
-  font-weight: 500;
-  letter-spacing: 0.24em;
-  text-transform: uppercase;
+  color: inherit;
   cursor: pointer;
+}
+
+/* Menu icon: hamburger that draws into an X */
+.icon {
+  width: 18px;
+  height: 18px;
+  overflow: visible;
+  filter: drop-shadow(0 1px 6px rgba(7, 15, 29, 0.5));
+}
+
+.icon path {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: var(--length) var(--total-length);
+  stroke-dashoffset: var(--offset);
+  transition: 0.8s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+
+.outer {
+  --length: 24;
+  --offset: -50.228;
+  --total-length: 111.228;
+}
+
+.middle {
+  --length: 24;
+  --offset: -38;
+  --total-length: 99;
+}
+
+.toggle[aria-expanded="true"] path {
+  translate: 30px 0;
+}
+
+.toggle[aria-expanded="true"] .outer {
+  --length: 22.627;
+  --offset: -16.971;
+}
+
+.toggle[aria-expanded="true"] .middle {
+  --length: 0;
+  --offset: -20;
 }
 
 /* Phone menu panel */
