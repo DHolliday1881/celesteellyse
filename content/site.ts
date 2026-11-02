@@ -22,8 +22,6 @@ export const nav = [
 export const images = {
   homeHero: "/images/jungle-sunset.jpeg",
   aboutPortrait: "/images/about-portrait.png",
-  bookAnimal: "/images/book-animal.jpg",
-  bookYou: "/images/book-you.jpg",
   servicesClouds: "/images/night-clouds.jpeg",
   servicesOcean: "/images/sunset-ocean.jpeg",
   moonCrescent: "/images/crescent-moon.png",
@@ -50,27 +48,6 @@ export const home = {
     signOff: "I’m glad you found your way here.",
     portraitAlt: "Portrait of Celeste",
     cta: {label: "See sessions", href: "/services"},
-  },
-  book: {
-    eyebrow: "Sessions",
-    heading: "Book with me",
-    intro: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.",
-    options: [
-      {
-        title: "For your animal",
-        line: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.",
-        image: images.bookAnimal,
-        imageAlt: "",
-        cta: {label: "Book for your animal", href: "/services#animal"},
-      },
-      {
-        title: "For you",
-        line: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.",
-        image: images.bookYou,
-        imageAlt: "",
-        cta: {label: "Book for you", href: "/services#you"},
-      },
-    ],
   },
 }
 
