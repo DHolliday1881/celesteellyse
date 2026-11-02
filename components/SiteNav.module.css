@@ -166,6 +166,7 @@
 }
 
 .link[aria-current="page"] {
+  color: var(--periwinkle);
   box-shadow: inset 0 -1px 0 var(--periwinkle);
 }
 

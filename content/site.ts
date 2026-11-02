@@ -100,7 +100,7 @@ export const services = {
             "When you book, share their name and your questions, plus their age and who they live with if they’re living. Then reply to your confirmation email with a clear photo, eyes visible.",
             "Your written session by email within 7 days: what your animal shared, what they showed me, and their answers to each of your questions. It’s yours to keep and come back to whenever you want to hear from them again.",
           ),
-          note: addReikiNote,
+          note: "Want to add Reiki? Book the combo, or add it after your session arrives.",
         },
         {
           id: "two-animal-session",
@@ -122,18 +122,35 @@ export const services = {
           note: addReikiNote,
         },
         {
-          id: "animal-reiki",
-          name: "Animal Reiki",
-          summary: "Distance Reiki while your animal rests at home. Sessions run 20 to 25 minutes.",
+          id: "communication-and-reiki",
+          name: "Animal communication + Reiki",
+          summary: "A written session with up to 5 of your questions, plus a 30-minute Reiki session for your animal.",
           options: [
             {
-              price: "$50",
-              duration: "20 min",
+              price: "$240",
+              duration: "45 min",
+              url: "https://cal.com/celesteellyse/communication-and-reiki",
+            },
+          ],
+          details: details(
+            "Everything in an animal communication session, with distance Reiki to follow. Many people like hearing from their animal first, then giving them some calm and care.",
+            "Book, share their name, age, who they live with, and your questions, then reply to your confirmation email with a clear photo, eyes visible. I’ll text you before the Reiki begins.",
+            "Your written session by email within 7 days, plus a follow-up by email or phone call on what I felt and saw during the Reiki.",
+          ),
+        },
+        {
+          id: "animal-reiki",
+          name: "Animal Reiki",
+          summary: "Distance Reiki while your animal rests at home. Sessions run 30 minutes.",
+          options: [
+            {
+              price: "$75",
+              duration: "30 min",
               url: "https://cal.com/celesteellyse/animal-reiki",
             },
           ],
           details: details(
-            "Gentle energy work for calm and balance. It’s lovely during stressful stretches, recovery, older age, or big changes, or as a follow-up after a communication session. Animals carry a different energy than people, so Reiki meets them differently, and a shorter session is all they need.",
+            "Gentle energy work for calm and balance. It’s lovely during stressful stretches, recovery, older age, or big changes, or as a follow-up after a communication session. Animals carry a different energy than people, so Reiki meets them differently, and I allow time for your animal to settle in before the Reiki begins.",
             "Pick a time, and share your animal’s name and a photo. Your animal can rest wherever they like, with no need to keep them still. I’ll text you right before I begin.",
             "A follow-up by email or phone call, sharing what I felt and saw during the session.",
           ),
@@ -150,12 +167,12 @@ export const services = {
           summary: "Reiki from a distance while you rest somewhere comfortable.",
           options: [
             {
-              price: "$100",
+              price: "$120",
               duration: "45 min",
               url: "https://cal.com/celesteellyse/distance-reiki",
             },
             {
-              price: "$80",
+              price: "$100",
               duration: "30 min",
               url: "https://cal.com/celesteellyse/distance-reiki-30",
             },
