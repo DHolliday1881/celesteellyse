@@ -12,6 +12,7 @@ export default function SiteNav() {
   const [open, setOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const header = useRef<HTMLElement>(null)
+  const toggle = useRef<HTMLButtonElement>(null)
 
   useEffect(() => {
     const onScroll = () => {
@@ -26,8 +27,18 @@ export default function SiteNav() {
   useEffect(() => {
     if (!open) return
     const onKey = (event: KeyboardEvent) => event.key === "Escape" && setOpen(false)
+    const onResize = () => !toggle.current?.checkVisibility() && setOpen(false)
+    const page = [...document.body.children].filter(
+      (element): element is HTMLElement => element instanceof HTMLElement && element !== header.current && !element.inert,
+    )
+    page.forEach((element) => (element.inert = true))
     window.addEventListener("keydown", onKey)
-    return () => window.removeEventListener("keydown", onKey)
+    window.addEventListener("resize", onResize)
+    return () => {
+      page.forEach((element) => (element.inert = false))
+      window.removeEventListener("keydown", onKey)
+      window.removeEventListener("resize", onResize)
+    }
   }, [open])
 
   const close = () => setOpen(false)
@@ -40,6 +51,7 @@ export default function SiteNav() {
       </Link>
 
       <button
+        ref={toggle}
         type="button"
         className={styles.toggle}
         aria-expanded={open}
