@@ -13,6 +13,8 @@ const OCEAN_ID = "services-ocean"
 
 export const metadata: Metadata = {
   title: "Services · Celeste Ellyse",
+  description:
+    "Written animal communication sessions for animals living and passed, plus distance Reiki for animals and people. Prices, how it works, and FAQ.",
 }
 
 /** Services page over a night sky that fades into an ocean sunset. */
