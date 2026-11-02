@@ -3,7 +3,7 @@ export const brand = {
   name: "Celeste Ellyse",
   email: "hello@celesteellyse.com",
   emailPrompt: "Questions? Email me",
-  disclaimer: "I'm not a veterinarian or doctor. Sessions don't replace professional care.",
+  disclaimer: "Sessions are for entertainment and personal insight. I'm not a veterinarian or doctor, and sessions don't replace professional care.",
 }
 
 // Social
@@ -268,7 +268,7 @@ export const services = {
           {
             question: "Are you a vet or doctor?",
             answer:
-              "No. I'm not a veterinarian, doctor, or therapist, and my sessions aren't medical care. I don't diagnose, treat, or give medical advice, and nothing I share replaces care from a professional. If your animal is sick, hurt, or acting differently, please see your vet first, and please don't stop or delay any treatment because of a session. Sessions aren't for emergencies.",
+              "No. I'm not a veterinarian, doctor, or therapist, and my sessions aren't medical care. I don't diagnose, treat, or give medical advice, and nothing I share replaces care from a professional. If your animal is sick, hurt, or acting differently, please see your vet first, and please don't stop or delay any treatment because of a session. Sessions aren't for emergencies. Sessions are offered for entertainment and personal insight.",
           },
           {
             question: "Can a session change my animal's behavior?",
