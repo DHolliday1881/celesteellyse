@@ -87,6 +87,7 @@ export default function SiteNav() {
             <li key={item.href}>
               <a href={item.href} className={styles.link} target="_blank" rel="noopener noreferrer">
                 {item.label}
+                <span className="visually-hidden"> (opens in a new tab)</span>
               </a>
             </li>
           ))}
