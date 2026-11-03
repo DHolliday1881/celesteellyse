@@ -124,6 +124,7 @@ export default function HowSessionsWork() {
                       width={96}
                       height={96}
                       sizes="(min-width: 40rem) 96px, 84px"
+                      loading="eager"
                       className={styles.moonImage}
                       data-shown={src === moon || undefined}
                     />
