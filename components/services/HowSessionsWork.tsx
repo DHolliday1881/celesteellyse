@@ -27,6 +27,7 @@ export default function HowSessionsWork() {
   const [active, setActive] = useState(0)
   const [shown, setShown] = useState(0)
   const [leaving, setLeaving] = useState(false)
+  const [switches, setSwitches] = useState(0)
   const {moons} = tabs[active]
   const tabRefs = useRef<(HTMLButtonElement | null)[]>([])
   const swapTimer = useRef<number | undefined>(undefined)
@@ -36,6 +37,7 @@ export default function HowSessionsWork() {
   const select = (index: number) => {
     if (index === active) return
     setActive(index)
+    setSwitches((count) => count + 1)
     window.clearTimeout(swapTimer.current)
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       setShown(index)
@@ -107,6 +109,7 @@ export default function HowSessionsWork() {
           className={styles.panel}
           style={motion}
           data-leaving={leaving || undefined}
+          data-switch={switches ? switches % 2 : undefined}
         >
           <StepsReveal className={styles.steps}>
             {moons.map((moon, index) => (

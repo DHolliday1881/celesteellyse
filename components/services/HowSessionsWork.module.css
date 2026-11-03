@@ -166,6 +166,39 @@
   transition-delay: calc(var(--i) * var(--phase-stagger) + var(--phase-ms));
 }
 
+/* Full moon: a little larger, dipping to normal size on each tab switch */
+.step:last-child .moonImage {
+  inset: -2.5px;
+  width: calc(100% + 5px);
+  max-width: none;
+  height: calc(100% + 5px);
+}
+
+/* Alternating names restart the animation, since the browser won't replay one with the same name */
+.panel[data-switch="0"] .step:last-child .moonImage {
+  animation: full-moon-dip-a var(--phase-ms) ease-in-out calc(var(--i) * var(--phase-stagger));
+}
+
+.panel[data-switch="1"] .step:last-child .moonImage {
+  animation: full-moon-dip-b var(--phase-ms) ease-in-out calc(var(--i) * var(--phase-stagger));
+}
+
+@keyframes full-moon-dip-a {
+  50% {
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+@keyframes full-moon-dip-b {
+  50% {
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+}
+
 /* Step text */
 .number {
   color: var(--periwinkle);
