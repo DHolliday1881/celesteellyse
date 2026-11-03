@@ -21,7 +21,7 @@ export default function RootLayout({children}: LayoutProps<"/">) {
       <body>
         <SiteNav />
         {children}
-        {process.env.NODE_ENV === "production" && <Analytics />}
+        <Analytics />
       </body>
     </html>
   )
