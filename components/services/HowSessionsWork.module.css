@@ -83,6 +83,8 @@
 /* Steps */
 .steps {
   --moon-size: 84px;
+  --phase-ms: 0.8s;
+  --phase-stagger: 90ms;
   display: grid;
   gap: 3rem;
   padding: 0;
@@ -101,16 +103,9 @@
   transition-delay: calc(var(--i) * var(--enter-stagger));
 }
 
-.steps[data-reveal="waiting"] .step,
-.panel[data-leaving] .step {
+.steps[data-reveal="waiting"] .step {
   opacity: 0;
   translate: 0 1.5rem;
-}
-
-.panel[data-leaving] .step {
-  transition-duration: var(--leave-ms);
-  transition-timing-function: ease-in;
-  transition-delay: calc(var(--ri) * var(--leave-stagger));
 }
 
 .step:nth-child(1) {
@@ -141,18 +136,78 @@
   content: "";
   position: absolute;
   top: 50%;
-  left: 58%;
+  left: 50%;
   width: 170%;
   height: 170%;
   translate: -50% -50%;
   background: radial-gradient(closest-side, rgba(200, 212, 255, var(--glow)), transparent);
+  transition: left var(--phase-ms) cubic-bezier(0.2, 0.7, 0.2, 1);
+  transition-delay: calc(var(--i) * var(--phase-stagger));
 }
 
+/* Glow leans toward the lit side; the full moon stays centred */
+.panel[data-lit="right"] .step:not(:last-child) .moon::before {
+  left: 58%;
+}
+
+.panel[data-lit="left"] .step:not(:last-child) .moon::before {
+  left: 42%;
+}
+
+/* Moon phase change */
 .moonImage {
-  position: relative;
+  position: absolute;
+  inset: 0;
   display: block;
   width: 100%;
   height: 100%;
+  transition:
+    opacity var(--phase-ms) ease,
+    rotate var(--phase-ms) cubic-bezier(0.2, 0.7, 0.2, 1);
+  transition-delay: calc(var(--i) * var(--phase-stagger));
+}
+
+.moonImage[data-shown] {
+  z-index: 1;
+}
+
+.moonImage:not([data-shown]) {
+  opacity: 0;
+  rotate: -6deg;
+  transition-delay: calc(var(--i) * var(--phase-stagger) + var(--phase-ms));
+}
+
+/* Full moon: a little larger, dipping to normal size on each tab switch */
+.step:last-child .moonImage {
+  inset: -2.5px;
+  width: calc(100% + 5px);
+  max-width: none;
+  height: calc(100% + 5px);
+}
+
+/* Alternating names restart the animation, since the browser won't replay one with the same name */
+.panel[data-switch="0"] .step:last-child .moonImage {
+  animation: full-moon-dip-a var(--phase-ms) ease-in-out calc(var(--i) * var(--phase-stagger));
+}
+
+.panel[data-switch="1"] .step:last-child .moonImage {
+  animation: full-moon-dip-b var(--phase-ms) ease-in-out calc(var(--i) * var(--phase-stagger));
+}
+
+@keyframes full-moon-dip-a {
+  50% {
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+@keyframes full-moon-dip-b {
+  50% {
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
 }
 
 /* Step text */
@@ -166,6 +221,18 @@
 
 .copyStack {
   display: grid;
+  transition:
+    opacity var(--enter-ms) ease,
+    translate var(--enter-ms) cubic-bezier(0.2, 0.7, 0.2, 1);
+  transition-delay: calc(var(--i) * var(--enter-stagger));
+}
+
+.panel[data-leaving] .copyStack {
+  opacity: 0;
+  translate: 0 0.75rem;
+  transition-duration: var(--leave-ms);
+  transition-timing-function: ease-in;
+  transition-delay: calc(var(--ri) * var(--leave-stagger));
 }
 
 .copy {
