@@ -23,10 +23,11 @@ const motion = {
 
 /** How it works: a pill toggle between Animal communication and Distance Reiki. */
 export default function HowSessionsWork() {
-  const {eyebrow, heading, moons, tabs} = services.howItWorks
+  const {eyebrow, heading, tabs} = services.howItWorks
   const [active, setActive] = useState(0)
   const [shown, setShown] = useState(0)
   const [leaving, setLeaving] = useState(false)
+  const {moons} = tabs[shown]
   const tabRefs = useRef<(HTMLButtonElement | null)[]>([])
   const swapTimer = useRef<number | undefined>(undefined)
 
@@ -110,7 +111,7 @@ export default function HowSessionsWork() {
           <StepsReveal className={styles.steps}>
             {moons.map((moon, index) => (
               <li
-                key={moon}
+                key={index}
                 className={styles.step}
                 style={{"--i": index, "--ri": moons.length - 1 - index} as CSSProperties}
               >

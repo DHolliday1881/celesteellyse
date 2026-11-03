@@ -28,6 +28,9 @@ export const images = {
   moonQuarter: "/images/quarter-moon.png",
   moonWaxing: "/images/waxing-moon.png",
   moonFull: "/images/full-moon.png",
+  moonWaningCrescent: "/images/waning-crescent-moon.png",
+  moonThirdQuarter: "/images/third-quarter-moon.png",
+  moonWaningGibbous: "/images/waning-gibbous-moon.png",
 }
 
 // Home
@@ -189,11 +192,11 @@ export const services = {
   howItWorks: {
     eyebrow: "How it works",
     heading: "Four steps, start to finish",
-    moons: [images.moonCrescent, images.moonQuarter, images.moonWaxing, images.moonFull],
     tabs: [
       {
         id: "animal-communication",
         label: "Animal communication",
+        moons: [images.moonCrescent, images.moonQuarter, images.moonWaxing, images.moonFull],
         steps: [
           {title: "Book and pay", body: "Pick your session and any open time to hold your spot."},
           {title: "Share their details", body: "Their name, your questions, and a clear photo with their eyes visible."},
@@ -204,6 +207,7 @@ export const services = {
       {
         id: "distance-reiki",
         label: "Distance Reiki",
+        moons: [images.moonWaningCrescent, images.moonThirdQuarter, images.moonWaningGibbous, images.moonFull],
         steps: [
           {title: "Book a time", body: "Pick the time that works best for you."},
           {
