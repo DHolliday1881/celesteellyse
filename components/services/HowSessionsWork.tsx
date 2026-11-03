@@ -11,8 +11,8 @@ const PANEL_ID = "how-sessions-panel"
 // Step motion
 const ENTER_MS = 600 // how long each step takes to slide up
 const ENTER_STAGGER_MS = 120 // gap between steps sliding up, left to right
-const LEAVE_MS = 220 // how long each step takes to leave on switch
-const LEAVE_STAGGER_MS = 60 // gap between steps leaving, right to left
+const LEAVE_MS = 220 // how long the step text takes to leave on switch
+const LEAVE_STAGGER_MS = 60 // gap between step text leaving, right to left
 
 const motion = {
   "--enter-ms": `${ENTER_MS}ms`,
@@ -27,7 +27,7 @@ export default function HowSessionsWork() {
   const [active, setActive] = useState(0)
   const [shown, setShown] = useState(0)
   const [leaving, setLeaving] = useState(false)
-  const {moons} = tabs[shown]
+  const {moons} = tabs[active]
   const tabRefs = useRef<(HTMLButtonElement | null)[]>([])
   const swapTimer = useRef<number | undefined>(undefined)
 
@@ -116,14 +116,18 @@ export default function HowSessionsWork() {
                 style={{"--i": index, "--ri": moons.length - 1 - index} as CSSProperties}
               >
                 <span className={styles.moon}>
-                  <Image
-                    src={moon}
-                    alt=""
-                    width={96}
-                    height={96}
-                    sizes="(min-width: 40rem) 96px, 84px"
-                    className={styles.moonImage}
-                  />
+                  {[...new Set(tabs.map((tab) => tab.moons[index]))].map((src) => (
+                    <Image
+                      key={src}
+                      src={src}
+                      alt=""
+                      width={96}
+                      height={96}
+                      sizes="(min-width: 40rem) 96px, 84px"
+                      className={styles.moonImage}
+                      data-shown={src === moon || undefined}
+                    />
+                  ))}
                 </span>
                 <span className={styles.number}>{String(index + 1).padStart(2, "0")}</span>
                 <div className={styles.copyStack}>
