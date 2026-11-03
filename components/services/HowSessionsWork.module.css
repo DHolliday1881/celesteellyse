@@ -136,11 +136,22 @@
   content: "";
   position: absolute;
   top: 50%;
-  left: 58%;
+  left: 50%;
   width: 170%;
   height: 170%;
   translate: -50% -50%;
   background: radial-gradient(closest-side, rgba(200, 212, 255, var(--glow)), transparent);
+  transition: left var(--phase-ms) cubic-bezier(0.2, 0.7, 0.2, 1);
+  transition-delay: calc(var(--i) * var(--phase-stagger));
+}
+
+/* Glow leans toward the lit side; the full moon stays centred */
+.panel[data-lit="right"] .step:not(:last-child) .moon::before {
+  left: 58%;
+}
+
+.panel[data-lit="left"] .step:not(:last-child) .moon::before {
+  left: 42%;
 }
 
 /* Moon phase change */

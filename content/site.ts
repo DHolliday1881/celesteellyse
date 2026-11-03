@@ -196,6 +196,7 @@ export const services = {
       {
         id: "animal-communication",
         label: "Animal communication",
+        lit: "right",
         moons: [images.moonCrescent, images.moonQuarter, images.moonWaxing, images.moonFull],
         steps: [
           {title: "Book and pay", body: "Pick your session and any open time to hold your spot."},
@@ -207,6 +208,7 @@ export const services = {
       {
         id: "distance-reiki",
         label: "Distance Reiki",
+        lit: "left",
         moons: [images.moonWaningCrescent, images.moonThirdQuarter, images.moonWaningGibbous, images.moonFull],
         steps: [
           {title: "Book a time", body: "Pick the time that works best for you."},

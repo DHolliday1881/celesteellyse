@@ -110,6 +110,7 @@ export default function HowSessionsWork() {
           style={motion}
           data-leaving={leaving || undefined}
           data-switch={switches ? switches % 2 : undefined}
+          data-lit={tabs[active].lit}
         >
           <StepsReveal className={styles.steps}>
             {moons.map((moon, index) => (
