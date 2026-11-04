@@ -34,23 +34,46 @@ export const images = {
 }
 
 // Home
+export type SessionPath = {id: "animal" | "you"; eyebrow: string; title: string; body: string; href: string}
+
 export const home = {
   hero: {
     eyebrow: "Intuitive · Animal communicator · Reiki master",
     tagline: "Guided by intuition, rooted in care.",
+    glimmer: ["intuition", "care"],
     cta: {label: "Book a session", href: "/services"},
   },
   about: {
     eyebrow: "About",
     heading: "Hi, I’m Celeste.",
+    credentials: ["Certified animal communicator", "Certified Reiki master"],
     body: [
       "I’m an animal communicator and Reiki master based in New York City. I’ve always been drawn to animals and to energy, and my work lets me bring the two together.",
-      "Through animal communication and mediumship, I connect with animals living and passed, sharing who they are, how they feel, and what they want you to know.",
-      "As a Reiki master, I’m trained to work with energy to help people and animals release stress, move through what feels stuck or heavy, and find their way back to calm and balance, wherever they are.",
+      "Through animal communication and mediumship, I connect with animals living and passed, sharing who they are, how they feel, and the love that’s still there. With Reiki, I help people and animals release stress and find their way back to calm, wherever they are.",
     ],
     signOff: "I’m glad you found your way here.",
     portraitAlt: "Portrait of Celeste",
-    cta: {label: "See sessions", href: "/services"},
+  },
+  paths: {
+    eyebrow: "Sessions",
+    heading: "Two ways to connect",
+    intro: "Whether it’s for your animal or for you, every session happens from wherever you are.",
+    items: [
+      {
+        id: "animal",
+        eyebrow: "For your animal",
+        title: "Animal communication & Reiki",
+        body: "Written sessions for animals living or passed, with the option to add Reiki.",
+        href: "/services#animal",
+      },
+      {
+        id: "you",
+        eyebrow: "For you",
+        title: "Distance Reiki for people",
+        body: "Remote Reiki to help you release stress and come back to calm.",
+        href: "/services#you",
+      },
+    ] satisfies SessionPath[],
   },
 }
 
@@ -167,7 +190,7 @@ export const services = {
         {
           id: "distance-reiki",
           name: "Distance Reiki",
-          summary: "Reiki from a distance while you rest somewhere comfortable.",
+          summary: "A distance Reiki session for you, to help you release stress and come back to calm. All you have to do is lie down somewhere quiet and rest. Choose 30 or 45 minutes.",
           options: [
             {
               price: "$120",
@@ -182,8 +205,8 @@ export const services = {
           ],
           details: details(
             "Gentle energy work, sent to you wherever you are. It’s lovely when you’re stressed, grieving, worn out, or in the middle of a big change. Some people feel warmth or deep calm during the session, and some notice the shift in the days after.",
-            "Pick a time and tell me where you’ll be. Lie down somewhere quiet, and I’ll text you before I begin. All you have to do is rest.",
-            "A follow-up by email or phone call, sharing what I felt and saw during your session.",
+            "Pick a time and tell me the city you’ll be in. Lie down somewhere quiet, and I’ll text you right before I begin. All you have to do is rest.",
+            "A follow-up by email or phone call, sharing what I felt and saw during your session and anything that stood out. Go easy on yourself afterward. Many people like a little quiet time.",
           ),
         },
       ],

@@ -1,10 +1,11 @@
 import {brand, social} from "@/content/site"
 import styles from "./SiteFooter.module.css"
 
-/** Shared footer: name, email, socials and the care disclaimer. */
+/** Shared footer: crescent, name, email, socials, the care disclaimer and a copyright line. */
 export default function SiteFooter() {
   return (
     <footer className={styles.footer}>
+      <span className={styles.moon} aria-hidden="true" />
       <p className={styles.name}>{brand.name}</p>
       <a href={`mailto:${brand.email}`} className={styles.contact}>
         <span className={styles.emailLink}>
@@ -19,13 +20,18 @@ export default function SiteFooter() {
         {social.map((item) => (
           <li key={item.href}>
             <a href={item.href} className={styles.socialLink} target="_blank" rel="noopener noreferrer">
-              {item.label}
+              <span className={styles.socialLabel} data-label={item.label}>
+                {item.label}
+              </span>
               <span className="visually-hidden"> (opens in a new tab)</span>
             </a>
           </li>
         ))}
       </ul>
       <p className={styles.disclaimer}>{brand.disclaimer}</p>
+      <p className={styles.copyright}>
+        © {new Date().getFullYear()} {brand.name}
+      </p>
     </footer>
   )
 }

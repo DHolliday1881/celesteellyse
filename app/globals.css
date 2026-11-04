@@ -3,11 +3,11 @@
   --navy: #0A1424;
   --navy-deep: #070F1D;
   --periwinkle: #95A3EC;
-  --moon-white: #F3F1EA;
+  --moon-white: #F7F5F0;
   --coral: #FF8A73;
 
   /* Supporting text tones */
-  --ink-soft: #C9CFE4;
+  --ink-soft: #D5DAED;
   --ink-faint: #9AA4C2;
 
   /* Fonts */
@@ -76,7 +76,7 @@ body {
   color: var(--moon-white);
   font-family: var(--font-body);
   font-size: var(--text-base);
-  font-weight: 300;
+  font-weight: 400;
   line-height: 1.7;
   -webkit-font-smoothing: antialiased;
 }
@@ -191,17 +191,6 @@ a {
 
 details[open] > summary .toggle-icon::after {
   rotate: 0deg;
-}
-
-.reveal {
-  animation: reveal 0.3s ease;
-}
-
-@keyframes reveal {
-  from {
-    opacity: 0;
-    translate: 0 -4px;
-  }
 }
 
 .visually-hidden {
