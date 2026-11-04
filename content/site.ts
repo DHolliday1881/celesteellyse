@@ -34,6 +34,8 @@ export const images = {
 }
 
 // Home
+export type SessionPath = {id: "animal" | "you"; eyebrow: string; title: string; body: string; href: string}
+
 export const home = {
   hero: {
     eyebrow: "Intuitive · Animal communicator · Reiki master",
@@ -50,7 +52,27 @@ export const home = {
     ],
     signOff: "I’m glad you found your way here.",
     portraitAlt: "Portrait of Celeste",
-    cta: {label: "See sessions", href: "/services"},
+  },
+  paths: {
+    eyebrow: "Sessions",
+    heading: "Two ways to connect",
+    intro: "Whether it’s for your animal or for you, every session happens from wherever you are.",
+    items: [
+      {
+        id: "animal",
+        eyebrow: "For your animal",
+        title: "Animal communication & Reiki",
+        body: "Written sessions for animals living or passed, with the option to add Reiki.",
+        href: "/services#animal",
+      },
+      {
+        id: "you",
+        eyebrow: "For you",
+        title: "Distance Reiki for people",
+        body: "Remote Reiki to help you release stress and come back to calm.",
+        href: "/services#you",
+      },
+    ] satisfies SessionPath[],
   },
 }
 
