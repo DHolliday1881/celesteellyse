@@ -193,17 +193,6 @@ details[open] > summary .toggle-icon::after {
   rotate: 0deg;
 }
 
-.reveal {
-  animation: reveal 0.3s ease;
-}
-
-@keyframes reveal {
-  from {
-    opacity: 0;
-    translate: 0 -4px;
-  }
-}
-
 .visually-hidden {
   position: absolute;
   width: 1px;

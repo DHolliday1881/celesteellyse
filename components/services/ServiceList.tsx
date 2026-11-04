@@ -37,7 +37,7 @@ export default function ServiceList({groups}: {groups: ServiceGroup[]}) {
                       Close details<span className="visually-hidden"> for {service.name}</span>
                     </span>
                   </summary>
-                  <dl className={`reveal ${styles.parts}`}>
+                  <dl className={styles.parts}>
                     {service.details.map((part) => (
                       <div key={part.label} className={styles.part}>
                         <dt className={styles.partLabel}>{part.label}</dt>
@@ -45,7 +45,7 @@ export default function ServiceList({groups}: {groups: ServiceGroup[]}) {
                       </div>
                     ))}
                   </dl>
-                  {service.note && <p className={`reveal ${styles.note}`}>{service.note}</p>}
+                  {service.note && <p className={styles.note}>{service.note}</p>}
                 </details>
 
                 <div className={styles.actions}>
