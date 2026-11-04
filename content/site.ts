@@ -45,6 +45,7 @@ export const home = {
   about: {
     eyebrow: "About",
     heading: "Hi, I’m Celeste.",
+    credentials: ["Certified animal communicator", "Certified Reiki master"],
     body: [
       "I’m an animal communicator and Reiki master based in New York City. I’ve always been drawn to animals and to energy, and my work lets me bring the two together.",
       "Through animal communication and mediumship, I connect with animals living and passed, sharing who they are, how they feel, and what they want you to know.",

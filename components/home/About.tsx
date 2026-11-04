@@ -1,10 +1,11 @@
 import Image from "next/image"
+import {Fragment} from "react"
 import {home, images} from "@/content/site"
 import styles from "./About.module.css"
 
 /** About me: arched portrait with a soft glow and crescent beside a short intro. */
 export default function About() {
-  const {eyebrow, heading, body, signOff, portraitAlt} = home.about
+  const {eyebrow, heading, credentials, body, signOff, portraitAlt} = home.about
 
   return (
     <section id="about" className={styles.about} aria-labelledby="about-heading">
@@ -23,6 +24,14 @@ export default function About() {
         <h2 id="about-heading" className={styles.heading}>
           {heading}
         </h2>
+        <p className={styles.credentials}>
+          {credentials.map((credential, index) => (
+            <Fragment key={credential}>
+              {index > 0 && " "}
+              <span>{credential}</span>
+            </Fragment>
+          ))}
+        </p>
         <div className={styles.body}>
           {body.map((paragraph) => (
             <p key={paragraph}>{paragraph}</p>
