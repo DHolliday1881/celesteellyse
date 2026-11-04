@@ -1,5 +1,6 @@
 import Image from "next/image"
 import Link from "next/link"
+import {Fragment} from "react"
 import {brand, home, images} from "@/content/site"
 import styles from "./Hero.module.css"
 
@@ -21,8 +22,11 @@ export default function Hero() {
           ))}
         </p>
         <h1 className={styles.name}>
-          {brand.name.split(" ").map((word) => (
-            <span key={word}>{word}</span>
+          {brand.name.split(" ").map((word, index) => (
+            <Fragment key={word}>
+              {index > 0 && " "}
+              <span>{word}</span>
+            </Fragment>
           ))}
         </h1>
         <p className={styles.tagline}>{tagline}</p>
