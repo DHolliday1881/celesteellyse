@@ -48,8 +48,7 @@ export const home = {
     credentials: ["Certified animal communicator", "Certified Reiki master"],
     body: [
       "I’m an animal communicator and Reiki master based in New York City. I’ve always been drawn to animals and to energy, and my work lets me bring the two together.",
-      "Through animal communication and mediumship, I connect with animals living and passed, sharing who they are, how they feel, and what they want you to know.",
-      "As a Reiki master, I’m trained to work with energy to help people and animals release stress, move through what feels stuck or heavy, and find their way back to calm and balance, wherever they are.",
+      "Through animal communication and mediumship, I connect with animals living and passed, sharing who they are, how they feel, and the love that’s still there. With Reiki, I help people and animals release stress and find their way back to calm, wherever they are.",
     ],
     signOff: "I’m glad you found your way here.",
     portraitAlt: "Portrait of Celeste",
