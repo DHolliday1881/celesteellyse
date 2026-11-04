@@ -79,6 +79,27 @@
   line-height: 1.5;
 }
 
+/* Glimmer: a light sweeps each word once, then it settles a shade softer */
+.glimmer {
+  display: inline-block;
+  background: linear-gradient(105deg, #E2E6F4 0 34%, #FFFFFF 40%, #AEB9F5 45%, #FFC9BC 51%, #FFFFFF 57%, var(--moon-white) 64% 100%) 100% 0 / 300% 100%;
+  background-clip: text;
+  color: transparent;
+  text-shadow: none;
+  filter: drop-shadow(0 1px 4px rgba(7, 15, 29, 0.35)) drop-shadow(0 2px 28px rgba(7, 15, 29, 0.55));
+  animation: glimmer 1.8s ease-in-out calc(0.6s + var(--order) * 0.35s) both;
+}
+
+@keyframes glimmer {
+  50% {
+    filter: drop-shadow(0 0 8px rgba(201, 210, 255, 0.6)) drop-shadow(0 2px 28px rgba(7, 15, 29, 0.55));
+  }
+
+  to {
+    background-position: 0 0;
+  }
+}
+
 .rule {
   width: 32px;
   height: 1px;

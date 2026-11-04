@@ -73,7 +73,70 @@
 }
 
 .details {
+  --details-shift: 0.45s cubic-bezier(0.65, 0, 0.35, 1);
   margin-top: 0.5rem;
+  interpolate-size: allow-keywords;
+}
+
+.details::details-content {
+  block-size: 0;
+  overflow: hidden;
+  opacity: 0;
+  translate: 0 -6px;
+  transition:
+    block-size var(--details-shift) 0.3s,
+    opacity 0.2s ease 0.3s,
+    translate var(--details-shift) 0.3s,
+    content-visibility var(--details-shift) 0.3s allow-discrete;
+}
+
+.details[open]::details-content {
+  block-size: auto;
+  opacity: 1;
+  translate: 0 0;
+  transition:
+    block-size var(--details-shift),
+    opacity 0.35s ease 0.1s,
+    translate var(--details-shift),
+    content-visibility var(--details-shift) allow-discrete;
+}
+
+.details :global(.toggle-icon)::after {
+  transition: rotate var(--details-shift);
+}
+
+/* Parts arrive one after another, then leave in reverse before the panel closes */
+.part,
+.note {
+  opacity: 0;
+  translate: 0 8px;
+  transition: opacity 0.25s ease, translate 0.25s ease;
+  transition-delay: calc(var(--ri) * 0.07s);
+}
+
+.details[open] .part,
+.details[open] .note {
+  opacity: 1;
+  translate: 0 0;
+  transition-duration: 0.4s;
+  transition-timing-function: ease-out;
+  transition-delay: calc(0.1s + var(--i) * 0.1s);
+}
+
+@starting-style {
+  .details[open] .part,
+  .details[open] .note {
+    opacity: 0;
+    translate: 0 8px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .details::details-content,
+  .part,
+  .note {
+    transition-delay: 0s !important;
+  }
 }
 
 .note {
@@ -211,7 +274,7 @@
       "details details";
     column-gap: 2rem;
     row-gap: 0.75rem;
-    align-items: center;
+    align-items: start;
   }
 
   .numeral {

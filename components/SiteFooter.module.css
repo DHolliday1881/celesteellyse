@@ -1,6 +1,5 @@
 /* Footer */
 .footer {
-  --link-glow: 0 0 14px rgba(149, 163, 236, 0.65);
   position: relative;
   max-width: var(--container);
   margin: 0 auto;
@@ -10,6 +9,14 @@
   align-items: center;
   gap: 1.25rem;
   text-align: center;
+}
+
+.moon {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  box-shadow: -5px 3px 0 0 var(--moon-white);
+  translate: 2.5px 0;
 }
 
 .name {
@@ -44,7 +51,7 @@
   font-size: 0.9375rem;
   font-weight: 400;
   transform-origin: left center;
-  transition: translate 0.35s ease, scale 0.35s ease;
+  transition: color 0.5s ease-in-out, translate 0.3s ease, scale 0.3s ease;
 }
 
 .address {
@@ -53,19 +60,26 @@
   font-size: 0.8125rem;
   font-weight: 400;
   letter-spacing: 0.06em;
-  transition: translate 0.35s ease, text-shadow 0.35s ease;
+  transition: translate 0.35s ease, color 0.5s ease-in-out;
 }
 
 .contact:hover .arrow,
 .contact:focus-visible .arrow {
-  translate: 4px 0;
-  scale: 1.35 1;
+  color: var(--coral);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .contact:hover .arrow,
+  .contact:focus-visible .arrow {
+    translate: 4px 0;
+    scale: 1.35 1;
+  }
 }
 
 .contact:hover .address,
 .contact:focus-visible .address {
   translate: 0 -2px;
-  text-shadow: var(--link-glow);
+  color: var(--coral);
 }
 
 .social {
@@ -83,12 +97,28 @@
   font-size: var(--text-label);
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  transition: text-shadow 0.35s ease;
+  transition: translate 0.35s ease, color 0.5s ease-in-out, font-weight 0.5s ease-in-out;
 }
 
 .socialLink:hover,
 .socialLink:focus-visible {
-  text-shadow: var(--link-glow);
+  translate: 0 -2px;
+  color: var(--coral);
+  font-weight: 500;
+}
+
+/* Reserves the hover weight's width so the row doesn't shift */
+.socialLabel {
+  display: inline-flex;
+  flex-direction: column;
+}
+
+.socialLabel::after {
+  content: attr(data-label);
+  height: 0;
+  overflow: hidden;
+  font-weight: 500;
+  visibility: hidden;
 }
 
 .disclaimer {
@@ -98,4 +128,11 @@
   font-size: 0.8125rem;
   font-weight: 400;
   line-height: 1.6;
+}
+
+.copyright {
+  color: var(--ink-faint);
+  font-family: var(--font-label);
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
 }
