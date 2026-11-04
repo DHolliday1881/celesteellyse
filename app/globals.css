@@ -76,7 +76,7 @@ body {
   color: var(--moon-white);
   font-family: var(--font-body);
   font-size: var(--text-base);
-  font-weight: 300;
+  font-weight: 400;
   line-height: 1.7;
   -webkit-font-smoothing: antialiased;
 }
