@@ -190,7 +190,7 @@ export const services = {
         {
           id: "distance-reiki",
           name: "Distance Reiki",
-          summary: "Reiki from a distance while you rest somewhere comfortable.",
+          summary: "A distance Reiki session for you, to help you release stress and come back to calm. All you have to do is lie down somewhere quiet and rest. Choose 30 or 45 minutes.",
           options: [
             {
               price: "$120",
@@ -205,8 +205,8 @@ export const services = {
           ],
           details: details(
             "Gentle energy work, sent to you wherever you are. It’s lovely when you’re stressed, grieving, worn out, or in the middle of a big change. Some people feel warmth or deep calm during the session, and some notice the shift in the days after.",
-            "Pick a time and tell me where you’ll be. Lie down somewhere quiet, and I’ll text you before I begin. All you have to do is rest.",
-            "A follow-up by email or phone call, sharing what I felt and saw during your session.",
+            "Pick a time and tell me the city you’ll be in. Lie down somewhere quiet, and I’ll text you right before I begin. All you have to do is rest.",
+            "A follow-up by email or phone call, sharing what I felt and saw during your session and anything that stood out. Go easy on yourself afterward. Many people like a little quiet time.",
           ),
         },
       ],
