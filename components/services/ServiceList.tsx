@@ -1,3 +1,4 @@
+import type {CSSProperties} from "react"
 import type {ServiceGroup} from "@/content/site"
 import styles from "./ServiceList.module.css"
 
@@ -38,14 +39,22 @@ export default function ServiceList({groups}: {groups: ServiceGroup[]}) {
                     </span>
                   </summary>
                   <dl className={styles.parts}>
-                    {service.details.map((part) => (
-                      <div key={part.label} className={styles.part}>
+                    {service.details.map((part, index) => (
+                      <div
+                        key={part.label}
+                        className={styles.part}
+                        style={{"--i": index, "--ri": service.details.length - index - (service.note ? 0 : 1)} as CSSProperties}
+                      >
                         <dt className={styles.partLabel}>{part.label}</dt>
                         <dd className={styles.partBody}>{part.body}</dd>
                       </div>
                     ))}
                   </dl>
-                  {service.note && <p className={styles.note}>{service.note}</p>}
+                  {service.note && (
+                    <p className={styles.note} style={{"--i": service.details.length, "--ri": 0} as CSSProperties}>
+                      {service.note}
+                    </p>
+                  )}
                 </details>
 
                 <div className={styles.actions}>
