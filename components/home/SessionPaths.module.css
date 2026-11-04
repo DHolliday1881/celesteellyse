@@ -57,6 +57,7 @@
   width: 3rem;
   height: 3rem;
   color: var(--periwinkle);
+  transition: color 0.5s ease-in-out, rotate 0.5s ease-in-out;
 }
 
 .text {
@@ -103,12 +104,29 @@
   font-family: var(--font-label);
   font-size: 0.65em;
   font-weight: 400;
-  transition: translate 0.35s ease;
+  vertical-align: 0.16em;
+  transform-origin: left center;
+  transition: color 0.5s ease-in-out, translate 0.3s ease, scale 0.3s ease;
 }
 
+.item:hover .icon,
+.item:has(.link:focus-visible) .icon,
 .item:hover .arrow,
 .link:focus-visible .arrow {
-  translate: 4px 0;
+  color: var(--coral);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .item:hover .icon,
+  .item:has(.link:focus-visible) .icon {
+    rotate: 90deg;
+  }
+
+  .item:hover .arrow,
+  .link:focus-visible .arrow {
+    translate: 4px 0;
+    scale: 1.35 1;
+  }
 }
 
 .body {

@@ -52,7 +52,7 @@
   font-size: 0.9375rem;
   font-weight: 400;
   transform-origin: left center;
-  transition: translate 0.35s ease, scale 0.35s ease;
+  transition: color 0.5s ease-in-out, translate 0.3s ease, scale 0.3s ease;
 }
 
 .address {
@@ -61,19 +61,26 @@
   font-size: 0.8125rem;
   font-weight: 400;
   letter-spacing: 0.06em;
-  transition: translate 0.35s ease, text-shadow 0.35s ease;
+  transition: translate 0.35s ease, color 0.5s ease-in-out;
 }
 
 .contact:hover .arrow,
 .contact:focus-visible .arrow {
-  translate: 4px 0;
-  scale: 1.35 1;
+  color: var(--coral);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .contact:hover .arrow,
+  .contact:focus-visible .arrow {
+    translate: 4px 0;
+    scale: 1.35 1;
+  }
 }
 
 .contact:hover .address,
 .contact:focus-visible .address {
   translate: 0 -2px;
-  text-shadow: var(--link-glow);
+  color: var(--coral);
 }
 
 .social {
