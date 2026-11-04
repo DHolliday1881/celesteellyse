@@ -40,6 +40,7 @@ export const home = {
   hero: {
     eyebrow: "Intuitive · Animal communicator · Reiki master",
     tagline: "Guided by intuition, rooted in care.",
+    glimmer: ["intuition", "care"],
     cta: {label: "Book a session", href: "/services"},
   },
   about: {
