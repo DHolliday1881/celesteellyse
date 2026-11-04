@@ -1,10 +1,11 @@
 import {brand, social} from "@/content/site"
 import styles from "./SiteFooter.module.css"
 
-/** Shared footer: name, email, socials and the care disclaimer. */
+/** Shared footer: crescent, name, email, socials, the care disclaimer and a copyright line. */
 export default function SiteFooter() {
   return (
     <footer className={styles.footer}>
+      <span className={styles.moon} aria-hidden="true" />
       <p className={styles.name}>{brand.name}</p>
       <a href={`mailto:${brand.email}`} className={styles.contact}>
         <span className={styles.emailLink}>
@@ -26,6 +27,9 @@ export default function SiteFooter() {
         ))}
       </ul>
       <p className={styles.disclaimer}>{brand.disclaimer}</p>
+      <p className={styles.copyright}>
+        © {new Date().getFullYear()} {brand.name}
+      </p>
     </footer>
   )
 }
