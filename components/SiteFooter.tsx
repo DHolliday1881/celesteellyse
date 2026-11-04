@@ -20,7 +20,9 @@ export default function SiteFooter() {
         {social.map((item) => (
           <li key={item.href}>
             <a href={item.href} className={styles.socialLink} target="_blank" rel="noopener noreferrer">
-              {item.label}
+              <span className={styles.socialLabel} data-label={item.label}>
+                {item.label}
+              </span>
               <span className="visually-hidden"> (opens in a new tab)</span>
             </a>
           </li>
