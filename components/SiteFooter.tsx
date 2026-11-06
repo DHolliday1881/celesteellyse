@@ -1,11 +1,12 @@
 import {brand, social} from "@/content/site"
+import Crescent from "./Crescent"
 import styles from "./SiteFooter.module.css"
 
 /** Shared footer: crescent, name, email, socials, the care disclaimer and a copyright line. */
 export default function SiteFooter() {
   return (
     <footer className={styles.footer}>
-      <span className={styles.moon} aria-hidden="true" />
+      <Crescent className={styles.moon} />
       <p className={styles.name}>{brand.name}</p>
       <a href={`mailto:${brand.email}`} className={styles.contact}>
         <span className={styles.emailLink}>
