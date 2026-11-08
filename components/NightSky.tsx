@@ -268,11 +268,13 @@ function Stars({count, still, mouse}: {count: number; still: boolean; mouse: boo
   )
 }
 
-/** Full-screen animated star field fixed behind page content. Fades out over the element with `fadeTargetId`. */
-export default function NightSky({fadeTargetId}: {fadeTargetId?: string}) {
+/** Full-screen animated star field fixed behind page content. Fades out over the element with `fadeTargetId`; `density` scales the star count. */
+export default function NightSky({fadeTargetId, density = 1}: {fadeTargetId?: string; density?: number}) {
   const still = useSyncExternalStore(reducedMotion.subscribe, reducedMotion.get, () => true)
   const mouse = useSyncExternalStore(finePointer.subscribe, finePointer.get, () => false)
-  const [count] = useState(() => (window.innerWidth < PHONE_MAX_WIDTH ? STAR_COUNT_PHONE : STAR_COUNT_DESKTOP))
+  const [count] = useState(() =>
+    Math.round((window.innerWidth < PHONE_MAX_WIDTH ? STAR_COUNT_PHONE : STAR_COUNT_DESKTOP) * density),
+  )
   const [tabVisible, setTabVisible] = useState(() => !document.hidden)
   const [onScreen, setOnScreen] = useState(true)
   const [fadedOut, setFadedOut] = useState(false)

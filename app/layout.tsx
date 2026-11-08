@@ -4,7 +4,7 @@ import Analytics from "@/components/Analytics"
 import SiteNav from "@/components/SiteNav"
 import "./globals.css"
 
-const raleway = Raleway({subsets: ["latin"], variable: "--font-raleway"})
+const raleway = Raleway({subsets: ["latin"], style: ["normal", "italic"], variable: "--font-raleway"})
 const jost = Jost({subsets: ["latin"], variable: "--font-jost"})
 
 export const metadata: Metadata = {
