@@ -1,0 +1,33 @@
+/* Mark */
+.mark {
+  overflow: visible;
+}
+
+.mark path {
+  transform-box: fill-box;
+  transform-origin: center;
+  transition: rotate 0.5s ease-in-out, scale 0.5s ease-in-out, opacity 0.5s ease-in-out;
+}
+
+.star {
+  opacity: 0;
+}
+
+/* Hovering the surrounding link tips the moon and reveals the star */
+a:is(:hover, :focus-visible) .star {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .star {
+    scale: 0.4;
+  }
+
+  a:is(:hover, :focus-visible) .moon {
+    rotate: -20deg;
+  }
+
+  a:is(:hover, :focus-visible) .star {
+    scale: 1;
+  }
+}
