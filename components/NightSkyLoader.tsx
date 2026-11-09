@@ -21,10 +21,10 @@ const noSubscribe = () => () => {}
 const getWebGLSupport = () => (webGLSupport ??= hasWebGL())
 
 /** Loads the animated night sky in the browser only, or a static CSS star pattern without WebGL. */
-export default function NightSkyLoader({fadeTargetId}: {fadeTargetId?: string}) {
+export default function NightSkyLoader({fadeTargetId, density}: {fadeTargetId?: string; density?: number}) {
   const supported = useSyncExternalStore(noSubscribe, getWebGLSupport, () => null)
 
   if (supported === null) return null
   if (!supported) return <div className={`${styles.sky} ${styles.fallback}`} aria-hidden="true" />
-  return <NightSky fadeTargetId={fadeTargetId} />
+  return <NightSky fadeTargetId={fadeTargetId} density={density} />
 }

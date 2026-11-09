@@ -4,6 +4,7 @@ import Link from "next/link"
 import {usePathname} from "next/navigation"
 import {useEffect, useRef, useState} from "react"
 import {brand, nav, social} from "@/content/site"
+import Crescent from "./Crescent"
 import styles from "./SiteNav.module.css"
 
 /** Sticky top navigation: name on the left, links on the right, a menu panel on phones; frosts once scrolled past its own height, or half a screen on Home. */
@@ -46,7 +47,7 @@ export default function SiteNav() {
   return (
     <header ref={header} className={styles.header} data-scrolled={scrolled}>
       <Link href="/" className={styles.name} onClick={close}>
-        <span className={styles.moon} aria-hidden="true" />
+        <Crescent className={styles.moon} />
         {brand.name}
       </Link>
 
