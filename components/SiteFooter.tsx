@@ -2,7 +2,7 @@ import {brand, social} from "@/content/site"
 import Crescent from "./Crescent"
 import styles from "./SiteFooter.module.css"
 
-/** Shared footer: crescent and name linking back to the top, email, socials, the care disclaimer and a copyright line. */
+/** Shared footer: crescent and name linking back to the top, socials, the care disclaimer and a copyright line. */
 export default function SiteFooter() {
   return (
     <footer className={styles.footer}>
@@ -10,15 +10,6 @@ export default function SiteFooter() {
         <Crescent className={styles.moon} />
         <span className={styles.name}>{brand.name}</span>
         <span className="visually-hidden"> (back to top)</span>
-      </a>
-      <a href={`mailto:${brand.email}`} className={styles.contact}>
-        <span className={styles.emailLink}>
-          {brand.emailPrompt}
-          <span className={styles.arrow} aria-hidden="true">
-            →
-          </span>
-        </span>
-        <span className={styles.address}>{brand.email}</span>
       </a>
       <ul className={styles.social}>
         {social.map((item) => (
