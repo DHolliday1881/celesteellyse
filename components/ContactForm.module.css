@@ -54,10 +54,10 @@
 
 .textarea {
   height: auto;
-  min-height: var(--tap);
-  padding: 10px 0;
+  padding: 10px 0 0;
+  overflow: hidden;
   line-height: 1.5;
-  resize: vertical;
+  resize: none;
 }
 
 /* Send */
