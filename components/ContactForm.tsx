@@ -144,7 +144,7 @@ export default function ContactForm({page, className}: {page: "Home" | "Services
             <textarea
               id={`${id}-message`}
               name="message"
-              rows={3}
+              rows={2}
               required
               className={`${styles.input} ${styles.textarea}`}
               onInput={fitToText}
