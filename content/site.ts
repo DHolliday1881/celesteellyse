@@ -270,6 +270,11 @@ export const services = {
   faq: {
     eyebrow: "Good to know",
     heading: "Questions & policies",
+    ask: {
+      heading: "Didn’t find your answer?",
+      open: "Send me a note",
+      close: "Close message form",
+    },
     groups: [
       {
         label: "Sessions",
