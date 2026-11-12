@@ -1,15 +1,19 @@
 /* Layout */
 .ask {
+  --ask-pad: 32px;
+  --ask-heading-size: 20px;
+  --ask-heading-line: 1.15;
   position: relative;
-  padding-top: 32px;
+  padding-top: var(--ask-pad);
   border-top: 1px solid rgba(243, 241, 234, 0.1);
   text-align: center;
 }
 
 .heading {
   color: var(--cream);
-  font-size: 20px;
+  font-size: var(--ask-heading-size);
   font-weight: 300;
+  line-height: var(--ask-heading-line);
 }
 
 /* Folding rows */
@@ -104,8 +108,8 @@
 /* Close */
 .close {
   position: absolute;
-  top: 9px;
-  right: -11px;
+  top: calc(var(--ask-pad) + var(--ask-heading-size) * var(--ask-heading-line) / 2 - var(--tap) / 2);
+  right: 0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -143,14 +147,7 @@
 /* Tablet and up */
 @media (min-width: 48rem) {
   .ask {
-    padding-top: 40px;
-  }
-
-  .heading {
-    font-size: 22px;
-  }
-
-  .close {
-    top: 17px;
+    --ask-pad: 40px;
+    --ask-heading-size: 22px;
   }
 }
