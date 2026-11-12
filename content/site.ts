@@ -65,6 +65,11 @@ export const home = {
     signOff: "I’m glad you found your way here.",
     portraitAlt: "Portrait of Celeste",
   },
+  sayHello: {
+    eyebrow: "Say hello",
+    heading: "Have a question first?",
+    intro: "Not sure which session is right, or just want to say hello? Send me a note.",
+  },
   paths: {
     eyebrow: "Sessions",
     heading: "Two ways to connect",
