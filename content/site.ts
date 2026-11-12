@@ -5,6 +5,18 @@ export const brand = {
   disclaimer: "Sessions are for entertainment and personal insight. I’m not a veterinarian or doctor, and sessions don’t replace professional care.",
 }
 
+// Contact form
+export const contact = {
+  formName: "contact",
+  fields: {firstName: "First name", email: "Email", message: "Message"},
+  send: "Send",
+  sending: "Sending",
+  replyNote: "I’ll reply within 2 days.",
+  thanks: "Thank you, it’s on its way.",
+  thanksNote: "I’ll be in touch within 2 days.",
+  errorLead: "Something went wrong. You can email me at",
+}
+
 // Social
 export const social = [
   {label: "Instagram", href: "https://instagram.com/celeste.ellyse"},

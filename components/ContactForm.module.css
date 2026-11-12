@@ -1,0 +1,139 @@
+/* Layout */
+.root {
+  width: 100%;
+  text-align: left;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.row {
+  display: grid;
+  gap: 24px;
+}
+
+/* Fields */
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.label {
+  color: var(--periwinkle-soft);
+  font-family: var(--font-label);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+}
+
+.input {
+  width: 100%;
+  height: var(--tap);
+  padding: 0;
+  border: 0;
+  border-bottom: 1px solid rgba(179, 190, 242, 0.4);
+  border-radius: 0;
+  background: transparent;
+  color: var(--cream);
+  font-family: var(--font-body);
+  font-size: 17px;
+  font-weight: 300;
+  transition: border-color 0.3s ease;
+}
+
+.input:focus,
+.input:focus-visible {
+  border-bottom-color: var(--cream);
+  box-shadow: 0 1px 0 var(--cream);
+  outline: none;
+}
+
+.textarea {
+  height: auto;
+  min-height: var(--tap);
+  padding: 10px 0;
+  line-height: 1.5;
+  resize: vertical;
+}
+
+/* Send */
+.actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding-top: 8px;
+  text-align: center;
+}
+
+.send {
+  min-height: var(--tap);
+  padding: 0 48px;
+}
+
+.send:disabled,
+.send:disabled:hover {
+  opacity: 0.6;
+  cursor: default;
+  transform: none;
+  box-shadow: none;
+}
+
+.note {
+  color: var(--ink-faint);
+  font-family: var(--font-label);
+  font-size: 13px;
+  font-weight: 400;
+}
+
+/* Status */
+.status {
+  text-align: center;
+}
+
+.status:focus {
+  outline: none;
+}
+
+.thanks {
+  color: var(--cream);
+  font-size: 22px;
+  font-style: italic;
+  font-weight: 300;
+}
+
+.thanksNote {
+  margin-top: 6px;
+  color: var(--ink-mist);
+  font-size: 15px;
+  font-weight: 300;
+}
+
+.error {
+  margin-top: 20px;
+  color: var(--ink-mist);
+  font-size: 15px;
+  font-weight: 300;
+}
+
+.errorLink {
+  color: var(--cream);
+  box-shadow: inset 0 -1px 0 var(--periwinkle);
+}
+
+/* Tablet and up: name and email side by side */
+@media (min-width: 48rem) {
+  .form,
+  .row {
+    gap: 28px;
+  }
+
+  .row {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
