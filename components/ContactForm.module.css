@@ -49,7 +49,6 @@
 .input:focus,
 .input:focus-visible {
   border-bottom-color: var(--cream);
-  box-shadow: 0 1px 0 var(--cream);
   outline: none;
 }
 
