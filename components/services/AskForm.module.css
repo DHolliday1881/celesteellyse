@@ -3,6 +3,8 @@
   --ask-pad: 32px;
   --ask-heading-size: 20px;
   --ask-heading-line: 1.15;
+  --ask-form-width: 640px;
+  --ask-close-icon: 22px;
   position: relative;
   padding-top: var(--ask-pad);
   border-top: 1px solid rgba(243, 241, 234, 0.1);
@@ -53,7 +55,7 @@
 }
 
 .formInner {
-  max-width: 640px;
+  max-width: var(--ask-form-width);
   margin: 0 auto;
   padding-top: 28px;
 }
@@ -109,7 +111,7 @@
 .close {
   position: absolute;
   top: calc(var(--ask-pad) + var(--ask-heading-size) * var(--ask-heading-line) / 2 - var(--tap) / 2);
-  right: 0;
+  right: calc(max(0px, (100% - var(--ask-form-width)) / 2) - (var(--tap) - var(--ask-close-icon)) / 2);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -133,8 +135,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 22px;
-  height: 22px;
+  width: var(--ask-close-icon);
+  height: var(--ask-close-icon);
   border: 1px solid rgba(149, 163, 236, 0.6);
   border-radius: 50%;
   color: var(--periwinkle-soft);
