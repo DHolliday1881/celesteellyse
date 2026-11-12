@@ -60,6 +60,13 @@
   resize: none;
 }
 
+.fieldError {
+  color: var(--periwinkle-soft);
+  font-family: var(--font-label);
+  font-size: 12px;
+  font-weight: 400;
+}
+
 /* Send */
 .actions {
   display: flex;

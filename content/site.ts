@@ -15,6 +15,12 @@ export const contact = {
   thanks: "Thank you, it’s on its way.",
   thanksNote: "I’ll be in touch within 2 days.",
   errorLead: "Something went wrong. You can email me at",
+  errors: {
+    firstName: "Please add your first name.",
+    email: "Please add your email.",
+    emailFormat: "That email doesn’t look quite right.",
+    message: "Please write a message.",
+  },
 }
 
 // Social

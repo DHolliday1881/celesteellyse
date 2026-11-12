@@ -5,6 +5,10 @@ import {brand, contact} from "@/content/site"
 import styles from "./ContactForm.module.css"
 
 type Status = "idle" | "sending" | "sent" | "error"
+type FieldName = "first-name" | "email" | "message"
+type FieldElement = HTMLInputElement | HTMLTextAreaElement
+
+const FIELDS: FieldName[] = ["first-name", "email", "message"]
 
 // Netlify only accepts fields declared in public/__forms.html; a mismatch is dropped silently
 const NETLIFY_FORM_PATH = "/__forms.html"
@@ -16,26 +20,52 @@ function fitToText(event: FormEvent<HTMLTextAreaElement>) {
   field.style.height = `${field.scrollHeight + field.offsetHeight - field.clientHeight}px`
 }
 
+/** Returns the message for a field that isn't filled in correctly, or undefined when it is. */
+function checkField(field: FieldElement): string | undefined {
+  const empty = field.value.trim() === ""
+  if (field.name === "first-name") return empty ? contact.errors.firstName : undefined
+  if (field.name === "email") {
+    if (empty) return contact.errors.email
+    return field.validity.typeMismatch ? contact.errors.emailFormat : undefined
+  }
+  return empty ? contact.errors.message : undefined
+}
+
 /** Contact form posting to Netlify Forms; `page` records which page a message came from. */
 export default function ContactForm({page, className}: {page: "Home" | "Services"; className?: string}) {
   const id = useId()
   const status = useRef<HTMLDivElement>(null)
   const [state, setState] = useState<Status>("idle")
+  const [errors, setErrors] = useState<Partial<Record<FieldName, string>>>({})
 
   useEffect(() => {
     if (state === "sent") status.current?.focus()
   }, [state])
 
-  /** Sends the fields URL-encoded to Netlify and swaps in the thank-you or error message. */
+  /** Rechecks a field the visitor is fixing, so its message clears once it's right. */
+  function handleInput(event: FormEvent<HTMLFormElement>) {
+    const field = event.target as FieldElement
+    const name = field.name as FieldName
+    if (errors[name]) setErrors((current) => ({...current, [name]: checkField(field)}))
+  }
+
+  /** Checks every field, then sends them URL-encoded to Netlify and swaps in the thank-you or error message. */
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
+    const form = event.currentTarget
+    const fields = FIELDS.map((name) => form.elements.namedItem(name) as FieldElement)
+    const found = Object.fromEntries(fields.map((field) => [field.name, checkField(field)]))
+    setErrors(found)
+    const firstInvalid = fields.find((field) => found[field.name])
+    if (firstInvalid) return firstInvalid.focus()
+
     setState("sending")
-    const fields = Array.from(new FormData(event.currentTarget), ([key, value]) => [key, String(value)])
+    const body = Array.from(new FormData(form), ([key, value]) => [key, String(value)])
     try {
       const response = await fetch(NETLIFY_FORM_PATH, {
         method: "POST",
         headers: {"Content-Type": "application/x-www-form-urlencoded"},
-        body: new URLSearchParams(fields).toString(),
+        body: new URLSearchParams(body).toString(),
       })
       setState(response.ok ? "sent" : "error")
     } catch {
@@ -43,12 +73,29 @@ export default function ContactForm({page, className}: {page: "Home" | "Services
     }
   }
 
+  /** Accessibility props and the inline message for one field. */
+  function validation(name: FieldName) {
+    const error = errors[name]
+    const errorId = `${id}-${name}-error`
+    return {
+      props: {"aria-invalid": error ? true : undefined, "aria-describedby": error ? errorId : undefined},
+      message: error && (
+        <p id={errorId} className={styles.fieldError}>
+          {error}
+        </p>
+      ),
+    }
+  }
+
+  const firstName = validation("first-name")
+  const email = validation("email")
+  const message = validation("message")
   const sending = state === "sending"
 
   return (
     <div className={`${styles.root} ${className ?? ""}`}>
       {state !== "sent" && (
-        <form name={contact.formName} className={styles.form} onSubmit={handleSubmit}>
+        <form name={contact.formName} className={styles.form} noValidate onInput={handleInput} onSubmit={handleSubmit}>
           <input type="hidden" name="form-name" value={contact.formName} />
           <input type="hidden" name="page" value={page} />
           <p hidden>
@@ -69,7 +116,9 @@ export default function ContactForm({page, className}: {page: "Home" | "Services
                 autoComplete="given-name"
                 required
                 className={styles.input}
+                {...firstName.props}
               />
+              {firstName.message}
             </div>
             <div className={styles.field}>
               <label htmlFor={`${id}-email`} className={styles.label}>
@@ -82,7 +131,9 @@ export default function ContactForm({page, className}: {page: "Home" | "Services
                 autoComplete="email"
                 required
                 className={styles.input}
+                {...email.props}
               />
+              {email.message}
             </div>
           </div>
 
@@ -97,7 +148,9 @@ export default function ContactForm({page, className}: {page: "Home" | "Services
               required
               className={`${styles.input} ${styles.textarea}`}
               onInput={fitToText}
+              {...message.props}
             />
+            {message.message}
           </div>
 
           <div className={styles.actions}>
