@@ -132,6 +132,9 @@
 /* Glimmer settles back to the link colour; hover shows coral instead */
 .sweep {
   --glimmer-to: var(--moon-white);
+  --glimmer-cool: var(--periwinkle);
+  --glimmer-warm: color-mix(in srgb, var(--coral) 55%, white);
+  --glimmer-halo: none;
 }
 
 .socialLink:is(:hover, :focus-visible) .sweep {

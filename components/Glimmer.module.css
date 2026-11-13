@@ -1,7 +1,7 @@
 /* Glimmer: a light sweeps across the word once, then it settles */
 .glimmer {
   display: inline-block;
-  background: linear-gradient(105deg, var(--glimmer-to, #E2E6F4) 0 34%, #FFFFFF 40%, #AEB9F5 45%, #FFC9BC 51%, #FFFFFF 57%, var(--glimmer-from, var(--moon-white)) 64% 100%) 100% 0 / 300% 100%;
+  background: linear-gradient(105deg, var(--glimmer-to, #E2E6F4) 0 34%, #FFFFFF 40%, var(--glimmer-cool, #AEB9F5) 45%, var(--glimmer-warm, #FFC9BC) 51%, #FFFFFF 57%, var(--glimmer-from, var(--moon-white)) 64% 100%) 100% 0 / 300% 100%;
   background-clip: text;
   color: transparent;
   animation: glimmer 1.8s ease-in-out calc(var(--glimmer-delay, 0s) + var(--order, 0) * 0.35s) both;
@@ -9,7 +9,7 @@
 
 @keyframes glimmer {
   50% {
-    filter: drop-shadow(0 0 8px rgba(201, 210, 255, 0.6)) drop-shadow(0 2px 28px rgba(7, 15, 29, 0.55));
+    filter: var(--glimmer-halo, drop-shadow(0 0 8px rgba(201, 210, 255, 0.6)) drop-shadow(0 2px 28px rgba(7, 15, 29, 0.55)));
   }
 
   to {
