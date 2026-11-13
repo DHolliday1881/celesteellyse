@@ -22,9 +22,7 @@
   inset: auto 0 0;
   z-index: -1;
   height: 70%;
-  background:
-    radial-gradient(ellipse 30% 55% at 50% 100%, color-mix(in srgb, var(--coral) 14%, transparent), transparent),
-    radial-gradient(ellipse 48% 100% at 50% 100%, color-mix(in srgb, var(--periwinkle) 12%, transparent), transparent);
+  background: radial-gradient(ellipse 45% 100% at 50% 100%, color-mix(in srgb, var(--periwinkle) 7%, transparent), transparent);
   pointer-events: none;
 }
 
