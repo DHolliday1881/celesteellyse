@@ -31,27 +31,23 @@ export default function AskForm() {
     <div className={styles.ask} data-open={open}>
       <h3 className={styles.heading}>{heading}</h3>
 
-      <div className={`${styles.fold} ${styles.triggerFold}`} inert={open}>
-        <div className={styles.clip}>
-          <div className={styles.triggerInner}>
-            <button
-              ref={trigger}
-              type="button"
-              className={styles.trigger}
-              aria-expanded={open}
-              aria-controls={FORM_ID}
-              onClick={() => setForm(true)}
-            >
-              <span className={styles.triggerText}>{openLabel}</span>
-              <span className={styles.arrow} aria-hidden="true">
-                →
-              </span>
-            </button>
-          </div>
-        </div>
+      <div className={styles.triggerRow} inert={open}>
+        <button
+          ref={trigger}
+          type="button"
+          className={styles.trigger}
+          aria-expanded={open}
+          aria-controls={FORM_ID}
+          onClick={() => setForm(true)}
+        >
+          <span className={styles.triggerText}>{openLabel}</span>
+          <span className={styles.arrow} aria-hidden="true">
+            →
+          </span>
+        </button>
       </div>
 
-      <div id={FORM_ID} ref={form} className={`${styles.fold} ${styles.formFold}`} inert={!open}>
+      <div id={FORM_ID} ref={form} className={styles.fold} inert={!open}>
         <div className={styles.clip}>
           <div className={styles.formInner}>
             <ContactForm page="Services" />
