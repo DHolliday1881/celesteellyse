@@ -109,9 +109,20 @@
 
 .social {
   display: flex;
-  gap: 1.75rem;
+  gap: 0.875rem;
   padding: 0;
   list-style: none;
+}
+
+.social li {
+  display: flex;
+  align-items: center;
+  gap: 0.875rem;
+}
+
+.social li + li::before {
+  content: "·" / "";
+  color: var(--periwinkle);
 }
 
 .socialLink {
