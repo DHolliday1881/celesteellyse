@@ -68,6 +68,12 @@
 html {
   -webkit-text-size-adjust: 100%;
   -webkit-tap-highlight-color: transparent;
+  scrollbar-width: none;
+}
+
+/* Safari before 18.2 ignores scrollbar-width */
+html::-webkit-scrollbar {
+  display: none;
 }
 
 body {
