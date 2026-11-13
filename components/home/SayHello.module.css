@@ -1,6 +1,6 @@
 /* Layout */
 .section {
-  padding: var(--space-xl) 16px 72px;
+  padding: var(--space-xl) var(--gutter) 72px;
 }
 
 /* Card */
