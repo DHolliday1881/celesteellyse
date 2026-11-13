@@ -1,9 +1,10 @@
 import {services} from "@/content/site"
+import AskForm from "./AskForm"
 import styles from "./Faq.module.css"
 
 export const FAQ_ID = "faq"
 
-/** Questions & policies on a frosted night glass card, in two labelled columns; one answer open at a time. */
+/** Questions & policies on a frosted night glass card, in two labelled columns; one answer open at a time. A note form folds out at the bottom. */
 export default function Faq() {
   const {eyebrow, heading, groups} = services.faq
 
@@ -33,6 +34,8 @@ export default function Faq() {
             </div>
           ))}
         </div>
+
+        <AskForm />
       </div>
     </section>
   )

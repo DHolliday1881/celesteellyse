@@ -1,0 +1,170 @@
+/* Layout */
+.ask {
+  --ask-pad: 32px;
+  --ask-heading-size: 20px;
+  --ask-heading-line: 1.15;
+  --ask-form-width: 640px;
+  --ask-close-icon: 22px;
+  position: relative;
+  padding-top: var(--ask-pad);
+  border-top: 1px solid rgba(243, 241, 234, 0.1);
+  text-align: center;
+}
+
+.heading {
+  color: var(--moon-white);
+  font-size: var(--ask-heading-size);
+  font-weight: 300;
+  line-height: var(--ask-heading-line);
+}
+
+/* Folding rows */
+.fold {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transition: grid-template-rows 0.6s cubic-bezier(0.65, 0, 0.35, 1), opacity 0.5s ease;
+}
+
+.clip {
+  min-height: 0;
+  overflow: clip;
+}
+
+.ask[data-open="true"] .fold {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+
+.triggerRow {
+  padding: 6px 0;
+}
+
+.formInner {
+  max-width: var(--ask-form-width);
+  margin: 0 auto;
+  padding-top: 28px;
+}
+
+/* Send me a note */
+.trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  height: var(--tap);
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  transition: gap 0.35s ease;
+}
+
+.triggerText {
+  padding-bottom: 6px;
+  box-shadow: inset 0 -1px 0 var(--periwinkle);
+  color: var(--moon-white);
+  font-family: var(--font-label);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  transition: box-shadow 0.35s ease;
+}
+
+.arrow {
+  display: inline-block;
+  max-width: 1em;
+  overflow: hidden;
+  padding-bottom: 6px;
+  color: var(--periwinkle);
+  font-family: var(--font-label);
+  font-size: 15px;
+  font-weight: 400;
+  transform-origin: left center;
+  transition: color 0.5s ease-in-out, translate 0.3s ease, scale 0.3s ease, opacity 0.35s ease, max-width 0.35s ease;
+}
+
+.ask[data-open="true"] .trigger {
+  gap: 0;
+  cursor: default;
+}
+
+.ask[data-open="true"] .triggerText {
+  box-shadow: inset 0 -1px 0 transparent;
+}
+
+.ask[data-open="true"] .arrow {
+  max-width: 0;
+  opacity: 0;
+}
+
+.trigger:hover .arrow,
+.trigger:focus-visible .arrow {
+  color: var(--coral);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .trigger:hover .arrow,
+  .trigger:focus-visible .arrow {
+    translate: 4px 0;
+    scale: 1.35 1;
+  }
+}
+
+/* Close */
+.close {
+  position: absolute;
+  top: calc(var(--ask-pad) + var(--ask-heading-size) * var(--ask-heading-line) / 2 - var(--tap) / 2);
+  right: calc(max(0px, (100% - var(--ask-form-width)) / 2) - (var(--tap) - var(--ask-close-icon)) / 2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--tap);
+  height: var(--tap);
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s ease;
+}
+
+.ask[data-open="true"] .close {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.closeIcon {
+  position: relative;
+  width: var(--ask-close-icon);
+  height: var(--ask-close-icon);
+  border: 1px solid rgba(149, 163, 236, 0.6);
+  border-radius: 50%;
+  color: var(--periwinkle);
+}
+
+.closeIcon::before,
+.closeIcon::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 9px;
+  height: 1px;
+  background: currentColor;
+  translate: -50% -50%;
+  rotate: 45deg;
+}
+
+.closeIcon::after {
+  rotate: -45deg;
+}
+
+/* Tablet and up */
+@media (min-width: 48rem) {
+  .ask {
+    --ask-pad: 40px;
+    --ask-heading-size: 22px;
+  }
+}
