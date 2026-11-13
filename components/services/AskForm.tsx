@@ -2,25 +2,30 @@
 
 import {useEffect, useRef, useState} from "react"
 import ContactForm from "@/components/ContactForm"
-import {GROWS_UP} from "./FooterGap"
+import ContactThanks from "@/components/ContactThanks"
+import {GROWS_UP, STAYS_OPEN} from "./FooterGap"
 import {services} from "@/content/site"
 import styles from "./AskForm.module.css"
 
 const FORM_ID = "ask-form"
+const THANKS_FOR_MS = 5_000
 
-/** "Didn't find your answer?" with a note form that opens into the space above the footer, then grows upward. */
+/** "Didn't find your answer?" with a note form that opens into the space above the footer, then grows upward; once sent it shows a thank-you, then resets to closed. */
 export default function AskForm() {
   const {heading, open: openLabel, close: closeLabel} = services.faq.ask
   const [open, setOpen] = useState(false)
+  const [sent, setSent] = useState(false)
+  const [round, setRound] = useState(0)
   const toggled = useRef(false)
+  const root = useRef<HTMLDivElement>(null)
   const trigger = useRef<HTMLButtonElement>(null)
   const form = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     if (!toggled.current) return
-    if (open) form.current?.querySelector<HTMLElement>("input:not([type=hidden]):not([name=bot-field])")?.focus({preventScroll: true})
+    if (open) form.current?.querySelector<HTMLElement>("input[name=first-name]")?.focus({preventScroll: true})
     else trigger.current?.focus({preventScroll: true})
-  }, [open])
+  }, [open, round])
 
   /** Opens or closes the form and remembers that the visitor asked for it, so focus can follow. */
   function setForm(next: boolean) {
@@ -28,30 +33,70 @@ export default function AskForm() {
     setOpen(next)
   }
 
-  return (
-    <div className={styles.ask} data-open={open}>
-      <h3 className={styles.heading}>{heading}</h3>
+  /** Back to the closed default with an empty form; `moveFocus` returns focus to "Send me a note". */
+  function reset(moveFocus: boolean) {
+    toggled.current = moveFocus
+    setSent(false)
+    setOpen(false)
+    setRound((count) => count + 1)
+  }
 
-      <div className={styles.triggerRow} inert={open}>
-        <button
-          ref={trigger}
-          type="button"
-          className={styles.trigger}
-          aria-expanded={open}
-          aria-controls={FORM_ID}
-          onClick={() => setForm(true)}
-        >
-          <span className={styles.triggerText}>{openLabel}</span>
-          <span className={styles.arrow} aria-hidden="true">
-            →
-          </span>
-        </button>
+  useEffect(() => {
+    if (!sent) return
+    const element = root.current
+    const timer = window.setTimeout(() => reset(true), THANKS_FOR_MS)
+    const leave = () => reset(false)
+    const onHidden = () => document.hidden && leave()
+    const observer = new IntersectionObserver(([entry]) => !entry.isIntersecting && leave())
+    if (element) observer.observe(element)
+    document.addEventListener("visibilitychange", onHidden)
+    window.addEventListener("pagehide", leave)
+    return () => {
+      window.clearTimeout(timer)
+      observer.disconnect()
+      document.removeEventListener("visibilitychange", onHidden)
+      window.removeEventListener("pagehide", leave)
+    }
+  }, [sent])
+
+  const showForm = open && !sent
+
+  return (
+    <div ref={root} className={styles.ask} data-open={open} data-sent={sent}>
+      <div className={styles.rows} inert={sent}>
+        <div className={styles.clip}>
+          <div className={styles.intro} data-swapped={sent}>
+            <h3 className={styles.heading}>{heading}</h3>
+
+            <div className={styles.triggerRow} inert={open}>
+              <button
+                ref={trigger}
+                type="button"
+                className={styles.trigger}
+                aria-expanded={showForm}
+                aria-controls={FORM_ID}
+                onClick={() => setForm(true)}
+              >
+                <span className={styles.triggerText}>{openLabel}</span>
+                <span className={styles.arrow} aria-hidden="true">
+                  →
+                </span>
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <div id={FORM_ID} ref={form} className={styles.fold} inert={!open} {...GROWS_UP}>
+      <div className={styles.thanksRows} {...STAYS_OPEN}>
+        <div className={styles.clip}>
+          <ContactThanks active={sent} heading="h3" className={styles.thanks} />
+        </div>
+      </div>
+
+      <div id={FORM_ID} ref={form} className={styles.fold} inert={!showForm} {...GROWS_UP}>
         <div className={styles.clip}>
           <div className={styles.formInner}>
-            <ContactForm page="Services" />
+            <ContactForm key={round} page="Services" onSent={() => setSent(true)} />
           </div>
         </div>
       </div>
@@ -60,8 +105,8 @@ export default function AskForm() {
         type="button"
         className={styles.close}
         aria-label={closeLabel}
-        tabIndex={open ? 0 : -1}
-        inert={!open}
+        tabIndex={showForm ? 0 : -1}
+        inert={!showForm}
         onClick={() => setForm(false)}
       >
         <span className={styles.closeIcon} aria-hidden="true" />
