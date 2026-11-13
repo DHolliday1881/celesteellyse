@@ -24,7 +24,7 @@ export default function ServicesPage() {
       <NightSkyLoader fadeTargetId={OCEAN_ID} />
       <div className={styles.clouds} aria-hidden="true">
         <div className={styles.cloudsPhoto}>
-          <Image src={images.servicesClouds} alt="" fill preload sizes="100vw" />
+          <Image src={images.servicesClouds} alt="" fill loading="eager" fetchPriority="high" sizes="100vw" />
         </div>
       </div>
       <div id={OCEAN_ID} className={styles.ocean} aria-hidden="true">
