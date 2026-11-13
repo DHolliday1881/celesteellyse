@@ -40,7 +40,7 @@
 .heading {
   color: var(--moon-white);
   font-size: 28px;
-  font-weight: 200;
+  font-weight: 300;
   line-height: 1.15;
   text-wrap: balance;
 }
@@ -49,7 +49,7 @@
   max-width: 440px;
   color: var(--ink-soft);
   font-size: 16px;
-  font-weight: 300;
+  font-weight: 400;
   line-height: 1.7;
 }
 

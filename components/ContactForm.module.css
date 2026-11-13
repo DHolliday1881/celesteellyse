@@ -42,7 +42,7 @@
   color: var(--moon-white);
   font-family: var(--font-body);
   font-size: 17px;
-  font-weight: 300;
+  font-weight: 400;
   transition: border-color 0.3s ease;
 }
 
@@ -117,14 +117,14 @@
   margin-top: 6px;
   color: var(--ink-soft);
   font-size: 15px;
-  font-weight: 300;
+  font-weight: 400;
 }
 
 .error {
   margin-top: 20px;
   color: var(--ink-soft);
   font-size: 15px;
-  font-weight: 300;
+  font-weight: 400;
 }
 
 .errorLink {
