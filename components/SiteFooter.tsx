@@ -14,7 +14,7 @@ const STARS = [
   {x: 24, y: -50, size: 5, shape: "sparkle", tone: "white", opacity: 0.6, duration: 4.5, delay: 1.8},
 ] as const
 
-/** Shared footer: crescent and name linking back to the top, email, socials, the care disclaimer and a copyright line; `stars` scatters a few twinkling stars around the moon. */
+/** Shared footer: crescent and name linking back to the top, socials, the care disclaimer and a copyright line; `stars` scatters a few twinkling stars around the moon. */
 export default function SiteFooter({stars = false}: {stars?: boolean}) {
   return (
     <footer className={styles.footer}>
@@ -44,15 +44,6 @@ export default function SiteFooter({stars = false}: {stars?: boolean}) {
         </span>
         <span className={styles.name}>{brand.name}</span>
         <span className="visually-hidden"> (back to top)</span>
-      </a>
-      <a href={`mailto:${brand.email}`} className={styles.contact}>
-        <span className={styles.emailLink}>
-          {brand.emailPrompt}
-          <span className={styles.arrow} aria-hidden="true">
-            →
-          </span>
-        </span>
-        <span className={styles.address}>{brand.email}</span>
       </a>
       <FooterSocial />
       <p className={styles.disclaimer}>{brand.disclaimer}</p>

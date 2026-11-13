@@ -1,8 +1,8 @@
 import type {Metadata} from "next"
 import Image from "next/image"
 import Faq, {FAQ_ID} from "@/components/services/Faq"
+import FooterGap from "@/components/services/FooterGap"
 import HowSessionsWork from "@/components/services/HowSessionsWork"
-import PinToAnchor from "@/components/services/PinToAnchor"
 import ServiceList from "@/components/services/ServiceList"
 import NightSkyLoader from "@/components/NightSkyLoader"
 import SiteFooter from "@/components/SiteFooter"
@@ -30,7 +30,7 @@ export default function ServicesPage() {
       <div id={OCEAN_ID} className={styles.ocean} aria-hidden="true">
         <Image src={images.servicesOcean} alt="" fill sizes="100vw" />
       </div>
-      <PinToAnchor targetId={OCEAN_ID} anchorId={FAQ_ID} />
+      <FooterGap anchorId={FAQ_ID} />
 
       <main className={styles.main}>
         <header className={styles.title}>
