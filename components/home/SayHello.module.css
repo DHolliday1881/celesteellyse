@@ -29,7 +29,7 @@
 .eyebrow {
   display: flex;
   gap: 12px;
-  color: var(--periwinkle-soft);
+  color: var(--periwinkle);
   letter-spacing: 0.32em;
 }
 
@@ -38,7 +38,7 @@
 }
 
 .heading {
-  color: var(--cream);
+  color: var(--moon-white);
   font-size: 28px;
   font-weight: 200;
   line-height: 1.15;
@@ -47,7 +47,7 @@
 
 .intro {
   max-width: 440px;
-  color: var(--ink-mist);
+  color: var(--ink-soft);
   font-size: 16px;
   font-weight: 300;
   line-height: 1.7;
