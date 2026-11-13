@@ -1,5 +1,6 @@
-import {brand, social} from "@/content/site"
+import {brand} from "@/content/site"
 import Crescent from "./Crescent"
+import FooterSocial from "./FooterSocial"
 import styles from "./SiteFooter.module.css"
 
 /** Shared footer: crescent and name linking back to the top, email, socials, the care disclaimer and a copyright line. */
@@ -22,18 +23,7 @@ export default function SiteFooter() {
         </span>
         <span className={styles.address}>{brand.email}</span>
       </a>
-      <ul className={styles.social}>
-        {social.map((item) => (
-          <li key={item.href}>
-            <a href={item.href} className={styles.socialLink} target="_blank" rel="noopener noreferrer">
-              <span className={styles.socialLabel} data-label={item.label}>
-                {item.label}
-              </span>
-              <span className="visually-hidden"> (opens in a new tab)</span>
-            </a>
-          </li>
-        ))}
-      </ul>
+      <FooterSocial />
       <p className={styles.disclaimer}>{brand.disclaimer}</p>
       <p className={styles.copyright}>
         © {new Date().getFullYear()} {brand.name}

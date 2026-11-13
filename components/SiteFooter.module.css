@@ -143,6 +143,16 @@
   font-weight: 500;
 }
 
+/* Glimmer settles back to the link colour; hover shows coral instead */
+.sweep {
+  --glimmer-to: var(--moon-white);
+}
+
+.socialLink:is(:hover, :focus-visible) .sweep {
+  background: none;
+  color: var(--coral);
+}
+
 /* Reserves the hover weight's width so the row doesn't shift */
 .socialLabel {
   display: inline-flex;
