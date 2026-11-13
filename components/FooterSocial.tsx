@@ -5,10 +5,10 @@ import {social} from "@/content/site"
 import glimmer from "./Glimmer.module.css"
 import styles from "./SiteFooter.module.css"
 
-const SWEEP_EVERY_MS = 10_000
+const SWEEP_EVERY_MS = 8_000
 const FIRST_SWEEP_MS = 800
 
-/** Footer social links; while on screen, a glimmer sweeps across them every ten seconds. */
+/** Footer social links; while on screen, a glimmer sweeps across them every eight seconds. */
 export default function FooterSocial() {
   const list = useRef<HTMLUListElement>(null)
   const [sweep, setSweep] = useState(0)
