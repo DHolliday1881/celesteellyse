@@ -14,7 +14,7 @@ export default function Home() {
         <SessionPaths />
         <SayHello />
       </main>
-      <SiteFooter stars />
+      <SiteFooter stars dusk />
     </>
   )
 }

@@ -20,10 +20,10 @@ const STARS = [
   {x: 91.6, y: 58, size: 1.5, tone: "white", opacity: 0.4, duration: 3.9, delay: 1.6},
 ] as const
 
-/** Shared footer: crescent and name linking back to the top, socials, the care disclaimer and a copyright line; `stars` scatters twinkling stars across it. */
-export default function SiteFooter({stars = false}: {stars?: boolean}) {
+/** Shared footer: crescent and name linking back to the top, socials, the care disclaimer and a copyright line; `stars` scatters twinkling stars across it and `dusk` adds a soft glow along the bottom. */
+export default function SiteFooter({stars = false, dusk = false}: {stars?: boolean; dusk?: boolean}) {
   return (
-    <footer className={styles.footer}>
+    <footer className={`${styles.footer} ${dusk ? styles.dusk : ""}`}>
       {stars && (
         <span className={styles.stars} aria-hidden="true">
           {STARS.map((star) => (
