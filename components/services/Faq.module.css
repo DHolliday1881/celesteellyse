@@ -1,6 +1,7 @@
 /* Layout */
 .faq {
-  padding: clamp(4rem, 9vw, 7rem) var(--gutter) 0;
+  --gap-room: 150px;
+  padding: clamp(4rem, 9vw, 7rem) var(--gutter) max(0px, var(--gap-room) - var(--gap-taken, 0px));
 }
 
 /* Card */

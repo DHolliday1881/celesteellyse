@@ -2,13 +2,13 @@
 
 import {useEffect, useRef, useState} from "react"
 import ContactForm from "@/components/ContactForm"
-import {GROWS} from "./PinToAnchor"
+import {GROWS_UP} from "./FooterGap"
 import {services} from "@/content/site"
 import styles from "./AskForm.module.css"
 
 const FORM_ID = "ask-form"
 
-/** "Didn't find your answer?" with a note form that folds open under the FAQ. */
+/** "Didn't find your answer?" with a note form that opens into the space above the footer, then grows upward. */
 export default function AskForm() {
   const {heading, open: openLabel, close: closeLabel} = services.faq.ask
   const [open, setOpen] = useState(false)
@@ -18,8 +18,8 @@ export default function AskForm() {
 
   useEffect(() => {
     if (!toggled.current) return
-    if (open) form.current?.querySelector<HTMLElement>("input:not([type=hidden]):not([name=bot-field])")?.focus()
-    else trigger.current?.focus()
+    if (open) form.current?.querySelector<HTMLElement>("input:not([type=hidden]):not([name=bot-field])")?.focus({preventScroll: true})
+    else trigger.current?.focus({preventScroll: true})
   }, [open])
 
   /** Opens or closes the form and remembers that the visitor asked for it, so focus can follow. */
@@ -48,7 +48,7 @@ export default function AskForm() {
         </button>
       </div>
 
-      <div id={FORM_ID} ref={form} className={styles.fold} inert={!open} {...GROWS}>
+      <div id={FORM_ID} ref={form} className={styles.fold} inert={!open} {...GROWS_UP}>
         <div className={styles.clip}>
           <div className={styles.formInner}>
             <ContactForm page="Services" />
