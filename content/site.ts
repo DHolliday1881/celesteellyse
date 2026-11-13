@@ -12,8 +12,10 @@ export const contact = {
   send: "Send",
   sending: "Sending",
   replyNote: "I’ll reply within 2 days.",
+  sent: "Sent",
   thanks: "Thank you, it’s on its way.",
   thanksNote: "I’ll be in touch within 2 days.",
+  sendAnother: "Send another note",
   errorLead: "Something went wrong. You can email me at",
   errors: {
     firstName: "Please add your first name.",

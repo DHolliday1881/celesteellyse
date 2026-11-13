@@ -1,0 +1,64 @@
+/* Cross-fade: what's leaving fades out first, then what's arriving fades in */
+.swap {
+  transition: opacity 0.35s ease 0.25s, visibility 0s;
+}
+
+.swap[data-swapped="true"] {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.25s ease, visibility 0s 0.25s;
+}
+
+.thanks {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 6px;
+  text-align: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.25s ease, visibility 0s 0.25s;
+}
+
+.thanks[data-active="true"] {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.35s ease 0.25s, visibility 0s;
+}
+
+/* Text */
+.label {
+  display: flex;
+  gap: 12px;
+  color: var(--periwinkle);
+  letter-spacing: 0.32em;
+}
+
+.dot {
+  color: var(--periwinkle);
+}
+
+.heading {
+  margin-top: 14px;
+  color: var(--moon-white);
+  font-size: var(--thanks-heading-size, 28px);
+  font-weight: 300;
+  line-height: 1.15;
+  text-wrap: balance;
+}
+
+.heading:focus {
+  outline: none;
+}
+
+.note {
+  margin-top: 12px;
+  color: var(--ink-soft);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.7;
+}
+
+.again {
+  margin-top: 20px;
+}

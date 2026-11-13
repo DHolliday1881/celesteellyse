@@ -5,6 +5,7 @@
   --ask-heading-line: 1.15;
   --ask-form-width: 640px;
   --ask-close-icon: 22px;
+  --ask-fold: 0.6s cubic-bezier(0.65, 0, 0.35, 1);
   position: relative;
   padding-top: var(--ask-pad);
   border-top: 1px solid rgba(243, 241, 234, 0.1);
@@ -23,7 +24,7 @@
   display: grid;
   grid-template-rows: 0fr;
   opacity: 0;
-  transition: grid-template-rows 0.6s cubic-bezier(0.65, 0, 0.35, 1), opacity 0.5s ease;
+  transition: grid-template-rows var(--ask-fold), opacity 0.5s ease;
 }
 
 .clip {
@@ -34,6 +35,37 @@
 .ask[data-open="true"] .fold {
   grid-template-rows: 1fr;
   opacity: 1;
+}
+
+/* Once sent, the heading folds away and the thank-you folds in */
+.rows,
+.thanksRows {
+  display: grid;
+  grid-template-rows: 1fr;
+  transition: grid-template-rows var(--ask-fold);
+}
+
+.thanksRows,
+.ask[data-sent="true"] .rows {
+  grid-template-rows: 0fr;
+}
+
+.ask[data-sent="true"] .thanksRows {
+  grid-template-rows: 1fr;
+}
+
+.ask[data-sent="true"] .fold {
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transition: grid-template-rows var(--ask-fold), opacity 0.25s ease;
+}
+
+.intro {
+  composes: swap from "../ContactThanks.module.css";
+}
+
+.thanks {
+  --thanks-heading-size: 22px;
 }
 
 .triggerRow {
@@ -48,39 +80,19 @@
 
 /* Send me a note */
 .trigger {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  height: var(--tap);
-  padding: 0;
-  border: 0;
-  background: none;
-  cursor: pointer;
+  composes: link from "../ArrowLink.module.css";
   transition: gap 0.35s ease;
 }
 
 .triggerText {
-  padding-bottom: 6px;
-  box-shadow: inset 0 -1px 0 var(--periwinkle);
-  color: var(--moon-white);
-  font-family: var(--font-label);
-  font-size: 12px;
-  font-weight: 500;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
+  composes: text from "../ArrowLink.module.css";
   transition: box-shadow 0.35s ease;
 }
 
 .arrow {
-  display: inline-block;
+  composes: arrow from "../ArrowLink.module.css";
   max-width: 1em;
   overflow: hidden;
-  padding-bottom: 6px;
-  color: var(--periwinkle);
-  font-family: var(--font-label);
-  font-size: 15px;
-  font-weight: 400;
-  transform-origin: left center;
   transition: color 0.5s ease-in-out, translate 0.3s ease, scale 0.3s ease, opacity 0.35s ease, max-width 0.35s ease;
 }
 
@@ -96,19 +108,6 @@
 .ask[data-open="true"] .arrow {
   max-width: 0;
   opacity: 0;
-}
-
-.trigger:hover .arrow,
-.trigger:focus-visible .arrow {
-  color: var(--coral);
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .trigger:hover .arrow,
-  .trigger:focus-visible .arrow {
-    translate: 4px 0;
-    scale: 1.35 1;
-  }
 }
 
 /* Close */
@@ -133,6 +132,11 @@
 .ask[data-open="true"] .close {
   opacity: 1;
   pointer-events: auto;
+}
+
+.ask[data-sent="true"] .close {
+  opacity: 0;
+  pointer-events: none;
 }
 
 .closeIcon {
@@ -166,5 +170,9 @@
   .ask {
     --ask-pad: 40px;
     --ask-heading-size: 22px;
+  }
+
+  .thanks {
+    --thanks-heading-size: 26px;
   }
 }

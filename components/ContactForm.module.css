@@ -102,24 +102,6 @@
   text-align: center;
 }
 
-.status:focus {
-  outline: none;
-}
-
-.thanks {
-  color: var(--moon-white);
-  font-size: 22px;
-  font-style: italic;
-  font-weight: 300;
-}
-
-.thanksNote {
-  margin-top: 6px;
-  color: var(--ink-soft);
-  font-size: 15px;
-  font-weight: 400;
-}
-
 .error {
   margin-top: 20px;
   color: var(--ink-soft);

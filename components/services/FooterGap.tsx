@@ -5,6 +5,9 @@ import {useEffect} from "react"
 /** Marks a folding block (fold > clip > content) inside the anchor that grows down into the room below and upward for the rest, both at once. */
 export const GROWS_UP = {"data-grows-up": ""}
 
+/** Marks a folding block that counts as open while it has height, so swapping it in grows down into the room below. */
+export const STAYS_OPEN = {"data-stays-open": ""}
+
 /** Lets the anchor's card open into its `--gap-room` padding below; `GROWS_UP` blocks split their growth between down and up so the footer stays put. */
 export default function FooterGap({anchorId}: {anchorId: string}) {
   useEffect(() => {
@@ -19,7 +22,9 @@ export default function FooterGap({anchorId}: {anchorId: string}) {
       [...anchor.querySelectorAll("details")].reduce((sum, details) => {
         const summary = details.querySelector("summary")
         return sum + height(details) - (summary ? height(summary) : 0)
-      }, 0) + upBlocksHeight()
+      }, 0) +
+      upBlocksHeight() +
+      [...anchor.querySelectorAll("[data-stays-open]")].reduce((sum, block) => sum + height(block), 0)
 
     const fullHeight = (block: Element) => height(block.firstElementChild?.firstElementChild ?? block)
 
