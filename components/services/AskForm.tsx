@@ -2,6 +2,7 @@
 
 import {useEffect, useRef, useState} from "react"
 import ContactForm from "@/components/ContactForm"
+import {GROWS} from "./PinToAnchor"
 import {services} from "@/content/site"
 import styles from "./AskForm.module.css"
 
@@ -47,7 +48,7 @@ export default function AskForm() {
         </button>
       </div>
 
-      <div id={FORM_ID} ref={form} className={styles.fold} inert={!open}>
+      <div id={FORM_ID} ref={form} className={styles.fold} inert={!open} {...GROWS}>
         <div className={styles.clip}>
           <div className={styles.formInner}>
             <ContactForm page="Services" />

@@ -2,7 +2,10 @@
 
 import {useEffect} from "react"
 
-/** Pins an absolutely positioned backdrop to an anchor so opening the anchor's details grows the page without moving the backdrop. */
+/** Marks a block inside the anchor that grows open, so the backdrop stays put while it does. */
+export const GROWS = {"data-grows": ""}
+
+/** Pins an absolutely positioned backdrop to an anchor so opening the anchor's details or `GROWS` blocks grows the page without moving the backdrop. */
 export default function PinToAnchor({targetId, anchorId}: {targetId: string; anchorId: string}) {
   useEffect(() => {
     const target = document.getElementById(targetId)
@@ -16,8 +19,11 @@ export default function PinToAnchor({targetId, anchorId}: {targetId: string; anc
         return sum + details.getBoundingClientRect().height - (summary?.getBoundingClientRect().height ?? 0)
       }, 0)
 
+    const growsHeight = () =>
+      [...anchor.querySelectorAll("[data-grows]")].reduce((sum, block) => sum + block.getBoundingClientRect().height, 0)
+
     const place = () => {
-      target.style.top = `${page.offsetHeight - answersHeight() - target.offsetHeight}px`
+      target.style.top = `${page.offsetHeight - answersHeight() - growsHeight() - target.offsetHeight}px`
       target.style.bottom = "auto"
     }
 
