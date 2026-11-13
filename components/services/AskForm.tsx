@@ -63,9 +63,7 @@ export default function AskForm() {
         inert={!open}
         onClick={() => setForm(false)}
       >
-        <span className={styles.closeIcon} aria-hidden="true">
-          ×
-        </span>
+        <span className={styles.closeIcon} aria-hidden="true" />
       </button>
     </div>
   )

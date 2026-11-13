@@ -136,18 +136,29 @@
 }
 
 .closeIcon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  position: relative;
   width: var(--ask-close-icon);
   height: var(--ask-close-icon);
   border: 1px solid rgba(149, 163, 236, 0.6);
   border-radius: 50%;
   color: var(--periwinkle-soft);
-  font-family: var(--font-label);
-  font-size: 13px;
-  font-weight: 400;
-  line-height: 1;
+}
+
+.closeIcon::before,
+.closeIcon::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 9px;
+  height: 1px;
+  background: currentColor;
+  translate: -50% -50%;
+  rotate: 45deg;
+}
+
+.closeIcon::after {
+  rotate: -45deg;
 }
 
 /* Tablet and up */
