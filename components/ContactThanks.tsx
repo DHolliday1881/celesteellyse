@@ -5,7 +5,7 @@ import {contact} from "@/content/site"
 import link from "./ArrowLink.module.css"
 import styles from "./ContactThanks.module.css"
 
-/** Thank-you shown after a note is sent; fades in, takes focus, and offers a way back to an empty form. */
+/** Thank-you shown after a note is sent; fades in, takes focus, and can offer a way back to an empty form. */
 export default function ContactThanks({
   active,
   heading: Heading,
@@ -14,7 +14,7 @@ export default function ContactThanks({
 }: {
   active: boolean
   heading: "h2" | "h3"
-  onSendAnother: () => void
+  onSendAnother?: () => void
   className?: string
 }) {
   const title = useRef<HTMLHeadingElement>(null)
@@ -53,12 +53,14 @@ export default function ContactThanks({
             {contact.thanks}
           </Heading>
           <p className={styles.note}>{contact.thanksNote}</p>
-          <button type="button" className={`${link.link} ${styles.again}`} onClick={onSendAnother}>
-            <span className={link.text}>{contact.sendAnother}</span>
-            <span className={link.arrow} aria-hidden="true">
-              →
-            </span>
-          </button>
+          {onSendAnother && (
+            <button type="button" className={`${link.link} ${styles.again}`} onClick={onSendAnother}>
+              <span className={link.text}>{contact.sendAnother}</span>
+              <span className={link.arrow} aria-hidden="true">
+                →
+              </span>
+            </button>
+          )}
         </>
       )}
     </div>

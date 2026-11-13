@@ -8,14 +8,16 @@ import {services} from "@/content/site"
 import styles from "./AskForm.module.css"
 
 const FORM_ID = "ask-form"
+const THANKS_FOR_MS = 5_000
 
-/** "Didn't find your answer?" with a note form that opens into the space above the footer, then grows upward; once sent it folds to a thank-you. */
+/** "Didn't find your answer?" with a note form that opens into the space above the footer, then grows upward; once sent it shows a thank-you, then resets to closed. */
 export default function AskForm() {
   const {heading, open: openLabel, close: closeLabel} = services.faq.ask
   const [open, setOpen] = useState(false)
   const [sent, setSent] = useState(false)
   const [round, setRound] = useState(0)
   const toggled = useRef(false)
+  const root = useRef<HTMLDivElement>(null)
   const trigger = useRef<HTMLButtonElement>(null)
   const form = useRef<HTMLDivElement>(null)
 
@@ -31,17 +33,36 @@ export default function AskForm() {
     setOpen(next)
   }
 
-  /** Swaps the thank-you back for the open, empty form. */
-  function sendAnother() {
-    toggled.current = true
+  /** Back to the closed default with an empty form; `moveFocus` returns focus to "Send me a note". */
+  function reset(moveFocus: boolean) {
+    toggled.current = moveFocus
     setSent(false)
+    setOpen(false)
     setRound((count) => count + 1)
   }
+
+  useEffect(() => {
+    if (!sent) return
+    const element = root.current
+    const timer = window.setTimeout(() => reset(true), THANKS_FOR_MS)
+    const leave = () => reset(false)
+    const onHidden = () => document.hidden && leave()
+    const observer = new IntersectionObserver(([entry]) => !entry.isIntersecting && leave())
+    if (element) observer.observe(element)
+    document.addEventListener("visibilitychange", onHidden)
+    window.addEventListener("pagehide", leave)
+    return () => {
+      window.clearTimeout(timer)
+      observer.disconnect()
+      document.removeEventListener("visibilitychange", onHidden)
+      window.removeEventListener("pagehide", leave)
+    }
+  }, [sent])
 
   const showForm = open && !sent
 
   return (
-    <div className={styles.ask} data-open={open} data-sent={sent}>
+    <div ref={root} className={styles.ask} data-open={open} data-sent={sent}>
       <div className={styles.rows} inert={sent}>
         <div className={styles.clip}>
           <div className={styles.intro} data-swapped={sent}>
@@ -68,7 +89,7 @@ export default function AskForm() {
 
       <div className={styles.thanksRows} {...STAYS_OPEN}>
         <div className={styles.clip}>
-          <ContactThanks active={sent} heading="h3" onSendAnother={sendAnother} className={styles.thanks} />
+          <ContactThanks active={sent} heading="h3" className={styles.thanks} />
         </div>
       </div>
 
