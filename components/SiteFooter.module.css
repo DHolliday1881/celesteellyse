@@ -18,10 +18,30 @@
   gap: 1.25rem;
 }
 
+/* Moon with a soft periwinkle halo */
+.moonGlow {
+  position: relative;
+  display: flex;
+}
+
+.moonGlow::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 120px;
+  aspect-ratio: 1;
+  background: radial-gradient(closest-side, color-mix(in srgb, var(--periwinkle) 22%, transparent), transparent);
+  translate: -50% -50%;
+  pointer-events: none;
+}
+
 .moon {
+  position: relative;
   width: 32px;
   height: 32px;
   color: var(--moon-white);
+  filter: drop-shadow(0 0 6px color-mix(in srgb, var(--periwinkle) 55%, transparent));
 }
 
 .name {

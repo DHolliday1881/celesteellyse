@@ -7,7 +7,9 @@ export default function SiteFooter() {
   return (
     <footer className={styles.footer}>
       <a href="#top" className={styles.top}>
-        <Crescent className={styles.moon} />
+        <span className={styles.moonGlow}>
+          <Crescent className={styles.moon} />
+        </span>
         <span className={styles.name}>{brand.name}</span>
         <span className="visually-hidden"> (back to top)</span>
       </a>
