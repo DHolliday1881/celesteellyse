@@ -2,7 +2,7 @@
 .paths {
   max-width: var(--container);
   margin: 0 auto;
-  padding: 0 var(--gutter);
+  padding: 60px var(--gutter);
   display: grid;
   gap: var(--space-lg);
   align-items: center;
