@@ -1,6 +1,6 @@
 "use client"
 
-import {useEffect, useId, useRef, useState, type FormEvent} from "react"
+import {useId, useState, type FormEvent} from "react"
 import {brand, contact} from "@/content/site"
 import styles from "./ContactForm.module.css"
 
@@ -31,16 +31,19 @@ function checkField(field: FieldElement): string | undefined {
   return empty ? contact.errors.message : undefined
 }
 
-/** Contact form posting to Netlify Forms; `page` records which page a message came from. */
-export default function ContactForm({page, className}: {page: "Home" | "Services"; className?: string}) {
+/** Contact form posting to Netlify Forms; `page` records which page a message came from and `onSent` hands off to the thank-you. */
+export default function ContactForm({
+  page,
+  onSent,
+  className,
+}: {
+  page: "Home" | "Services"
+  onSent: () => void
+  className?: string
+}) {
   const id = useId()
-  const status = useRef<HTMLDivElement>(null)
   const [state, setState] = useState<Status>("idle")
   const [errors, setErrors] = useState<Partial<Record<FieldName, string>>>({})
-
-  useEffect(() => {
-    if (state === "sent") status.current?.focus()
-  }, [state])
 
   /** Rechecks a field the visitor is fixing, so its message clears once it's right. */
   function handleInput(event: FormEvent<HTMLFormElement>) {
@@ -49,7 +52,7 @@ export default function ContactForm({page, className}: {page: "Home" | "Services
     if (errors[name]) setErrors((current) => ({...current, [name]: checkField(field)}))
   }
 
-  /** Checks every field, then sends them URL-encoded to Netlify and swaps in the thank-you or error message. */
+  /** Checks every field, then sends them URL-encoded to Netlify and hands off to the thank-you, or shows the error message. */
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
     const form = event.currentTarget
@@ -68,6 +71,7 @@ export default function ContactForm({page, className}: {page: "Home" | "Services
         body: new URLSearchParams(body).toString(),
       })
       setState(response.ok ? "sent" : "error")
+      if (response.ok) onSent()
     } catch {
       setState("error")
     }
@@ -90,85 +94,77 @@ export default function ContactForm({page, className}: {page: "Home" | "Services
   const firstName = validation("first-name")
   const email = validation("email")
   const message = validation("message")
-  const sending = state === "sending"
+  const sending = state === "sending" || state === "sent"
 
   return (
     <div className={`${styles.root} ${className ?? ""}`}>
-      {state !== "sent" && (
-        <form name={contact.formName} className={styles.form} noValidate onInput={handleInput} onSubmit={handleSubmit}>
-          <input type="hidden" name="form-name" value={contact.formName} />
-          <input type="hidden" name="page" value={page} />
-          <p hidden>
-            <label>
-              Leave this empty: <input name="bot-field" tabIndex={-1} autoComplete="off" />
-            </label>
-          </p>
+      <form name={contact.formName} className={styles.form} noValidate onInput={handleInput} onSubmit={handleSubmit}>
+        <input type="hidden" name="form-name" value={contact.formName} />
+        <input type="hidden" name="page" value={page} />
+        <p hidden>
+          <label>
+            Leave this empty: <input name="bot-field" tabIndex={-1} autoComplete="off" />
+          </label>
+        </p>
 
-          <div className={styles.row}>
-            <div className={styles.field}>
-              <label htmlFor={`${id}-first-name`} className={styles.label}>
-                {contact.fields.firstName}
-              </label>
-              <input
-                id={`${id}-first-name`}
-                name="first-name"
-                type="text"
-                autoComplete="given-name"
-                required
-                className={styles.input}
-                {...firstName.props}
-              />
-              {firstName.message}
-            </div>
-            <div className={styles.field}>
-              <label htmlFor={`${id}-email`} className={styles.label}>
-                {contact.fields.email}
-              </label>
-              <input
-                id={`${id}-email`}
-                name="email"
-                type="email"
-                autoComplete="email"
-                required
-                className={styles.input}
-                {...email.props}
-              />
-              {email.message}
-            </div>
-          </div>
-
+        <div className={styles.row}>
           <div className={styles.field}>
-            <label htmlFor={`${id}-message`} className={styles.label}>
-              {contact.fields.message}
+            <label htmlFor={`${id}-first-name`} className={styles.label}>
+              {contact.fields.firstName}
             </label>
-            <textarea
-              id={`${id}-message`}
-              name="message"
-              rows={2}
+            <input
+              id={`${id}-first-name`}
+              name="first-name"
+              type="text"
+              autoComplete="given-name"
               required
-              className={`${styles.input} ${styles.textarea}`}
-              onInput={fitToText}
-              {...message.props}
+              className={styles.input}
+              {...firstName.props}
             />
-            {message.message}
+            {firstName.message}
           </div>
-
-          <div className={styles.actions}>
-            <button type="submit" className={`button ${styles.send}`} disabled={sending}>
-              {sending ? contact.sending : contact.send}
-            </button>
-            <p className={styles.note}>{contact.replyNote}</p>
+          <div className={styles.field}>
+            <label htmlFor={`${id}-email`} className={styles.label}>
+              {contact.fields.email}
+            </label>
+            <input
+              id={`${id}-email`}
+              name="email"
+              type="email"
+              autoComplete="email"
+              required
+              className={styles.input}
+              {...email.props}
+            />
+            {email.message}
           </div>
-        </form>
-      )}
+        </div>
 
-      <div ref={status} tabIndex={-1} aria-live="polite" className={styles.status}>
-        {state === "sent" && (
-          <>
-            <p className={styles.thanks}>{contact.thanks}</p>
-            <p className={styles.thanksNote}>{contact.thanksNote}</p>
-          </>
-        )}
+        <div className={styles.field}>
+          <label htmlFor={`${id}-message`} className={styles.label}>
+            {contact.fields.message}
+          </label>
+          <textarea
+            id={`${id}-message`}
+            name="message"
+            rows={2}
+            required
+            className={`${styles.input} ${styles.textarea}`}
+            onInput={fitToText}
+            {...message.props}
+          />
+          {message.message}
+        </div>
+
+        <div className={styles.actions}>
+          <button type="submit" className={`button ${styles.send}`} disabled={sending}>
+            {sending ? contact.sending : contact.send}
+          </button>
+          <p className={styles.note}>{contact.replyNote}</p>
+        </div>
+      </form>
+
+      <div aria-live="polite" className={styles.status}>
         {state === "error" && (
           <p className={styles.error}>
             {contact.errorLead}{" "}
