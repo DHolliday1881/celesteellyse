@@ -31,7 +31,7 @@
   left: 50%;
   width: 120px;
   aspect-ratio: 1;
-  background: radial-gradient(closest-side, color-mix(in srgb, var(--periwinkle) 22%, transparent), transparent);
+  background: radial-gradient(closest-side, color-mix(in srgb, var(--periwinkle) 10%, transparent), transparent);
   translate: -50% -50%;
   pointer-events: none;
 }
@@ -41,7 +41,7 @@
   width: 32px;
   height: 32px;
   color: var(--moon-white);
-  filter: drop-shadow(0 0 6px color-mix(in srgb, var(--periwinkle) 55%, transparent));
+  filter: drop-shadow(0 0 4px color-mix(in srgb, var(--periwinkle) 30%, transparent));
 }
 
 /* Stars around the moon */
