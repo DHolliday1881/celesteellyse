@@ -12,7 +12,7 @@ export default function Home() {
         <About />
         <SessionPaths />
       </main>
-      <SiteFooter />
+      <SiteFooter stars />
     </>
   )
 }

@@ -44,6 +44,50 @@
   filter: drop-shadow(0 0 6px color-mix(in srgb, var(--periwinkle) 55%, transparent));
 }
 
+/* Stars around the moon */
+.stars {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  pointer-events: none;
+}
+
+.star {
+  position: absolute;
+  width: var(--size);
+  height: var(--size);
+  opacity: var(--opacity);
+  translate: calc(var(--x) - 50%) calc(var(--y) - 50%);
+}
+
+.dot {
+  border-radius: 50%;
+}
+
+.sparkle {
+  clip-path: polygon(50% 0, 62% 38%, 100% 50%, 62% 62%, 50% 100%, 38% 62%, 0 50%, 38% 38%);
+}
+
+.white {
+  background: #F3F1EA;
+}
+
+.lavender {
+  background: #B3AEEA;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .star {
+    animation: twinkle var(--duration) ease-in-out var(--delay) infinite alternate;
+  }
+}
+
+@keyframes twinkle {
+  to {
+    opacity: calc(var(--opacity) * 0.2);
+  }
+}
+
 .name {
   padding-left: 0.3em;
   font-size: 1.375rem;
