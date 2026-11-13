@@ -1,6 +1,6 @@
 /* Layout */
 .section {
-  padding: var(--space-xl) calc(var(--gutter) / 2) 72px;
+  padding: var(--space-xl) var(--gutter) 72px;
 }
 
 /* Card */
@@ -8,7 +8,7 @@
   box-sizing: border-box;
   max-width: 640px;
   margin: 0 auto;
-  padding: 40px calc(var(--gutter) / 2) 36px;
+  padding: 40px 22px 36px;
   display: flex;
   flex-direction: column;
   gap: 32px;
