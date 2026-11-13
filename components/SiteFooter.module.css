@@ -11,6 +11,21 @@
   text-align: center;
 }
 
+/* Soft dusk glow rising from the bottom */
+.dusk {
+  isolation: isolate;
+}
+
+.dusk::before {
+  content: "";
+  position: absolute;
+  inset: auto 0 0;
+  z-index: -1;
+  height: 70%;
+  background: radial-gradient(ellipse 45% 100% at 50% 100%, color-mix(in srgb, var(--periwinkle) 7%, transparent), transparent);
+  pointer-events: none;
+}
+
 .top {
   display: flex;
   flex-direction: column;
@@ -18,10 +33,67 @@
   gap: 1.25rem;
 }
 
+/* Moon with a soft periwinkle halo */
+.moonGlow {
+  position: relative;
+  display: flex;
+}
+
+.moonGlow::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 120px;
+  aspect-ratio: 1;
+  background: radial-gradient(closest-side, color-mix(in srgb, var(--periwinkle) 10%, transparent), transparent);
+  translate: -50% -50%;
+  pointer-events: none;
+}
+
 .moon {
+  position: relative;
   width: 32px;
   height: 32px;
   color: var(--moon-white);
+  filter: drop-shadow(0 0 4px color-mix(in srgb, var(--periwinkle) 30%, transparent));
+}
+
+/* Stars across the footer */
+.stars {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.star {
+  position: absolute;
+  top: var(--y);
+  left: var(--x);
+  width: var(--size);
+  height: var(--size);
+  border-radius: 50%;
+  opacity: var(--opacity);
+}
+
+.white {
+  background: #F3F1EA;
+}
+
+.lavender {
+  background: #B3AEEA;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .star {
+    animation: twinkle var(--duration) ease-in-out var(--delay) infinite alternate;
+  }
+}
+
+@keyframes twinkle {
+  to {
+    opacity: calc(var(--opacity) * 0.2);
+  }
 }
 
 .name {
@@ -30,61 +102,6 @@
   font-weight: 300;
   letter-spacing: 0.3em;
   text-transform: uppercase;
-}
-
-.contact {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 2px;
-}
-
-.emailLink {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  min-height: var(--tap);
-  color: var(--moon-white);
-  font-size: 1.125rem;
-  font-weight: 300;
-}
-
-.arrow {
-  display: inline-block;
-  color: var(--periwinkle);
-  font-family: var(--font-label);
-  font-size: 0.9375rem;
-  font-weight: 400;
-  transform-origin: left center;
-  transition: color 0.5s ease-in-out, translate 0.3s ease, scale 0.3s ease;
-}
-
-.address {
-  color: var(--periwinkle);
-  font-family: var(--font-label);
-  font-size: 0.8125rem;
-  font-weight: 400;
-  letter-spacing: 0.06em;
-  transition: translate 0.35s ease, color 0.5s ease-in-out;
-}
-
-.contact:hover .arrow,
-.contact:focus-visible .arrow {
-  color: var(--coral);
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .contact:hover .arrow,
-  .contact:focus-visible .arrow {
-    translate: 4px 0;
-    scale: 1.35 1;
-  }
-}
-
-.contact:hover .address,
-.contact:focus-visible .address {
-  translate: 0 -2px;
-  color: var(--coral);
 }
 
 .social {
@@ -110,6 +127,19 @@
   translate: 0 -2px;
   color: var(--coral);
   font-weight: 500;
+}
+
+/* Glimmer settles back to the link colour; hover shows coral instead */
+.sweep {
+  --glimmer-to: var(--moon-white);
+  --glimmer-cool: var(--periwinkle);
+  --glimmer-warm: color-mix(in srgb, var(--coral) 55%, white);
+  --glimmer-halo: none;
+}
+
+.socialLink:is(:hover, :focus-visible) .sweep {
+  background: none;
+  color: var(--coral);
 }
 
 /* Reserves the hover weight's width so the row doesn't shift */

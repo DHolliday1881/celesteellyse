@@ -2,8 +2,25 @@
 export const brand = {
   name: "Celeste Ellyse",
   email: "hello@celesteellyse.com",
-  emailPrompt: "Questions? Email me",
   disclaimer: "Sessions are for entertainment and personal insight. I’m not a veterinarian or doctor, and sessions don’t replace professional care.",
+}
+
+// Contact form
+export const contact = {
+  formName: "contact",
+  fields: {firstName: "First name", email: "Email", message: "Message"},
+  send: "Send",
+  sending: "Sending",
+  replyNote: "I’ll reply within 2 days.",
+  thanks: "Thank you, it’s on its way.",
+  thanksNote: "I’ll be in touch within 2 days.",
+  errorLead: "Something went wrong. You can email me at",
+  errors: {
+    firstName: "Please add your first name.",
+    email: "Please add your email.",
+    emailFormat: "That email doesn’t look quite right.",
+    message: "Please write a message.",
+  },
 }
 
 // Social
@@ -53,6 +70,11 @@ export const home = {
     ],
     signOff: "I’m glad you found your way here.",
     portraitAlt: "Portrait of Celeste",
+  },
+  sayHello: {
+    eyebrow: "Say hello",
+    heading: "Have a question first?",
+    intro: "Not sure which session is right, or just want to say hello? Send me a note.",
   },
   paths: {
     eyebrow: "Sessions",
@@ -254,6 +276,11 @@ export const services = {
   faq: {
     eyebrow: "Good to know",
     heading: "Questions & policies",
+    ask: {
+      heading: "Didn’t find your answer?",
+      open: "Send me a note",
+      close: "Close message form",
+    },
     groups: [
       {
         label: "Sessions",
