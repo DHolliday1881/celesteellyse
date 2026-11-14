@@ -6,6 +6,10 @@
   pointer-events: none;
 }
 
+.canvas {
+  display: block;
+}
+
 /* Static stars when WebGL is unavailable */
 .fallback {
   background-image:

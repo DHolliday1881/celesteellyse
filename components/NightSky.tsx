@@ -1,8 +1,6 @@
 "use client"
 
-import {Canvas, useFrame, useThree} from "@react-three/fiber"
-import {useEffect, useMemo, useRef, useState, useSyncExternalStore} from "react"
-import * as THREE from "three"
+import {useEffect, useRef, useState, useSyncExternalStore} from "react"
 import styles from "./NightSky.module.css"
 
 // Star count
@@ -45,15 +43,23 @@ const DEPTH_NEAR = 10
 const DEPTH_FAR = 100
 const FOV = 60
 
+// Camera clipping planes
+const CLIP_NEAR = 0.1
+const CLIP_FAR = DEPTH_FAR * 2
+
 const MAX_DPR = 1.5
 
 const vertexShader = /* glsl */ `
+  precision highp float;
+
+  attribute vec3 position;
   attribute float aSize;
   attribute float aSpeed;
   attribute float aPhase;
   attribute float aThreshold;
   attribute vec3 aColor;
 
+  uniform mat4 projectionMatrix;
   uniform float uTime;
   uniform float uAspect;
   uniform float uTanHalfFov;
@@ -91,6 +97,8 @@ const vertexShader = /* glsl */ `
 `
 
 const fragmentShader = /* glsl */ `
+  precision highp float;
+
   varying vec3 vColor;
   varying float vBrightness;
   varying float vGlow;
@@ -107,6 +115,9 @@ const fragmentShader = /* glsl */ `
   }
 `
 
+type Uniform = "projectionMatrix" | "uTime" | "uAspect" | "uTanHalfFov" | "uDrift" | "uParallax" | "uPixelRatio" | "uMinBrightness" | "uThin"
+const UNIFORMS: Uniform[] = ["projectionMatrix", "uTime", "uAspect", "uTanHalfFov", "uDrift", "uParallax", "uPixelRatio", "uMinBrightness", "uThin"]
+
 /** Small seeded random generator so the sky is the same on every render. */
 function seededRandom(seed: number) {
   return () => {
@@ -117,12 +128,20 @@ function seededRandom(seed: number) {
   }
 }
 
+/** Converts a hex colour to linear RGB, the space the star shader mixes in. */
+function linearColor(hex: string) {
+  return [1, 3, 5].map((start) => {
+    const c = parseInt(hex.slice(start, start + 2), 16) / 255
+    return c < 0.04045 ? c * 0.0773993808 : Math.pow(c * 0.9478672986 + 0.0521327014, 2.4)
+  })
+}
+
 /** Builds star positions (screen-relative x/y plus depth) and per-star attributes. */
 function buildStars(count: number) {
   const random = seededRandom(7)
-  const white = new THREE.Color(COLOR_MOON_WHITE)
-  const periwinkle = new THREE.Color(COLOR_PERIWINKLE)
-  const lavender = new THREE.Color(COLOR_LAVENDER)
+  const white = linearColor(COLOR_MOON_WHITE)
+  const periwinkle = linearColor(COLOR_PERIWINKLE)
+  const lavender = linearColor(COLOR_LAVENDER)
 
   const positions = new Float32Array(count * 3)
   const sizes = new Float32Array(count)
@@ -144,30 +163,16 @@ function buildStars(count: number) {
 
     const pick = random()
     const color = pick < SHARE_PERIWINKLE ? periwinkle : pick < SHARE_PERIWINKLE + SHARE_LAVENDER ? lavender : white
-    color.toArray(colors, i * 3)
+    colors.set(color, i * 3)
   }
 
-  const geometry = new THREE.BufferGeometry()
-  geometry.setAttribute("position", new THREE.BufferAttribute(positions, 3))
-  geometry.setAttribute("aSize", new THREE.BufferAttribute(sizes, 1))
-  geometry.setAttribute("aSpeed", new THREE.BufferAttribute(speeds, 1))
-  geometry.setAttribute("aPhase", new THREE.BufferAttribute(phases, 1))
-  geometry.setAttribute("aColor", new THREE.BufferAttribute(colors, 3))
-  geometry.setAttribute("aThreshold", new THREE.BufferAttribute(fadeOrder(sizes, random), 1))
-  return geometry
-}
-
-/** Fresh uniform values for the star shader. */
-function createUniforms() {
   return {
-    uTime: {value: 0},
-    uAspect: {value: 1},
-    uTanHalfFov: {value: Math.tan(THREE.MathUtils.degToRad(FOV / 2))},
-    uDrift: {value: 0},
-    uParallax: {value: new THREE.Vector2()},
-    uPixelRatio: {value: 1},
-    uMinBrightness: {value: TWINKLE_MIN_BRIGHTNESS},
-    uThin: {value: 0},
+    position: {data: positions, size: 3},
+    aSize: {data: sizes, size: 1},
+    aSpeed: {data: speeds, size: 1},
+    aPhase: {data: phases, size: 1},
+    aColor: {data: colors, size: 3},
+    aThreshold: {data: fadeOrder(sizes, random), size: 1},
   }
 }
 
@@ -182,6 +187,97 @@ function fadeOrder(sizes: Float32Array, random: () => number) {
   })
   return thresholds
 }
+
+/** Perspective projection for a camera at the origin looking down -z. */
+function perspective(aspect: number) {
+  const f = 1 / Math.tan((FOV * Math.PI) / 360)
+  const depth = CLIP_FAR - CLIP_NEAR
+  return new Float32Array([f / aspect, 0, 0, 0, 0, f, 0, 0, 0, 0, -(CLIP_FAR + CLIP_NEAR) / depth, -1, 0, 0, (-2 * CLIP_FAR * CLIP_NEAR) / depth, 0])
+}
+
+/** Compiles one shader stage, or returns null if it fails. */
+function compile(gl: WebGLRenderingContext, type: number, source: string) {
+  const shader = gl.createShader(type)
+  if (!shader) return null
+  gl.shaderSource(shader, source)
+  gl.compileShader(shader)
+  return gl.getShaderParameter(shader, gl.COMPILE_STATUS) ? shader : null
+}
+
+/** Sets up WebGL on the canvas and uploads the star field; returns null when WebGL can't be set up. */
+function createSky(canvas: HTMLCanvasElement, count: number) {
+  const options = {alpha: true, antialias: false, depth: false, premultipliedAlpha: true, powerPreference: "low-power"} as const
+  const gl = (canvas.getContext("webgl2", options) ?? canvas.getContext("webgl", options)) as WebGLRenderingContext | null
+  if (!gl) return null
+
+  const vertex = compile(gl, gl.VERTEX_SHADER, vertexShader)
+  const fragment = compile(gl, gl.FRAGMENT_SHADER, fragmentShader)
+  const program = gl.createProgram()
+  if (!vertex || !fragment || !program) return null
+  gl.attachShader(program, vertex)
+  gl.attachShader(program, fragment)
+  gl.linkProgram(program)
+  gl.deleteShader(vertex)
+  gl.deleteShader(fragment)
+  if (!gl.getProgramParameter(program, gl.LINK_STATUS)) return null
+  gl.useProgram(program)
+
+  const buffers = Object.entries(buildStars(count)).map(([name, {data, size}]) => {
+    const buffer = gl.createBuffer()
+    const location = gl.getAttribLocation(program, name)
+    gl.bindBuffer(gl.ARRAY_BUFFER, buffer)
+    gl.bufferData(gl.ARRAY_BUFFER, data, gl.STATIC_DRAW)
+    if (location >= 0) {
+      gl.enableVertexAttribArray(location)
+      gl.vertexAttribPointer(location, size, gl.FLOAT, false, 0, 0)
+    }
+    return buffer
+  })
+
+  const at = Object.fromEntries(UNIFORMS.map((name) => [name, gl.getUniformLocation(program, name)])) as Record<Uniform, WebGLUniformLocation | null>
+  gl.uniform1f(at.uTanHalfFov, Math.tan(((FOV / 2) * Math.PI) / 180))
+  gl.uniform1f(at.uMinBrightness, TWINKLE_MIN_BRIGHTNESS)
+
+  // Additive blending on a transparent canvas
+  gl.enable(gl.BLEND)
+  gl.blendEquation(gl.FUNC_ADD)
+  gl.blendFuncSeparate(gl.SRC_ALPHA, gl.ONE, gl.ONE, gl.ONE)
+  gl.clearColor(0, 0, 0, 0)
+
+  return {
+    /** Matches the canvas to its box at the given pixel ratio. */
+    resize(width: number, height: number, dpr: number) {
+      canvas.width = Math.floor(width * dpr)
+      canvas.height = Math.floor(height * dpr)
+      canvas.style.width = `${width}px`
+      canvas.style.height = `${height}px`
+      gl.viewport(0, 0, Math.floor(width * dpr), Math.floor(height * dpr))
+      gl.uniformMatrix4fv(at.projectionMatrix, false, perspective(width / height))
+      gl.uniform1f(at.uAspect, width / height)
+      gl.uniform1f(at.uPixelRatio, dpr)
+    },
+    /** Uploads the per-frame motion values. */
+    update(time: number, drift: number, parallaxX: number, parallaxY: number, thin: number) {
+      gl.uniform1f(at.uTime, time)
+      gl.uniform1f(at.uDrift, drift)
+      gl.uniform2f(at.uParallax, parallaxX, parallaxY)
+      gl.uniform1f(at.uThin, thin)
+    },
+    /** Draws one frame. */
+    draw() {
+      gl.clear(gl.COLOR_BUFFER_BIT)
+      gl.drawArrays(gl.POINTS, 0, count)
+    },
+    /** Frees the GPU resources and the context. */
+    dispose() {
+      buffers.forEach((buffer) => gl.deleteBuffer(buffer))
+      gl.deleteProgram(program)
+      gl.getExtension("WEBGL_lose_context")?.loseContext()
+    },
+  }
+}
+
+type Sky = NonNullable<ReturnType<typeof createSky>>
 
 /** Subscribes to a media query for useSyncExternalStore. */
 function mediaStore(query: string) {
@@ -198,87 +294,54 @@ function mediaStore(query: string) {
 const reducedMotion = mediaStore("(prefers-reduced-motion: reduce)")
 const finePointer = mediaStore("(hover: hover) and (pointer: fine)")
 
-/** The star field itself: one Points object animated in its shader. */
-function Stars({count, still, mouse}: {count: number; still: boolean; mouse: boolean}) {
-  const {size, viewport, invalidate} = useThree()
-  const geometry = useMemo(() => buildStars(count), [count])
-  const material = useRef<THREE.ShaderMaterial>(null)
-  const [uniforms] = useState(createUniforms)
-
-  const target = useRef(new THREE.Vector2())
-  const mouseTarget = useRef(new THREE.Vector2())
-  const thinTarget = useRef(0)
-
-  useEffect(() => () => geometry.dispose(), [geometry])
-  useEffect(() => {
-    if (!material.current) return
-    material.current.uniforms.uAspect.value = size.width / size.height
-    material.current.uniforms.uPixelRatio.value = viewport.dpr
-    invalidate()
-  }, [size, viewport.dpr, invalidate])
-
-  useEffect(() => {
-    if (still) return
-    const onScroll = () => {
-      const scrollable = document.documentElement.scrollHeight - window.innerHeight
-      const progress = scrollable > 0 ? window.scrollY / scrollable : 0
-      target.current.y = progress * SCROLL_PARALLAX
-      thinTarget.current = progress * SCROLL_THIN
-    }
-    const onPointer = (event: PointerEvent) => {
-      if (event.pointerType !== "mouse") return
-      mouseTarget.current.set(
-        -(event.clientX / window.innerWidth - 0.5) * 2 * MOUSE_PARALLAX,
-        (event.clientY / window.innerHeight - 0.5) * 2 * MOUSE_PARALLAX,
-      )
-    }
-    onScroll()
-    window.addEventListener("scroll", onScroll, {passive: true})
-    if (mouse) window.addEventListener("pointermove", onPointer, {passive: true})
-    return () => {
-      window.removeEventListener("scroll", onScroll)
-      window.removeEventListener("pointermove", onPointer)
-    }
-  }, [still, mouse])
-
-  useFrame((state, delta) => {
-    if (still || !material.current) return
-    const u = material.current.uniforms
-    u.uTime.value = state.clock.elapsedTime
-    u.uDrift.value = (state.clock.elapsedTime / 60) * DRIFT_SPEED * 2.2
-    const ease = 1 - Math.exp(-Math.min(delta, 0.1) * PARALLAX_EASE)
-    const parallax = u.uParallax.value as THREE.Vector2
-    parallax.x += (target.current.x + mouseTarget.current.x - parallax.x) * ease
-    parallax.y += (target.current.y + mouseTarget.current.y - parallax.y) * ease
-    u.uThin.value += (thinTarget.current - u.uThin.value) * ease
-  })
-
-  return (
-    <points geometry={geometry} frustumCulled={false}>
-      <shaderMaterial
-        ref={material}
-        vertexShader={vertexShader}
-        fragmentShader={fragmentShader}
-        uniforms={uniforms}
-        transparent
-        depthWrite={false}
-        blending={THREE.AdditiveBlending}
-      />
-    </points>
-  )
-}
-
 /** Full-screen animated star field fixed behind page content. Fades out over the element with `fadeTargetId`; `density` scales the star count. */
 export default function NightSky({fadeTargetId, density = 1}: {fadeTargetId?: string; density?: number}) {
   const still = useSyncExternalStore(reducedMotion.subscribe, reducedMotion.get, () => true)
-  const mouse = useSyncExternalStore(finePointer.subscribe, finePointer.get, () => false)
+  const mouse = useSyncExternalStore(finePointer.subscribe, finePointer.get, () => false) && !still
   const [count] = useState(() =>
     Math.round((window.innerWidth < PHONE_MAX_WIDTH ? STAR_COUNT_PHONE : STAR_COUNT_DESKTOP) * density),
   )
+  const [failed, setFailed] = useState(false)
   const [tabVisible, setTabVisible] = useState(() => !document.hidden)
   const [onScreen, setOnScreen] = useState(true)
   const [fadedOut, setFadedOut] = useState(false)
   const wrapper = useRef<HTMLDivElement>(null)
+  const canvas = useRef<HTMLCanvasElement>(null)
+  const sky = useRef<Sky | null>(null)
+  const stillRef = useRef(still)
+
+  const motion = useRef({parallaxX: 0, parallaxY: 0, thin: 0, scrollY: 0, thinTarget: 0, mouseX: 0, mouseY: 0})
+
+  useEffect(() => {
+    stillRef.current = still
+  }, [still])
+
+  useEffect(() => {
+    const el = wrapper.current
+    const created = canvas.current && createSky(canvas.current, count)
+    if (!el || !created) {
+      setFailed(true)
+      return
+    }
+    sky.current = created
+    const resize = () => {
+      const {width, height} = el.getBoundingClientRect()
+      if (!width || !height) return
+      created.resize(width, height, Math.min(Math.max(1, window.devicePixelRatio || 1), MAX_DPR))
+      if (stillRef.current) created.draw()
+    }
+    resize()
+    created.draw()
+    const observer = new ResizeObserver(resize)
+    observer.observe(el)
+    window.addEventListener("resize", resize)
+    return () => {
+      observer.disconnect()
+      window.removeEventListener("resize", resize)
+      created.dispose()
+      sky.current = null
+    }
+  }, [count])
 
   useEffect(() => {
     const onVisibility = () => setTabVisible(!document.hidden)
@@ -301,7 +364,7 @@ export default function NightSky({fadeTargetId, density = 1}: {fadeTargetId?: st
     const onScroll = () => {
       const rect = fadeTarget.getBoundingClientRect()
       const start = window.innerHeight * 0.75
-      const progress = THREE.MathUtils.clamp((start - rect.top) / (rect.height * 0.55), 0, 1)
+      const progress = Math.min(Math.max((start - rect.top) / (rect.height * 0.55), 0), 1)
       el.style.opacity = String(1 - progress)
       setFadedOut(progress >= 1)
     }
@@ -314,18 +377,59 @@ export default function NightSky({fadeTargetId, density = 1}: {fadeTargetId?: st
     }
   }, [fadeTargetId])
 
+  useEffect(() => {
+    if (still) return
+    const m = motion.current
+    const onScroll = () => {
+      const scrollable = document.documentElement.scrollHeight - window.innerHeight
+      const progress = scrollable > 0 ? window.scrollY / scrollable : 0
+      m.scrollY = progress * SCROLL_PARALLAX
+      m.thinTarget = progress * SCROLL_THIN
+    }
+    const onPointer = (event: PointerEvent) => {
+      if (event.pointerType !== "mouse") return
+      m.mouseX = -(event.clientX / window.innerWidth - 0.5) * 2 * MOUSE_PARALLAX
+      m.mouseY = (event.clientY / window.innerHeight - 0.5) * 2 * MOUSE_PARALLAX
+    }
+    onScroll()
+    window.addEventListener("scroll", onScroll, {passive: true})
+    if (mouse) window.addEventListener("pointermove", onPointer, {passive: true})
+    return () => {
+      window.removeEventListener("scroll", onScroll)
+      window.removeEventListener("pointermove", onPointer)
+    }
+  }, [still, mouse])
+
   const running = tabVisible && onScreen && !fadedOut
+
+  useEffect(() => {
+    if (still || !running || failed) return
+    const m = motion.current
+    let frame = 0
+    let last = performance.now()
+    let elapsed = 0
+    const tick = () => {
+      const now = performance.now()
+      const delta = (now - last) / 1000
+      last = now
+      elapsed += delta
+      const ease = 1 - Math.exp(-Math.min(delta, 0.1) * PARALLAX_EASE)
+      m.parallaxX += (m.mouseX - m.parallaxX) * ease
+      m.parallaxY += (m.scrollY + m.mouseY - m.parallaxY) * ease
+      m.thin += (m.thinTarget - m.thin) * ease
+      sky.current?.update(elapsed, (elapsed / 60) * DRIFT_SPEED * 2.2, m.parallaxX, m.parallaxY, m.thin)
+      sky.current?.draw()
+      frame = requestAnimationFrame(tick)
+    }
+    frame = requestAnimationFrame(tick)
+    return () => cancelAnimationFrame(frame)
+  }, [still, running, failed])
+
+  if (failed) return <div className={`${styles.sky} ${styles.fallback}`} aria-hidden="true" />
 
   return (
     <div ref={wrapper} className={styles.sky} aria-hidden="true">
-      <Canvas
-        dpr={[1, MAX_DPR]}
-        frameloop={still ? "demand" : running ? "always" : "never"}
-        camera={{fov: FOV, near: 0.1, far: DEPTH_FAR * 2, position: [0, 0, 0]}}
-        gl={{alpha: true, antialias: false, powerPreference: "low-power"}}
-      >
-        <Stars count={count} still={still} mouse={mouse && !still} />
-      </Canvas>
+      <canvas ref={canvas} className={styles.canvas} />
     </div>
   )
 }
