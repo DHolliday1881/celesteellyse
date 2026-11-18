@@ -347,3 +347,79 @@ export const services = {
     ],
   },
 }
+
+// Terms
+export const terms = {
+  title: "Terms",
+  label: "The fine print",
+  intro: "By booking a session, you agree to these terms. They’re here so we both know what to expect.",
+  updated: "Last updated November 2026",
+  sections: [
+    {
+      id: "who-can-book",
+      heading: "Who can book",
+      body: ["Sessions are for ages 18 and up. I only connect with an animal when their guardian has asked me to."],
+    },
+    {
+      id: "what-a-session-is",
+      heading: "What a session is",
+      body: [
+        "Animal communication is offered for entertainment and personal insight. Reiki is a gentle, complementary energy practice for relaxation and balance. Neither is a science or a regulated profession.",
+      ],
+    },
+    {
+      id: "not-medical-care",
+      heading: "Not medical care",
+      body: [
+        "I’m not a veterinarian, doctor, or therapist. I don’t diagnose, treat, or give medical advice, and nothing I share replaces care from a professional.",
+        "If your animal is sick, hurt, or acting differently, please see your vet first. Please don’t stop or delay any treatment because of a session. Sessions aren’t for emergencies.",
+      ],
+    },
+    {
+      id: "no-guarantees",
+      heading: "No guarantees",
+      body: [
+        "Every animal is different, and so is every session. I can’t promise specific answers, a change in behavior, or a particular outcome.",
+        "An animal who has passed may not come through the way you hope. Reiki is gentle and voluntary, and your animal takes only what they want.",
+      ],
+    },
+    {
+      id: "your-choices",
+      heading: "Your choices are yours",
+      body: [
+        "Anything you decide to do after a session is your own choice and responsibility. I’m not liable for decisions made based on a session.",
+      ],
+    },
+    {
+      id: "privacy",
+      heading: "Privacy",
+      body: [
+        "Your session is private. I only share parts of a reading, your animal’s name, or their photo if you’ve said yes on your intake form, and you can change your mind any time by emailing me.",
+      ],
+    },
+    {
+      id: "missing-animals",
+      heading: "Missing animals",
+      body: ["I’m not taking missing animal cases right now."],
+    },
+    {
+      id: "cancellations-and-refunds",
+      heading: "Cancellations and refunds",
+      body: [
+        "You can cancel for a full refund up to 48 hours before the time you booked. For written sessions, that’s the date you picked when booking.",
+        "After that, refunds aren’t available, but you can still reschedule up to 24 hours before, from your confirmation email.",
+      ],
+    },
+    {
+      id: "declined-sessions",
+      heading: "If I can’t take a session",
+      body: ["I may decline or cancel a booking if it isn’t a good fit. If I do, you’ll get a full refund."],
+    },
+    {
+      id: "changes",
+      heading: "Changes to these terms",
+      body: ["I may update these terms from time to time. Your booking follows the terms in place when you booked."],
+    },
+  ],
+  questions: {id: "questions", heading: "Questions", lead: "Email"},
+}
