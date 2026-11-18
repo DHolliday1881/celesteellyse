@@ -31,6 +31,11 @@ export const social = [
   {label: "TikTok", href: "https://tiktok.com/@celeste.ellyse"},
 ]
 
+// Footer
+export const footer = {
+  terms: {label: "Terms", href: "/terms"},
+}
+
 // Navigation
 export const nav = [
   {label: "Home", href: "/"},

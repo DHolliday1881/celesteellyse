@@ -1,5 +1,6 @@
+import Link from "next/link"
 import type {CSSProperties} from "react"
-import {brand} from "@/content/site"
+import {brand, footer} from "@/content/site"
 import Crescent from "./Crescent"
 import FooterSocial from "./FooterSocial"
 import styles from "./SiteFooter.module.css"
@@ -20,7 +21,7 @@ const STARS = [
   {x: 91.6, y: 58, size: 1.5, tone: "white", opacity: 0.4, duration: 3.9, delay: 1.6},
 ] as const
 
-/** Shared footer: crescent and name linking back to the top, socials, the care disclaimer and a copyright line; `stars` scatters twinkling stars across it and `dusk` adds a soft glow along the bottom. */
+/** Shared footer: crescent and name linking back to the top, socials, the care disclaimer and a copyright line with a Terms link; `stars` scatters twinkling stars across it and `dusk` adds a soft glow along the bottom. */
 export default function SiteFooter({stars = false, dusk = false}: {stars?: boolean; dusk?: boolean}) {
   return (
     <footer className={`${styles.footer} ${dusk ? styles.dusk : ""}`}>
@@ -55,6 +56,10 @@ export default function SiteFooter({stars = false, dusk = false}: {stars?: boole
       <p className={styles.disclaimer}>{brand.disclaimer}</p>
       <p className={styles.copyright}>
         © {new Date().getFullYear()} {brand.name}
+        <span aria-hidden="true">·</span>
+        <Link href={footer.terms.href} className={styles.terms}>
+          {footer.terms.label}
+        </Link>
       </p>
     </footer>
   )
