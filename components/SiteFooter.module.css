@@ -166,8 +166,24 @@
 }
 
 .copyright {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
   color: var(--ink-faint);
   font-family: var(--font-label);
   font-size: 0.75rem;
   letter-spacing: 0.12em;
+}
+
+.terms {
+  margin-block: calc((var(--tap) - 1lh) / -2);
+  padding-block: calc((var(--tap) - 1lh) / 2);
+  transition: color 0.3s ease;
+}
+
+.terms:hover,
+.terms:focus-visible {
+  color: var(--coral);
 }

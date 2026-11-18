@@ -5,10 +5,15 @@
   --periwinkle: #95A3EC;
   --moon-white: #F7F5F0;
   --coral: #FF8A73;
+  --starlight: #F3F1EA;
 
   /* Supporting text tones */
+  --ink-body: #E0E4F2;
   --ink-soft: #D5DAED;
+  --ink-lead: #C9CFE4;
+  --ink-label: #B3BEF2;
   --ink-faint: #9AA4C2;
+  --ink-muted: #8C97C9;
 
   /* Fonts */
   --font-body: var(--font-raleway), system-ui, sans-serif;
@@ -52,6 +57,7 @@
   --measure: 32rem;
   --container: 70rem;
   --tap: 44px;
+  --nav-height: calc(var(--tap) + 2.5rem);
 }
 
 /* Reset */
