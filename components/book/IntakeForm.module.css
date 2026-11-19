@@ -1,0 +1,454 @@
+/* Card */
+.frame {
+  position: relative;
+  width: 100%;
+  max-width: 620px;
+  margin: 0 auto;
+}
+
+.wide {
+  max-width: 1040px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 28px 22px 30px;
+  border-radius: 28px;
+  background: color-mix(in srgb, var(--night) 82%, transparent);
+  box-shadow:
+    inset 0 0 0 1px var(--glass-edge),
+    0 30px 80px rgba(4, 8, 20, 0.4);
+  scroll-margin-top: calc(var(--nav-height) + 48px);
+}
+
+.panel {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .panel {
+    animation: appear 0.45s ease both;
+  }
+}
+
+@keyframes appear {
+  from {
+    opacity: 0;
+    translate: 0 8px;
+  }
+}
+
+/* Focus rings only for keyboard */
+.frame :focus-visible {
+  outline: 1px solid var(--periwinkle);
+  outline-offset: 4px;
+}
+
+/* Heading */
+.intro {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.heading {
+  font-size: 24px;
+  font-weight: 300;
+  line-height: 1.15;
+  text-wrap: balance;
+}
+
+.introText {
+  color: var(--ink-lead);
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 1.6;
+}
+
+/* Progress */
+.progress {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.progressText {
+  color: var(--ink-muted);
+  font-family: var(--font-label);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.24em;
+  text-align: right;
+  text-transform: uppercase;
+}
+
+.track {
+  position: relative;
+  height: 2px;
+  background: color-mix(in srgb, var(--periwinkle) 18%, transparent);
+}
+
+.fill {
+  position: absolute;
+  inset: 0 auto 0 0;
+  background: var(--periwinkle);
+  transition: width 0.4s ease;
+}
+
+/* Fields */
+.fields {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Field shown only for some answers */
+.reveal {
+  display: grid;
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+
+.reveal[data-shown="false"] {
+  grid-template-rows: 0fr;
+  margin-top: -20px;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.revealInner {
+  min-height: 0;
+  overflow: clip;
+  overflow-clip-margin: 6px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .reveal {
+    transition:
+      grid-template-rows 0.4s ease,
+      margin-top 0.4s ease,
+      opacity 0.3s ease 0.1s,
+      visibility 0s;
+  }
+
+  .reveal[data-shown="false"] {
+    transition:
+      grid-template-rows 0.4s ease,
+      margin-top 0.4s ease,
+      opacity 0.2s ease,
+      visibility 0s 0.4s;
+  }
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+  padding: 0;
+  border: 0;
+}
+
+.label {
+  padding: 0;
+  color: var(--starlight);
+  font-size: 17px;
+  font-weight: 300;
+  line-height: 1.4;
+}
+
+.required {
+  color: var(--periwinkle);
+}
+
+.lead {
+  color: var(--ink-lead);
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 1.65;
+}
+
+.input {
+  width: 100%;
+  height: 46px;
+  padding: 0 16px;
+  border: 1px solid color-mix(in srgb, var(--periwinkle) 28%, transparent);
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--navy) 60%, transparent);
+  color: var(--starlight);
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-weight: 300;
+  transition: border-color 0.3s ease;
+}
+
+.textarea {
+  height: auto;
+  min-height: 120px;
+  padding: 12px 16px;
+  line-height: 1.6;
+  resize: vertical;
+}
+
+.frame .input:focus,
+.frame .input:focus-visible {
+  border-color: var(--periwinkle);
+  outline: none;
+}
+
+.input[aria-invalid="true"] {
+  border-color: var(--coral);
+}
+
+.fieldHint {
+  margin-top: -2px;
+  color: var(--ink-faint);
+  font-size: 13px;
+  font-weight: 300;
+  line-height: 1.5;
+}
+
+.error {
+  color: var(--coral);
+  font-family: var(--font-label);
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+}
+
+.hint {
+  color: var(--ink-faint);
+  font-size: 14px;
+  font-weight: 300;
+  overflow-wrap: anywhere;
+}
+
+/* Multiple choice */
+.pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.pill {
+  position: relative;
+  display: inline-flex;
+  max-width: 100%;
+  cursor: pointer;
+}
+
+.pill input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.pill span,
+.photoButton {
+  display: inline-flex;
+  align-items: center;
+  min-height: 40px;
+  padding: 0 22px;
+  border: 1px solid color-mix(in srgb, var(--periwinkle) 28%, transparent);
+  border-radius: 999px;
+  color: var(--starlight);
+  font-family: var(--font-label);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  line-height: 1.3;
+  text-transform: uppercase;
+  white-space: nowrap;
+  transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+.pill:hover span,
+.photo:hover .photoButton {
+  border-color: var(--periwinkle);
+}
+
+.pill input:checked + span {
+  border-color: var(--periwinkle);
+  background: var(--glass-tint);
+}
+
+.pill input:focus-visible + span,
+.photo input:focus-visible + .photoButton {
+  outline: 1px solid var(--periwinkle);
+  outline-offset: 4px;
+}
+
+fieldset[aria-invalid="true"] .pill span,
+.photo input[aria-invalid="true"] + .photoButton {
+  border-color: var(--coral);
+}
+
+/* Photo */
+.photo {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 16px;
+  margin-top: 4px;
+  cursor: pointer;
+}
+
+/* Buttons */
+.actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 16px;
+}
+
+.next {
+  height: 44px;
+  padding: 0 40px;
+  white-space: nowrap;
+}
+
+.next:disabled,
+.next:disabled:hover {
+  opacity: 0.6;
+  cursor: default;
+  transform: none;
+  box-shadow: none;
+}
+
+.submitLong {
+  display: none;
+}
+
+.backButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: var(--tap);
+  margin-right: auto;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--ink-label);
+  font-family: var(--font-label);
+  font-size: var(--text-label);
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.backButton:hover,
+.backButton:focus-visible {
+  color: var(--coral);
+}
+
+.sendError {
+  color: var(--ink-soft);
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 1.6;
+}
+
+/* Step 2 */
+.choices {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 6px;
+}
+
+.choice {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 56px;
+  padding: 0 24px;
+  border: 1px solid color-mix(in srgb, var(--periwinkle) 28%, transparent);
+  border-radius: 999px;
+  background: none;
+  color: var(--starlight);
+  font-family: var(--font-label);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-align: left;
+  text-transform: uppercase;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+.choice:hover,
+.choice:focus-visible {
+  border-color: var(--periwinkle);
+  background: var(--glass-tint);
+}
+
+.price {
+  color: var(--coral);
+  font-family: var(--font-body);
+  font-size: 20px;
+  font-weight: 300;
+  letter-spacing: 0;
+}
+
+.calendar {
+  width: 100%;
+  min-height: 480px;
+}
+
+.trouble {
+  align-self: center;
+  color: var(--ink-faint);
+  font-size: 14px;
+  font-weight: 300;
+  box-shadow: inset 0 -1px 0 color-mix(in srgb, var(--periwinkle) 50%, transparent);
+  transition: color 0.3s ease;
+}
+
+.trouble:hover,
+.trouble:focus-visible {
+  color: var(--coral);
+}
+
+/* Phone: tighter pills so the longest answer stays on one line */
+@media (max-width: 47.99rem) {
+  .pill span {
+    padding: 0 16px;
+    letter-spacing: 0.12em;
+  }
+}
+
+/* Narrowest phones: the longest answer may wrap rather than overflow */
+@media (max-width: 23rem) {
+  .pill span {
+    white-space: normal;
+  }
+}
+
+/* Tablet and up */
+@media (min-width: 48rem) {
+  .card {
+    padding: 44px 52px;
+  }
+
+  .heading {
+    font-size: 26px;
+  }
+
+  .submitLong {
+    display: inline;
+  }
+
+  .submitShort {
+    display: none;
+  }
+}
