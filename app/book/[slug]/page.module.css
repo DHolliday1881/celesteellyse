@@ -1,0 +1,23 @@
+/* Page */
+.page {
+  position: relative;
+  isolation: isolate;
+  background: var(--navy);
+}
+
+.main {
+  position: relative;
+  z-index: 1;
+  padding: calc(var(--nav-height) + 40px) 16px 0;
+}
+
+.page > footer {
+  z-index: 1;
+}
+
+/* Tablet and up */
+@media (min-width: 48rem) {
+  .main {
+    padding: calc(var(--nav-height) + 56px) var(--gutter) 0;
+  }
+}
