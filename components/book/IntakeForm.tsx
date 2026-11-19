@@ -252,6 +252,11 @@ export default function IntakeForm({form, initialChoice}: {form: Form; initialCh
       return (
         <fieldset key={field.name} className={styles.field} {...invalid}>
           <legend className={styles.label}>{label}</legend>
+          {hint && (
+            <p id={hintId} className={styles.fieldHint}>
+              {hint}
+            </p>
+          )}
           <div className={styles.pills}>
             {field.options.map((option, index) => (
               <label key={option} className={styles.pill}>

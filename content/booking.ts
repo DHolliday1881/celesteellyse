@@ -17,7 +17,7 @@ export type IntakeField =
       shownWhen?: {field: string; value: string}
     }
   | {kind: "photo"; name: string; label: string; required?: boolean}
-  | {kind: "choice"; name: string; label: string; options: string[]; required?: boolean; defaultValue?: string}
+  | {kind: "choice"; name: string; label: string; hint?: string; options: string[]; required?: boolean; defaultValue?: string}
   | {kind: "heading"; label: string}
 
 export type IntakePage = {label: string; fields: IntakeField[]}
@@ -71,8 +71,9 @@ const sharing = (nameLabel: string, photoLabel: string): IntakePage => ({
     {
       kind: "choice",
       name: "share-reading",
-      label: "Can I share parts of the reading?",
-      options: ["Yes", "No", "Let’s decide together after I read it"],
+      label: "Can I share parts of your reading?",
+      hint: "Never anything personal about you.",
+      options: ["Yes", "No", "Ask me after I read it"],
     },
   ],
 })
