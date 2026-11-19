@@ -219,7 +219,7 @@ export const services = {
         {
           id: "distance-reiki",
           name: "Distance Reiki",
-          summary: "A distance Reiki session for you, to help you release stress and come back to calm. All you have to do is lie down somewhere quiet and rest. Choose 30 or 45 minutes.",
+          summary: "A distance Reiki session for you, to help you release stress and come back to calm. All you have to do is lie down somewhere quiet and rest. Choose 30 or 45 minutes, or a series of three.",
           options: [
             {
               price: "$120",
@@ -236,6 +236,23 @@ export const services = {
             "Gentle energy work, sent to you wherever you are. It’s lovely when you’re stressed, grieving, worn out, or in the middle of a big change. Some people feel warmth or deep calm during the session, and some notice the shift in the days after.",
             "Pick a time and tell me the city you’ll be in. Lie down somewhere quiet, and I’ll text you right before I begin. All you have to do is rest.",
             "A follow-up by email or phone call, sharing what I felt and saw during your session and anything that stood out. Go easy on yourself afterward. Many people like a little quiet time.",
+          ),
+        },
+        {
+          id: "distance-reiki-3-sessions",
+          name: "Distance Reiki: 3 sessions",
+          summary: "Three 45-minute distance Reiki sessions for ongoing support. Save $30, and use them within 4 months.",
+          options: [
+            {
+              price: "$330",
+              duration: "45 min",
+              url: "https://cal.com/celesteellyse/distance-reiki-3-sessions",
+            },
+          ],
+          details: details(
+            "The same gentle distance Reiki, spread over three sessions. Many people choose this during a longer stretch, like grief, burnout, or a big change, when one session doesn’t feel like enough.",
+            "Book your first session when you buy. Once I’ve read your form, I’ll suggest a rhythm for the other two, like once a week or every other week. Then book them whenever you like with your private link. I’ll text you right before each session.",
+            "A follow-up after each session by email or phone call, sharing what I felt and saw and anything that stood out.",
           ),
         },
       ],
