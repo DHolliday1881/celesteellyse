@@ -109,7 +109,7 @@ export const home = {
 // Services
 export type ServiceDetail = {label: string; body: string}
 
-export type BookingOption = {price: string; duration: string; url: string; calUrl?: string}
+export type BookingOption = {price: string; duration: string; durationRange?: string; url: string; calUrl?: string}
 
 export type Service = {
   id: string
@@ -147,6 +147,7 @@ export const services = {
             {
               price: "$180",
               duration: "45 min",
+              durationRange: "45–60 min",
               url: "/book/animal-communication",
               calUrl: "https://cal.com/celesteellyse/animal-communication",
             },
@@ -167,6 +168,7 @@ export const services = {
             {
               price: "$240",
               duration: "60 min",
+              durationRange: "60–75 min",
               url: "/book/two-animals",
               calUrl: "https://cal.com/celesteellyse/two-animal-session",
             },

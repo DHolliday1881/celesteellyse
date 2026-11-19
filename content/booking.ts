@@ -1,5 +1,5 @@
 // Booking intake forms, posted to Netlify Forms; every field name must also be in public/__forms.html
-import {services} from "./site"
+import {services, type BookingOption} from "./site"
 
 /** Points every Cal.com embed at the $1 test events; set to false to book the real events. */
 export const USE_TEST_EVENTS = true
@@ -275,6 +275,9 @@ export const defaultAnswers = (form: IntakeForm): Record<string, string> =>
 export const findChoice = (form: IntakeForm, option: string | undefined) =>
   "choices" in form.booking ? form.booking.choices.find((choice) => choice.option === option) : undefined
 
+/** The session length to show on a booking page: the range when the time varies, otherwise the set length. */
+const rangeOrDuration = (option: BookingOption) => option.durationRange ?? option.duration
+
 /** Name, price, duration and Services card for the header above a booking form, read from the Services page. */
 export function sessionHeader(form: IntakeForm, choice: SessionChoice | undefined) {
   const path = `/book/${form.slug}`
@@ -286,7 +289,7 @@ export function sessionHeader(form: IntakeForm, choice: SessionChoice | undefine
     return {
       name: match.service.name,
       price: match.option.price,
-      duration: choice?.duration ?? match.option.duration,
+      duration: choice?.duration ?? rangeOrDuration(match.option),
       card: match.service.id,
       from: false,
     }
