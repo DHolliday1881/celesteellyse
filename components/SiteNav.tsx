@@ -2,10 +2,12 @@
 
 import Link from "next/link"
 import {usePathname} from "next/navigation"
-import {useEffect, useRef, useState} from "react"
+import {useEffect, useRef, useState, type CSSProperties} from "react"
 import {brand, nav, social} from "@/content/site"
 import Crescent from "./Crescent"
+import glimmer from "./Glimmer.module.css"
 import styles from "./SiteNav.module.css"
+import useGlimmerSweep from "./useGlimmerSweep"
 
 /** Sticky top navigation: name on the left, links on the right, a menu panel on phones; frosts once scrolled past its own height, or half a screen on Home. */
 export default function SiteNav() {
@@ -14,6 +16,7 @@ export default function SiteNav() {
   const [scrolled, setScrolled] = useState(false)
   const header = useRef<HTMLElement>(null)
   const toggle = useRef<HTMLButtonElement>(null)
+  const {ref: socialList, sweep, sweeping, done} = useGlimmerSweep<HTMLUListElement>()
 
   useEffect(() => {
     const onScroll = () => {
@@ -83,12 +86,18 @@ export default function SiteNav() {
           ))}
         </ul>
         <span className={styles.divider} aria-hidden="true" />
-        <ul className={styles.links}>
-          {social.map((item) => (
+        <ul ref={socialList} className={`${styles.links} ${styles.socials}`}>
+          {social.map((item, index) => (
             <li key={item.href}>
-              <a href={item.href} className={styles.link} target="_blank" rel="noopener noreferrer">
-                {item.label}
-                <span className="visually-hidden"> (opens in a new tab)</span>
+              <a href={item.href} className={`${styles.link} ${styles.socialLink}`} target="_blank" rel="noopener noreferrer">
+                <span
+                  key={sweep}
+                  className={sweeping ? `${styles.socialIcon} ${glimmer.glimmer} ${styles.sweep}` : styles.socialIcon}
+                  style={{"--order": index, "--icon": `url(${item.icon})`} as CSSProperties}
+                  aria-hidden="true"
+                  onAnimationEnd={index === social.length - 1 ? done : undefined}
+                />
+                <span className="visually-hidden">{item.label} (opens in a new tab)</span>
               </a>
             </li>
           ))}

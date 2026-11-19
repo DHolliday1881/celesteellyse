@@ -27,8 +27,8 @@ export const contact = {
 
 // Social
 export const social = [
-  {label: "Instagram", href: "https://instagram.com/celeste.ellyse"},
-  {label: "TikTok", href: "https://tiktok.com/@celeste.ellyse"},
+  {label: "Instagram", href: "https://instagram.com/celeste.ellyse", icon: "/icons/instagram.svg"},
+  {label: "TikTok", href: "https://tiktok.com/@celeste.ellyse", icon: "/icons/tiktok.svg"},
 ]
 
 // Footer
