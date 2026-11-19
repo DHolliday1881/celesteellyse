@@ -153,7 +153,7 @@ export const services = {
           ],
           details: details(
             "I connect with your animal and write down everything they share through words, images, and feelings: who they are, how they feel, and their answers to your questions. For animals who have passed, it’s a chance to hear from them again.",
-            "When you book, share their name and your questions, plus their age and who they live with if they’re living. Then reply to your confirmation email with a clear photo, eyes visible.",
+            "Fill out a short form with their name, your questions, and a clear photo with their eyes visible, plus their age and who they live with if they’re living. Then pick any open time to hold your spot.",
             "Your written session by email within 7 days: what your animal shared, what they showed me, and their answers to each of your questions. It’s yours to keep and come back to whenever you want to hear from them again.",
           ),
           note: "Want to add Reiki? Book the combo, or add it after your session arrives.",
@@ -173,7 +173,7 @@ export const services = {
           ],
           details: details(
             "The same written conversation, with two animals. They can share a home, or one can be here and one passed.",
-            "When you book, share each animal’s name and your questions. For living animals, also tell me their age and who they live with. Then reply to your confirmation email with a clear photo of each, eyes visible.",
+            "Fill out a short form with each animal’s name, your questions, and a clear photo of each, eyes visible. For living animals, also share their age and who they live with. Then pick any open time to hold your spot.",
             "One written session by email within 7 days, with each animal in their own voice and their answers to your questions. Yours to keep and come back to.",
           ),
           note: addReikiNote,
@@ -192,7 +192,7 @@ export const services = {
           ],
           details: details(
             "Everything in an animal communication session, with distance Reiki to follow. Many people like hearing from their animal first, then giving them some calm and care.",
-            "Book, share their name, age, who they live with, and your questions, then reply to your confirmation email with a clear photo, eyes visible. I’ll text you before the Reiki begins.",
+            "Fill out a short form with their name, your questions, and a clear photo with their eyes visible, plus their age and who they live with if they’re living. Then pick a time for their Reiki, and I’ll text you before it begins.",
             "Your written session by email within 7 days, plus a follow-up by email or phone call on what I felt and saw during the Reiki.",
           ),
         },
@@ -210,7 +210,7 @@ export const services = {
           ],
           details: details(
             "Gentle energy work for calm and balance. It’s lovely during stressful stretches, recovery, older age, or big changes, or as a follow-up after a communication session. Animals carry a different energy than people, so Reiki meets them differently, and I allow time for your animal to settle in before the Reiki begins.",
-            "Pick a time, and share your animal’s name and a photo. Your animal can rest wherever they like, with no need to keep them still. I’ll text you right before I begin.",
+            "Fill out a short form with your animal’s name and a photo, then pick a time. Your animal can rest wherever they like, with no need to keep them still. I’ll text you right before I begin.",
             "A follow-up by email or phone call, sharing what I felt and saw during the session.",
           ),
         },
@@ -240,7 +240,7 @@ export const services = {
           ],
           details: details(
             "Gentle energy work, sent to you wherever you are. It’s lovely when you’re stressed, grieving, worn out, or in the middle of a big change. Some people feel warmth or deep calm during the session, and some notice the shift in the days after.",
-            "Pick a time and tell me the city you’ll be in. Lie down somewhere quiet, and I’ll text you right before I begin. All you have to do is rest.",
+            "Fill out a short form, then pick a time. Lie down somewhere quiet, and I’ll text you right before I begin. All you have to do is rest.",
             "A follow-up by email or phone call, sharing what I felt and saw during your session and anything that stood out. Go easy on yourself afterward. Many people like a little quiet time.",
           ),
         },
@@ -275,8 +275,11 @@ export const services = {
         lit: "right",
         moons: [images.moonCrescent, images.moonQuarter, images.moonWaxing, images.moonFull],
         steps: [
-          {title: "Book and pay", body: "Pick your session and any open time to hold your spot."},
-          {title: "Share their details", body: "Their name, your questions, and a clear photo with their eyes visible."},
+          {
+            title: "Share their details",
+            body: "Fill out a short form with their name, your questions, and a clear photo with their eyes visible.",
+          },
+          {title: "Book and pay", body: "Pick any open time to hold your spot."},
           {title: "I tune in", body: "I sit quietly with your animal and write down everything they share."},
           {title: "Your session arrives", body: "Your written session arrives by email within 7 days."},
         ],
@@ -287,11 +290,11 @@ export const services = {
         lit: "left",
         moons: [images.moonWaningCrescent, images.moonThirdQuarter, images.moonWaningGibbous, images.moonFull],
         steps: [
-          {title: "Book a time", body: "Pick the time that works best for you."},
           {
             title: "Tell me who it’s for",
-            body: "For you, your name and the city you’ll be in. For your animal, their name and a photo.",
+            body: "Fill out a short form. For you, your name and the city you’ll be in. For your animal, their name and a photo.",
           },
+          {title: "Book a time", body: "Pick the time that works best for you."},
           {
             title: "Rest",
             body: "I’ll text you before I begin. Lie down somewhere quiet, or let your animal rest wherever they like.",
@@ -329,7 +332,7 @@ export const services = {
           {
             question: "What do I need to send you?",
             answer:
-              "For animal communication: their name, your questions, and a clear photo with their eyes visible. For a living animal, also their age and who they live with. Reply to your confirmation email with the photo. For Animal Reiki: their name and a photo. For Distance Reiki: your name and the city you’ll be in.",
+              "Before you book, you’ll fill out a short form, then pick your time and pay. For animal communication, it asks for their name, your questions, and a clear photo with their eyes visible, plus their age and who they live with if they’re living. For Animal Reiki, it asks for their name, a photo, and your phone number so I can text you before I begin. For Distance Reiki, it asks for your name, the city you’ll be in, and your phone number.",
           },
           {
             question: "What is Reiki?",
