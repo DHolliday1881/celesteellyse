@@ -39,6 +39,7 @@
 
   /* Type scale */
   --text-label: 0.6875rem;
+  --text-eyebrow: 0.75rem;
   --text-sm: 0.875rem;
   --text-base: 1rem;
   --text-lead: 1.0625rem;
@@ -140,7 +141,7 @@ a {
 /* Shared pieces */
 .label {
   font-family: var(--font-label);
-  font-size: var(--text-label);
+  font-size: var(--text-eyebrow);
   font-weight: 500;
   letter-spacing: 0.3em;
   text-transform: uppercase;
