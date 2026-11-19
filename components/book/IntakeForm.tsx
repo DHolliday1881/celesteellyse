@@ -195,7 +195,7 @@ export default function IntakeForm({form}: {form: Form}) {
 
   const setAnswer = (name: string, value: string) => setAnswers((current) => ({...current, [name]: value}))
 
-  /** One question: label, optional hint for photos, the control and its message. */
+  /** One question: label, the control, its hint and its message. */
   function renderField(field: IntakeField) {
     if (field.kind === "heading") {
       return (
@@ -208,7 +208,10 @@ export default function IntakeForm({form}: {form: Form}) {
     const photoProblem = field.kind === "photo" && typeof photos[field.name] === "string" && photos[field.name] !== "preparing"
     const error = errors[field.name] ?? (photoProblem ? checkField(field, "", photos[field.name]) : undefined)
     const errorId = `${fieldId}-error`
-    const invalid = {"aria-invalid": error ? true : undefined, "aria-describedby": error ? errorId : undefined}
+    const hintId = `${fieldId}-hint`
+    const hint = "hint" in field ? field.hint : undefined
+    const describedBy = [hint && hintId, error && errorId].filter(Boolean).join(" ") || undefined
+    const invalid = {"aria-invalid": error ? true : undefined, "aria-describedby": describedBy}
     const label = (
       <>
         {field.label}
@@ -298,6 +301,11 @@ export default function IntakeForm({form}: {form: Form}) {
         ) : (
           <input {...shared} type={field.kind} inputMode={field.kind === "tel" ? "tel" : undefined} className={styles.input} />
         )}
+        {hint && (
+          <p id={hintId} className={styles.fieldHint}>
+            {hint}
+          </p>
+        )}
         {message}
       </div>
     )
@@ -310,18 +318,14 @@ export default function IntakeForm({form}: {form: Form}) {
   const email = answers.email ?? ""
 
   return (
-    <div ref={card} className={`${styles.card} ${bookingStep ? styles.wide : ""}`}>
+    <div className={`${styles.frame} ${bookingStep ? styles.wide : ""}`}>
       <Link href={booking.back.href} className={styles.back}>
-        <span aria-hidden="true">←</span>
+        <span className={styles.backArrow} aria-hidden="true">
+          ←
+        </span>
         {booking.back.label}
       </Link>
-
-      <p className={styles.steps}>
-        <span className={bookingStep ? styles.stepDone : styles.stepCurrent}>{form.step}</span>
-        <span className={styles.stepRule} aria-hidden="true" />
-        <span className={bookingStep ? styles.stepCurrent : styles.stepNext}>{booking.steps.pickTime}</span>
-      </p>
-
+      <div ref={card} className={styles.card}>
       {bookingStep ? (
         <div key="booking" className={styles.panel}>
           <h1 className={styles.heading}>{booking.thanks}</h1>
@@ -358,14 +362,11 @@ export default function IntakeForm({form}: {form: Form}) {
 
           <div className={styles.intro}>
             <h1 className={styles.heading}>{page === 0 ? form.title : form.pages[page].label}</h1>
-            {page === 0 && <p className={styles.introText}>{form.intro}</p>}
+            {page === 0 && <p className={styles.introText}>{booking.intro}</p>}
           </div>
 
           <div className={styles.progress}>
-            <p className={styles.progressText}>
-              <span>{form.pages[page].label}</span>
-              <span>{booking.progress(page + 1, total)}</span>
-            </p>
+            <p className={styles.progressText}>{booking.progress(page + 1, total)}</p>
             <span className={styles.track} aria-hidden="true">
               <span className={styles.fill} style={{width: `${((page + 1) / total) * 100}%`}} />
             </span>
@@ -393,11 +394,17 @@ export default function IntakeForm({form}: {form: Form}) {
                   ? booking.buttons.next
                   : status === "error"
                     ? booking.buttons.retry
-                    : booking.buttons.submit}
+                    : (
+                      <>
+                        <span className={styles.submitLong}>{booking.buttons.submit}</span>
+                        <span className={styles.submitShort}>{booking.buttons.submitShort}</span>
+                      </>
+                    )}
             </button>
           </div>
         </form>
       )}
+      </div>
     </div>
   )
 }

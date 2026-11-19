@@ -19,7 +19,7 @@ export async function generateMetadata(props: PageProps<"/book/[slug]">): Promis
   const form = booking.forms.find((item) => item.slug === slug)
   return {
     title: `Book: ${form?.title} · Celeste Ellyse`,
-    description: form?.intro,
+    description: booking.intro,
   }
 }
 

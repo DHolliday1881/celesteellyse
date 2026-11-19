@@ -1,28 +1,32 @@
 /* Card */
-.card {
-  display: flex;
-  flex-direction: column;
-  gap: 28px;
+.frame {
+  position: relative;
   width: 100%;
-  max-width: 680px;
+  max-width: 620px;
   margin: 0 auto;
-  padding: clamp(32px, 7vw, 48px) clamp(22px, 7vw, 56px) clamp(36px, 7vw, 52px);
-  border-radius: 28px;
-  background: color-mix(in srgb, var(--night) 82%, transparent);
-  box-shadow:
-    inset 0 0 0 1px var(--glass-edge),
-    0 30px 80px rgba(4, 8, 20, 0.4);
-  scroll-margin-top: calc(var(--nav-height) + 16px);
 }
 
 .wide {
   max-width: 1040px;
 }
 
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 28px 22px 30px;
+  border-radius: 28px;
+  background: color-mix(in srgb, var(--night) 82%, transparent);
+  box-shadow:
+    inset 0 0 0 1px var(--glass-edge),
+    0 30px 80px rgba(4, 8, 20, 0.4);
+  scroll-margin-top: calc(var(--nav-height) + 48px);
+}
+
 .panel {
   display: flex;
   flex-direction: column;
-  gap: 28px;
+  gap: 24px;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -38,21 +42,36 @@
   }
 }
 
-/* Back to sessions */
+/* Focus rings only for keyboard */
+.frame :focus-visible {
+  outline: 1px solid var(--periwinkle);
+  outline-offset: 4px;
+}
+
+/* Back to sessions, above the card */
 .back {
+  position: absolute;
+  bottom: calc(100% + 14px - 10px);
+  left: 6px;
   display: inline-flex;
   align-items: center;
-  align-self: flex-start;
   gap: 10px;
-  min-height: var(--tap);
-  margin: -12px 0 -14px;
+  padding: 10px 0;
   color: var(--ink-label);
   font-family: var(--font-label);
-  font-size: var(--text-label);
+  font-size: 10px;
   font-weight: 500;
-  letter-spacing: 0.22em;
+  letter-spacing: 0.24em;
+  line-height: 1;
   text-transform: uppercase;
+  white-space: nowrap;
   transition: color 0.3s ease;
+}
+
+.backArrow {
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0;
 }
 
 .back:hover,
@@ -60,53 +79,25 @@
   color: var(--coral);
 }
 
-/* Step 1 · Step 2 */
-.steps {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 10px 14px;
-  font-family: var(--font-label);
-  font-size: 10px;
-  font-weight: 500;
-  letter-spacing: 0.24em;
-  line-height: 1.4;
-  text-transform: uppercase;
-}
-
-.stepCurrent {
-  color: var(--starlight);
-}
-
-.stepNext,
-.stepDone {
-  color: var(--ink-muted);
-}
-
-.stepRule {
-  width: 18px;
-  height: 1px;
-  background: var(--ink-muted);
-}
-
 /* Heading */
 .intro {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 10px;
 }
 
 .heading {
-  font-size: clamp(30px, 6vw, 38px);
+  font-size: 28px;
   font-weight: 200;
   line-height: 1.15;
+  text-wrap: balance;
 }
 
 .introText {
   color: var(--ink-lead);
   font-size: 16px;
   font-weight: 300;
-  line-height: 1.7;
+  line-height: 1.6;
 }
 
 /* Progress */
@@ -117,21 +108,19 @@
 }
 
 .progressText {
-  display: flex;
-  justify-content: space-between;
-  gap: 16px;
-  color: var(--periwinkle);
+  color: var(--ink-muted);
   font-family: var(--font-label);
   font-size: 10px;
   font-weight: 500;
   letter-spacing: 0.24em;
+  text-align: right;
   text-transform: uppercase;
 }
 
 .track {
   position: relative;
   height: 2px;
-  background: color-mix(in srgb, var(--periwinkle) 25%, transparent);
+  background: color-mix(in srgb, var(--periwinkle) 18%, transparent);
 }
 
 .fill {
@@ -145,7 +134,7 @@
 .fields {
   display: flex;
   flex-direction: column;
-  gap: 26px;
+  gap: 20px;
 }
 
 .field {
@@ -166,8 +155,7 @@
 }
 
 .required {
-  color: var(--ink-faint);
-  font-size: 14px;
+  color: var(--periwinkle);
 }
 
 .lead {
@@ -179,7 +167,7 @@
 
 .input {
   width: 100%;
-  height: 48px;
+  height: 46px;
   padding: 0 16px;
   border: 1px solid color-mix(in srgb, var(--periwinkle) 28%, transparent);
   border-radius: 12px;
@@ -199,14 +187,22 @@
   resize: vertical;
 }
 
-.input:focus,
-.input:focus-visible {
+.frame .input:focus,
+.frame .input:focus-visible {
   border-color: var(--periwinkle);
   outline: none;
 }
 
 .input[aria-invalid="true"] {
   border-color: var(--coral);
+}
+
+.fieldHint {
+  margin-top: -2px;
+  color: var(--ink-faint);
+  font-size: 13px;
+  font-weight: 300;
+  line-height: 1.5;
 }
 
 .error {
@@ -235,6 +231,7 @@
 .pill {
   position: relative;
   display: inline-flex;
+  max-width: 100%;
   cursor: pointer;
 }
 
@@ -259,6 +256,7 @@
   letter-spacing: 0.18em;
   line-height: 1.3;
   text-transform: uppercase;
+  white-space: nowrap;
   transition: border-color 0.3s ease, background-color 0.3s ease;
 }
 
@@ -274,8 +272,8 @@
 
 .pill input:focus-visible + span,
 .photo input:focus-visible + .photoButton {
-  outline: 2px solid var(--periwinkle);
-  outline-offset: 2px;
+  outline: 1px solid var(--periwinkle);
+  outline-offset: 4px;
 }
 
 fieldset[aria-invalid="true"] .pill span,
@@ -296,15 +294,15 @@ fieldset[aria-invalid="true"] .pill span,
 /* Buttons */
 .actions {
   display: flex;
-  flex-wrap: wrap;
   align-items: center;
   justify-content: flex-end;
-  gap: 12px 16px;
-  padding-top: 6px;
+  gap: 16px;
 }
 
 .next {
-  padding: 0 clamp(20px, 5vw, 40px);
+  height: 44px;
+  padding: 0 40px;
+  white-space: nowrap;
 }
 
 .next:disabled,
@@ -313,6 +311,10 @@ fieldset[aria-invalid="true"] .pill span,
   cursor: default;
   transform: none;
   box-shadow: none;
+}
+
+.submitLong {
+  display: none;
 }
 
 .backButton {
@@ -330,6 +332,7 @@ fieldset[aria-invalid="true"] .pill span,
   font-weight: 500;
   letter-spacing: 0.22em;
   text-transform: uppercase;
+  white-space: nowrap;
   cursor: pointer;
   transition: color 0.3s ease;
 }
@@ -371,6 +374,7 @@ fieldset[aria-invalid="true"] .pill span,
   letter-spacing: 0.18em;
   text-align: left;
   text-transform: uppercase;
+  white-space: nowrap;
   cursor: pointer;
   transition: border-color 0.3s ease, background-color 0.3s ease;
 }
@@ -406,4 +410,38 @@ fieldset[aria-invalid="true"] .pill span,
 .trouble:hover,
 .trouble:focus-visible {
   color: var(--coral);
+}
+
+/* Phone: tighter pills so the longest answer stays on one line */
+@media (max-width: 47.99rem) {
+  .pill span {
+    padding: 0 16px;
+    letter-spacing: 0.12em;
+  }
+}
+
+/* Narrowest phones: the longest answer may wrap rather than overflow */
+@media (max-width: 23rem) {
+  .pill span {
+    white-space: normal;
+  }
+}
+
+/* Tablet and up */
+@media (min-width: 48rem) {
+  .card {
+    padding: 44px 52px;
+  }
+
+  .heading {
+    font-size: 32px;
+  }
+
+  .submitLong {
+    display: inline;
+  }
+
+  .submitShort {
+    display: none;
+  }
 }

@@ -6,7 +6,7 @@ export const USE_TEST_EVENTS = true
 export const CAL_USER = "celesteellyse"
 
 export type IntakeField =
-  | {kind: "text" | "email" | "tel" | "textarea"; name: string; label: string; required?: boolean; autoComplete?: string}
+  | {kind: "text" | "email" | "tel" | "textarea"; name: string; label: string; hint?: string; required?: boolean; autoComplete?: string}
   | {kind: "photo"; name: string; label: string; required?: boolean}
   | {kind: "choice"; name: string; label: string; options: string[]; required?: boolean}
   | {kind: "heading"; label: string}
@@ -21,8 +21,6 @@ export type IntakeForm = {
   slug: string
   formName: string
   title: string
-  intro: string
-  step: string
   pages: IntakePage[]
   booking: CalEvent | {choices: SessionChoice[]}
 }
@@ -32,11 +30,12 @@ const firstName: IntakeField = {kind: "text", name: "first-name", label: "Your f
 const email: IntakeField = {
   kind: "email",
   name: "email",
-  label: "Your email (use the same one when you book)",
+  label: "Your email",
+  hint: "Use the same one when you book.",
   required: true,
   autoComplete: "email",
 }
-const phone = (label: string): IntakeField => ({kind: "tel", name: "phone", label, required: true, autoComplete: "tel"})
+const phone = (hint: string): IntakeField => ({kind: "tel", name: "phone", label: "Your phone number", hint, required: true, autoComplete: "tel"})
 const livingOrPassed = (name: string, label: string): IntakeField => ({kind: "choice", name, label, options: ["Living", "Passed"], required: true})
 const questions = (prefix: string, count: number): IntakeField[] =>
   Array.from({length: count}, (_, index) => ({kind: "text", name: `${prefix}question-${index + 1}`, label: `Question ${index + 1}`}))
@@ -45,7 +44,6 @@ const sharing = (nameLabel: string, photoLabel: string): IntakePage => ({
   label: "Sharing",
   fields: [
     {kind: "heading", label: "Optional. I’ll only share what you say yes to, and you can change your mind any time."},
-    {kind: "heading", label: "Sharing on social media (optional)"},
     {kind: "choice", name: "share-name", label: nameLabel, options: ["Yes", "No"]},
     {kind: "choice", name: "share-photo", label: photoLabel, options: ["Yes", "No"]},
     {
@@ -60,7 +58,7 @@ const aboutAnimal: IntakeField[] = [
   {kind: "text", name: "animal-name", label: "Your animal’s name", required: true},
   {kind: "photo", name: "photo", label: "A photo of your animal, with their eyes visible", required: true},
   livingOrPassed("living-or-passed", "Is your animal living, or have they passed?"),
-  {kind: "text", name: "age", label: "Age (if living)"},
+  {kind: "text", name: "age", label: "Age", hint: "If living."},
   {kind: "text", name: "sex", label: "Sex", required: true},
   {kind: "text", name: "humans", label: "The humans in their life"},
   {kind: "text", name: "other-animals", label: "Other animals in the home"},
@@ -68,9 +66,9 @@ const aboutAnimal: IntakeField[] = [
 
 export const booking = {
   back: {label: "Back to sessions", href: "/services"},
-  steps: {pickTime: "Step 2 · Pick your time"},
+  intro: "Takes a few minutes. After this, you’ll pick your time.",
   progress: (page: number, total: number) => `${page} of ${total}`,
-  buttons: {next: "Next", back: "Back", submit: "Submit & pick a time", sending: "Sending…", retry: "Try again"},
+  buttons: {next: "Next", back: "Back", submit: "Submit & pick a time", submitShort: "Submit", sending: "Sending…", retry: "Try again"},
   photo: {
     choose: "Choose a photo",
     change: "Choose a different photo",
@@ -95,8 +93,6 @@ export const booking = {
       slug: "animal-communication",
       formName: "intake-animal-communication",
       title: "Tell me about your animal",
-      intro: "This helps me connect with your animal, and only takes a few minutes. After you submit, you’ll pick your time and book.",
-      step: "Step 1 · Tell me about your animal",
       pages: [
         {label: "About you", fields: [firstName, email]},
         {label: "About your animal", fields: aboutAnimal},
@@ -112,8 +108,6 @@ export const booking = {
       slug: "two-animals",
       formName: "intake-two-animals",
       title: "Tell me about your animals",
-      intro: "This helps me connect with your animals, and only takes a few minutes. After you submit, you’ll pick your time and book.",
-      step: "Step 1 · Tell me about your animals",
       pages: [
         {label: "About you", fields: [firstName, email]},
         {
@@ -122,7 +116,7 @@ export const booking = {
             {kind: "text", name: "animal-1-name", label: "Your first animal’s name", required: true},
             {kind: "photo", name: "animal-1-photo", label: "A photo of your first animal, with their eyes visible", required: true},
             livingOrPassed("animal-1-living-or-passed", "Is your first animal living, or have they passed?"),
-            {kind: "text", name: "animal-1-age", label: "Age (if living)"},
+            {kind: "text", name: "animal-1-age", label: "Age", hint: "If living."},
             {kind: "text", name: "animal-1-sex", label: "Sex", required: true},
             {kind: "text", name: "humans", label: "The humans in their life"},
             {kind: "text", name: "other-animals", label: "Other animals in the home"},
@@ -138,7 +132,7 @@ export const booking = {
             {kind: "text", name: "animal-2-name", label: "Your second animal’s name", required: true},
             {kind: "photo", name: "animal-2-photo", label: "A photo of your second animal, with their eyes visible", required: true},
             livingOrPassed("animal-2-living-or-passed", "Is your second animal living, or have they passed?"),
-            {kind: "text", name: "animal-2-age", label: "Your second animal’s age (if living)"},
+            {kind: "text", name: "animal-2-age", label: "Your second animal’s age", hint: "If living."},
             {kind: "text", name: "animal-2-sex", label: "Your second animal’s sex", required: true},
           ],
         },
@@ -158,11 +152,8 @@ export const booking = {
       slug: "communication-and-reiki",
       formName: "intake-communication-and-reiki",
       title: "Tell me about your animal",
-      intro:
-        "This helps me connect with your animal for their reading and Reiki, and only takes a few minutes. After you submit, you’ll pick your Reiki time and book.",
-      step: "Step 1 · Tell me about your animal",
       pages: [
-        {label: "About you", fields: [firstName, email, phone("Your phone number (so I can text you about their Reiki)")]},
+        {label: "About you", fields: [firstName, email, phone("So I can text you before their Reiki.")]},
         {label: "About your animal", fields: aboutAnimal},
         {
           label: "Your questions",
@@ -173,7 +164,7 @@ export const booking = {
           fields: [
             {kind: "heading", label: "For their Reiki (optional)"},
             {kind: "textarea", name: "vet-care", label: "Any vet care or medications right now?"},
-            {kind: "textarea", name: "going-on", label: "What’s going on with them right now? (health, behavior, any big changes)"},
+            {kind: "textarea", name: "going-on", label: "What’s going on with them right now?", hint: "Health, behavior, any big changes."},
             {kind: "textarea", name: "hoping-for", label: "What are you hoping their Reiki helps with?"},
             anythingElse,
           ],
@@ -186,11 +177,8 @@ export const booking = {
       slug: "animal-reiki",
       formName: "intake-animal-reiki",
       title: "Your animal’s Reiki session",
-      intro:
-        "This helps me connect with your animal for their Reiki session, and only takes a few minutes. After you submit, you’ll pick your time and book.",
-      step: "Step 1 · Tell me about your animal",
       pages: [
-        {label: "About you", fields: [firstName, email, phone("Your phone number (so I can text you about your session)")]},
+        {label: "About you", fields: [firstName, email, phone("So I can text you before their Reiki.")]},
         {
           label: "About your animal",
           fields: [
@@ -202,7 +190,7 @@ export const booking = {
           label: "For their Reiki",
           fields: [
             {kind: "text", name: "vet-care", label: "Any vet care or medications right now?"},
-            {kind: "textarea", name: "going-on", label: "What’s going on with them right now? (health, behavior, any big changes)"},
+            {kind: "textarea", name: "going-on", label: "What’s going on with them right now?", hint: "Health, behavior, any big changes."},
             {kind: "textarea", name: "hoping-for", label: "What are you hoping this session helps with?"},
             anythingElse,
           ],
@@ -214,22 +202,20 @@ export const booking = {
       slug: "distance-reiki",
       formName: "intake-distance-reiki",
       title: "Your Distance Reiki session",
-      intro: "This helps me prepare for your Reiki session, and only takes a few minutes. After you submit, you’ll pick your time and book.",
-      step: "Step 1 · Tell me about you",
       pages: [
         {
           label: "About you",
           fields: [
             firstName,
             email,
-            phone("Your phone number (so I can text you about your session)"),
+            phone("So I can text you before your session."),
             {kind: "text", name: "city", label: "What city will you be in during your session?", required: true, autoComplete: "address-level2"},
           ],
         },
         {
           label: "Your session",
           fields: [
-            {kind: "textarea", name: "going-on", label: "What’s going on for you right now? (body, mind, anything you’re carrying)"},
+            {kind: "textarea", name: "going-on", label: "What’s going on for you right now?", hint: "Body, mind, anything you’re carrying."},
             {kind: "textarea", name: "hoping-for", label: "What are you hoping this session helps with?"},
             anythingElse,
           ],
