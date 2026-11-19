@@ -9,7 +9,9 @@ import glimmer from "./Glimmer.module.css"
 import styles from "./SiteNav.module.css"
 import useGlimmerSweep from "./useGlimmerSweep"
 
-/** Sticky top navigation: name on the left, links on the right, a menu panel on phones; frosts once scrolled past its own height, or half a screen on Home. */
+const GLASS_AFTER_PX = 20
+
+/** Sticky top navigation: name on the left, links on the right, a menu panel on phones; frosts once the page has scrolled 20px. */
 export default function SiteNav() {
   const pathname = usePathname()
   const [open, setOpen] = useState(false)
@@ -19,10 +21,7 @@ export default function SiteNav() {
   const {ref: socialList, sweep, sweeping, done} = useGlimmerSweep<HTMLUListElement>()
 
   useEffect(() => {
-    const onScroll = () => {
-      const threshold = pathname === "/" ? window.innerHeight / 2 : (header.current?.offsetHeight ?? 0)
-      setScrolled(window.scrollY > threshold)
-    }
+    const onScroll = () => setScrolled(window.scrollY > GLASS_AFTER_PX)
     onScroll()
     window.addEventListener("scroll", onScroll, {passive: true})
     return () => window.removeEventListener("scroll", onScroll)
