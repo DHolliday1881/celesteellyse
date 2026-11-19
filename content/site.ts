@@ -39,7 +39,7 @@ export const footer = {
 // Navigation
 export const nav = [
   {label: "Home", href: "/"},
-  {label: "Services", href: "/services"},
+  {label: "Services", href: "/services", includes: "/book/"},
 ]
 
 // Images

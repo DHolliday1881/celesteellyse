@@ -162,7 +162,7 @@
   color: var(--periwinkle);
 }
 
-.link[aria-current="page"] {
+.link[aria-current] {
   color: var(--periwinkle);
   box-shadow: inset 0 -1px 0 var(--periwinkle);
 }

@@ -77,7 +77,7 @@ export default function SiteNav() {
               <Link
                 href={item.href}
                 className={styles.link}
-                aria-current={pathname === item.href ? "page" : undefined}
+                aria-current={pathname === item.href ? "page" : item.includes && pathname.startsWith(item.includes) ? "true" : undefined}
                 onClick={close}
               >
                 {item.label}
