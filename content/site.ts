@@ -363,6 +363,7 @@ export const services = {
             question: "Cancellations & refunds",
             answer:
               "You can cancel for a full refund up to 48 hours before the time you booked. For written sessions, that’s the date you picked when booking. After that, refunds aren’t available, but you can still reschedule up to 24 hours before, from your confirmation email.",
+            link: {before: "For the 3-session Reiki package, see my", label: "terms", href: "/terms", after: "."},
           },
           {
             question: "Who can book?",
