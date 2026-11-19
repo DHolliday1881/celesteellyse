@@ -1,7 +1,7 @@
 "use client"
 
 import {useCallback, useEffect, useId, useRef, useState, type FormEvent} from "react"
-import {booking, calLink, fieldNames, type IntakeField, type IntakeForm as Form, type SessionChoice} from "@/content/booking"
+import {booking, calLink, defaultAnswers, fieldNames, type IntakeField, type IntakeForm as Form, type SessionChoice} from "@/content/booking"
 import CalEmbed from "./CalEmbed"
 import {MAX_REQUEST_BYTES, preparePhoto, type PreparedPhoto} from "./photo"
 import styles from "./IntakeForm.module.css"
@@ -73,7 +73,7 @@ export default function IntakeForm({form, initialChoice}: {form: Form; initialCh
   const inputs = fieldNames(form)
   const card = useRef<HTMLDivElement>(null)
   const honeypot = useRef<HTMLInputElement>(null)
-  const [answers, setAnswers] = useState<Record<string, string>>({})
+  const [answers, setAnswers] = useState(() => defaultAnswers(form))
   const [photos, setPhotos] = useState<Record<string, PhotoState>>({})
   const [page, setPage] = useState(0)
   const [checked, setChecked] = useState<Set<number>>(new Set())
@@ -84,14 +84,16 @@ export default function IntakeForm({form, initialChoice}: {form: Form; initialCh
 
   const total = form.pages.length
   const fields = form.pages[page].fields
-  const started = Object.values(answers).some((value) => value.trim() !== "") || Object.keys(photos).length > 0
+  const defaults = defaultAnswers(form)
+  const started =
+    Object.entries(answers).some(([name, value]) => value.trim() !== "" && value !== defaults[name]) || Object.keys(photos).length > 0
 
   // Restore saved answers and start on the first page
   useEffect(() => {
     const saved = storage.read(storageKey)
     const known = new Set(fieldNames(form).map((field) => field.name))
     // eslint-disable-next-line react-hooks/set-state-in-effect
-    if (saved) setAnswers(Object.fromEntries(Object.entries(saved).filter(([name]) => known.has(name))))
+    if (saved) setAnswers({...defaultAnswers(form), ...Object.fromEntries(Object.entries(saved).filter(([name]) => known.has(name)))})
     if (pageFromUrl() > 0) window.history.replaceState(window.history.state, "", urlForPage(0))
     restored.current = true
   }, [form, storageKey])
@@ -135,11 +137,17 @@ export default function IntakeForm({form, initialChoice}: {form: Form; initialCh
   const errorsFor = (index: number) =>
     Object.fromEntries(
       form.pages[index].fields.flatMap((field) =>
-        "name" in field ? [[field.name, checkField(field, answers[field.name] ?? "", photos[field.name])]] : [],
+        "name" in field && isShown(field) ? [[field.name, checkField(field, answers[field.name] ?? "", photos[field.name])]] : [],
       ),
     ) as Record<string, string | undefined>
 
   const errors = checked.has(page) ? errorsFor(page) : {}
+
+  /** Whether a field is on screen, given the answer its `shownWhen` depends on. */
+  function isShown(field: IntakeField) {
+    if (!("shownWhen" in field) || !field.shownWhen) return true
+    return answers[field.shownWhen.field] === field.shownWhen.value
+  }
 
   /** Checks the current page; focuses the first problem and returns false if there is one. */
   function pageIsValid() {
@@ -162,7 +170,7 @@ export default function IntakeForm({form, initialChoice}: {form: Form; initialCh
       const photo = photos[field.name]
       if (field.kind === "photo") {
         if (photo && typeof photo === "object") body.append(field.name, photo.file, photo.file.name)
-      } else body.append(field.name, answers[field.name] ?? "")
+      } else body.append(field.name, isShown(field) ? (answers[field.name] ?? "") : "")
     }
     if ("choices" in form.booking) {
       body.append(booking.session.field, choice ? `${choice.label} (${choice.price})` : booking.session.notChosen)
@@ -377,7 +385,15 @@ export default function IntakeForm({form, initialChoice}: {form: Form; initialCh
             </span>
           </div>
 
-          <div className={styles.fields}>{fields.map(renderField)}</div>
+          <div className={styles.fields}>{fields.map((field) =>
+              "shownWhen" in field && field.shownWhen ? (
+                <div key={field.name} className={styles.reveal} data-shown={isShown(field)} inert={!isShown(field)}>
+                  <div className={styles.revealInner}>{renderField(field)}</div>
+                </div>
+              ) : (
+                renderField(field)
+              ),
+            )}</div>
 
           {status === "error" && (
             <p className={styles.sendError} role="alert">

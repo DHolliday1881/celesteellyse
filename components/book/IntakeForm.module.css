@@ -106,6 +106,44 @@
   gap: 20px;
 }
 
+/* Field shown only for some answers */
+.reveal {
+  display: grid;
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+
+.reveal[data-shown="false"] {
+  grid-template-rows: 0fr;
+  margin-top: -20px;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.revealInner {
+  min-height: 0;
+  overflow: clip;
+  overflow-clip-margin: 6px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .reveal {
+    transition:
+      grid-template-rows 0.4s ease,
+      margin-top 0.4s ease,
+      opacity 0.3s ease 0.1s,
+      visibility 0s;
+  }
+
+  .reveal[data-shown="false"] {
+    transition:
+      grid-template-rows 0.4s ease,
+      margin-top 0.4s ease,
+      opacity 0.2s ease,
+      visibility 0s 0.4s;
+  }
+}
+
 .field {
   display: flex;
   flex-direction: column;

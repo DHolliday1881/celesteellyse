@@ -7,9 +7,17 @@ export const USE_TEST_EVENTS = true
 export const CAL_USER = "celesteellyse"
 
 export type IntakeField =
-  | {kind: "text" | "email" | "tel" | "textarea"; name: string; label: string; hint?: string; required?: boolean; autoComplete?: string}
+  | {
+      kind: "text" | "email" | "tel" | "textarea"
+      name: string
+      label: string
+      hint?: string
+      required?: boolean
+      autoComplete?: string
+      shownWhen?: {field: string; value: string}
+    }
   | {kind: "photo"; name: string; label: string; required?: boolean}
-  | {kind: "choice"; name: string; label: string; options: string[]; required?: boolean}
+  | {kind: "choice"; name: string; label: string; options: string[]; required?: boolean; defaultValue?: string}
   | {kind: "heading"; label: string}
 
 export type IntakePage = {label: string; fields: IntakeField[]}
@@ -36,7 +44,21 @@ const email: IntakeField = {
   autoComplete: "email",
 }
 const phone = (hint: string): IntakeField => ({kind: "tel", name: "phone", label: "Your phone number", hint, required: true, autoComplete: "tel"})
-const livingOrPassed = (name: string, label: string): IntakeField => ({kind: "choice", name, label, options: ["Living", "Passed"], required: true})
+const livingOrPassed = (name: string, label: string): IntakeField => ({
+  kind: "choice",
+  name,
+  label,
+  options: ["Living", "Passed"],
+  required: true,
+  defaultValue: "Living",
+})
+const ageIfLiving = (name: string, label: string, livingField: string): IntakeField => ({
+  kind: "text",
+  name,
+  label,
+  required: true,
+  shownWhen: {field: livingField, value: "Living"},
+})
 const questions = (prefix: string, count: number): IntakeField[] =>
   Array.from({length: count}, (_, index) => ({kind: "text", name: `${prefix}question-${index + 1}`, label: `Question ${index + 1}`}))
 const anythingElse: IntakeField = {kind: "textarea", name: "anything-else", label: "Anything else you’d like me to know?"}
@@ -58,7 +80,7 @@ const aboutAnimal: IntakeField[] = [
   {kind: "text", name: "animal-name", label: "Your animal’s name", required: true},
   {kind: "photo", name: "photo", label: "A photo of your animal, with their eyes visible", required: true},
   livingOrPassed("living-or-passed", "Is your animal living, or have they passed?"),
-  {kind: "text", name: "age", label: "Age", hint: "If living."},
+  ageIfLiving("age", "Age", "living-or-passed"),
   {kind: "text", name: "sex", label: "Sex", required: true},
   {kind: "text", name: "humans", label: "The humans in their life"},
   {kind: "text", name: "other-animals", label: "Other animals in the home"},
@@ -117,7 +139,7 @@ export const booking = {
             {kind: "text", name: "animal-1-name", label: "Your first animal’s name", required: true},
             {kind: "photo", name: "animal-1-photo", label: "A photo of your first animal, with their eyes visible", required: true},
             livingOrPassed("animal-1-living-or-passed", "Is your first animal living, or have they passed?"),
-            {kind: "text", name: "animal-1-age", label: "Age", hint: "If living."},
+            ageIfLiving("animal-1-age", "Age", "animal-1-living-or-passed"),
             {kind: "text", name: "animal-1-sex", label: "Sex", required: true},
             {kind: "text", name: "humans", label: "The humans in their life"},
             {kind: "text", name: "other-animals", label: "Other animals in the home"},
@@ -133,7 +155,7 @@ export const booking = {
             {kind: "text", name: "animal-2-name", label: "Your second animal’s name", required: true},
             {kind: "photo", name: "animal-2-photo", label: "A photo of your second animal, with their eyes visible", required: true},
             livingOrPassed("animal-2-living-or-passed", "Is your second animal living, or have they passed?"),
-            {kind: "text", name: "animal-2-age", label: "Your second animal’s age", hint: "If living."},
+            ageIfLiving("animal-2-age", "Your second animal’s age", "animal-2-living-or-passed"),
             {kind: "text", name: "animal-2-sex", label: "Your second animal’s sex", required: true},
           ],
         },
@@ -243,6 +265,10 @@ export const calLink = ({event, testEvent}: CalEvent) => `${CAL_USER}/${USE_TEST
 /** Every field name a form can send, for the Netlify registration and the restore check. */
 export const fieldNames = (form: IntakeForm) =>
   form.pages.flatMap((page) => page.fields.flatMap((field) => ("name" in field ? [field] : [])))
+
+/** The answers a form starts with, from its fields' default values. */
+export const defaultAnswers = (form: IntakeForm): Record<string, string> =>
+  Object.fromEntries(fieldNames(form).flatMap((field) => ("defaultValue" in field && field.defaultValue ? [[field.name, field.defaultValue]] : [])))
 
 /** The booking choice named by a page's ?option=, if the form offers choices. */
 export const findChoice = (form: IntakeForm, option: string | undefined) =>
