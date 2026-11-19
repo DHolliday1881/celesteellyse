@@ -386,7 +386,7 @@ export const terms = {
       id: "what-a-session-is",
       heading: "What a session is",
       body: [
-        "Animal communication is offered for entertainment and personal insight. Reiki is a gentle, complementary energy practice for relaxation and balance. Neither is a science or a regulated profession.",
+        "Animal communication is offered for entertainment and personal insight. Reiki is a gentle energy practice for relaxation and balance, meant to work alongside medical care, not replace it. Neither is a science or a regulated profession.",
       ],
     },
     {
@@ -395,6 +395,7 @@ export const terms = {
       body: [
         "I’m not a veterinarian, doctor, or therapist. I don’t diagnose, treat, or give medical advice, and nothing I share replaces care from a professional.",
         "If your animal is sick, hurt, or acting differently, please see your vet first. Please don’t stop or delay any treatment because of a session. Sessions aren’t for emergencies.",
+        "The same goes for you. If you’re working through a health or mental health concern, please keep working with your doctor or therapist. If you’re in crisis, call or text 988, or 911 in an emergency.",
       ],
     },
     {
@@ -402,7 +403,7 @@ export const terms = {
       heading: "No guarantees",
       body: [
         "Every animal is different, and so is every session. I can’t promise specific answers, a change in behavior, or a particular outcome.",
-        "An animal who has passed may not come through the way you hope. Reiki is gentle and voluntary, and your animal takes only what they want.",
+        "An animal who has passed may not come through the way you hope. Everyone experiences Reiki differently. Some people feel a lot, some feel very little, and both are normal. Reiki is gentle and voluntary. You can ask me to stop at any time, and your animal takes only what they want.",
       ],
     },
     {
@@ -430,6 +431,13 @@ export const terms = {
       body: [
         "You can cancel for a full refund up to 48 hours before the time you booked. For written sessions, that’s the date you picked when booking.",
         "After that, refunds aren’t available, but you can still reschedule up to 24 hours before, from your confirmation email.",
+      ],
+    },
+    {
+      id: "reiki-packages",
+      heading: "Reiki packages",
+      body: [
+        "Your first session is booked when you buy. You’ll get a private link to book your other sessions whenever you like. You can reschedule any session up to 24 hours before, from its confirmation email. All sessions need to be used within 4 months of purchase. Keeping track of that is up to you, and I won’t send reminders about it. A session missed without notice counts as used. Packages aren’t refundable once your first session has happened.",
       ],
     },
     {
