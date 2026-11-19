@@ -147,7 +147,7 @@ export const services = {
             {
               price: "$180",
               duration: "45 min",
-              url: "https://tally.so/r/J1l6Eo",
+              url: "/book/animal-communication",
               calUrl: "https://cal.com/celesteellyse/animal-communication",
             },
           ],
@@ -167,7 +167,7 @@ export const services = {
             {
               price: "$240",
               duration: "60 min",
-              url: "https://tally.so/r/EqlXRN",
+              url: "/book/two-animals",
               calUrl: "https://cal.com/celesteellyse/two-animal-session",
             },
           ],
@@ -186,7 +186,7 @@ export const services = {
             {
               price: "$240",
               duration: "45 min",
-              url: "https://tally.so/r/VpPb0l",
+              url: "/book/communication-and-reiki",
               calUrl: "https://cal.com/celesteellyse/communication-and-reiki",
             },
           ],
@@ -204,7 +204,7 @@ export const services = {
             {
               price: "$75",
               duration: "30 min",
-              url: "https://tally.so/r/OQXz28",
+              url: "/book/animal-reiki",
               calUrl: "https://cal.com/celesteellyse/animal-reiki",
             },
           ],
@@ -228,13 +228,13 @@ export const services = {
             {
               price: "$120",
               duration: "45 min",
-              url: "https://tally.so/r/GepzMo",
+              url: "/book/distance-reiki",
               calUrl: "https://cal.com/celesteellyse/distance-reiki",
             },
             {
               price: "$100",
               duration: "30 min",
-              url: "https://tally.so/r/GepzMo",
+              url: "/book/distance-reiki",
               calUrl: "https://cal.com/celesteellyse/distance-reiki-30",
             },
           ],
@@ -252,7 +252,7 @@ export const services = {
             {
               price: "$330",
               duration: "45 min",
-              url: "https://tally.so/r/GepzMo",
+              url: "/book/distance-reiki",
               calUrl: "https://cal.com/celesteellyse/distance-reiki-3-sessions",
             },
           ],
