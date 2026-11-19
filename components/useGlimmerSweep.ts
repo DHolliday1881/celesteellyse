@@ -5,8 +5,8 @@ import {useEffect, useRef, useState} from "react"
 const SWEEP_EVERY_MS = 8_000
 const FIRST_SWEEP_MS = 800
 
-/** Starts a glimmer sweep every eight seconds while the referenced element is on screen; `sweep` changes each time so the animated element can be re-keyed. */
-export default function useGlimmerSweep<T extends Element>() {
+/** Starts a glimmer sweep every eight seconds while the referenced element is on screen, the first after `firstMs`; `sweep` changes each time so the animated element can be re-keyed. */
+export default function useGlimmerSweep<T extends Element>(firstMs = FIRST_SWEEP_MS) {
   const ref = useRef<T>(null)
   const [sweep, setSweep] = useState(0)
   const [sweeping, setSweeping] = useState(false)
@@ -32,14 +32,14 @@ export default function useGlimmerSweep<T extends Element>() {
       first = window.setTimeout(() => {
         start()
         repeat = window.setInterval(start, SWEEP_EVERY_MS)
-      }, FIRST_SWEEP_MS)
+      }, firstMs)
     })
     observer.observe(element)
     return () => {
       observer.disconnect()
       stop()
     }
-  }, [])
+  }, [firstMs])
 
   return {ref, sweep, sweeping, done: () => setSweeping(false)}
 }

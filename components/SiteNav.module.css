@@ -176,6 +176,12 @@
 .socialLink {
   justify-content: center;
   min-width: var(--tap);
+  transition: color 0.25s ease, translate 0.35s ease;
+}
+
+.socialLink:hover,
+.socialLink:focus-visible {
+  translate: 0 -2px;
 }
 
 .socialIcon {
@@ -196,10 +202,10 @@
   background-clip: border-box;
   background-image: linear-gradient(
     105deg,
-    var(--moon-white) 0 22%,
-    color-mix(in srgb, var(--periwinkle) 30%, var(--moon-white)) 40%,
-    color-mix(in srgb, var(--coral) 25%, var(--moon-white)) 52%,
-    var(--moon-white) 76% 100%
+    var(--moon-white) 0 24%,
+    color-mix(in srgb, var(--periwinkle) 50%, var(--moon-white)) 40%,
+    color-mix(in srgb, var(--coral) 42%, var(--moon-white)) 52%,
+    var(--moon-white) 72% 100%
   );
 }
 

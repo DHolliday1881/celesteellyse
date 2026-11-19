@@ -10,6 +10,7 @@ import styles from "./SiteNav.module.css"
 import useGlimmerSweep from "./useGlimmerSweep"
 
 const GLASS_AFTER_PX = 20
+const NAV_FIRST_SWEEP_MS = 4_000
 
 /** Sticky top navigation: name on the left, links on the right, a menu panel on phones; frosts once the page has scrolled 20px. */
 export default function SiteNav() {
@@ -18,7 +19,7 @@ export default function SiteNav() {
   const [scrolled, setScrolled] = useState(false)
   const header = useRef<HTMLElement>(null)
   const toggle = useRef<HTMLButtonElement>(null)
-  const {ref: socialList, sweep, sweeping, done} = useGlimmerSweep<HTMLUListElement>()
+  const {ref: socialList, sweep, sweeping, done} = useGlimmerSweep<HTMLUListElement>(NAV_FIRST_SWEEP_MS)
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > GLASS_AFTER_PX)
