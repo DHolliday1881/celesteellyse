@@ -59,7 +59,7 @@ export default function ServiceList({groups}: {groups: ServiceGroup[]}) {
 
                 <div className={styles.actions}>
                   {service.options.map((option) => (
-                    <div key={option.url} className={styles.option}>
+                    <div key={option.price} className={styles.option}>
                       <p className={styles.priceLine}>
                         <span className={styles.price}>{option.price}</span>
                         <span className={styles.duration}>{option.duration}</span>

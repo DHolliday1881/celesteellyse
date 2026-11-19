@@ -109,7 +109,7 @@ export const home = {
 // Services
 export type ServiceDetail = {label: string; body: string}
 
-export type BookingOption = {price: string; duration: string; url: string}
+export type BookingOption = {price: string; duration: string; url: string; calUrl?: string}
 
 export type Service = {
   id: string
@@ -147,7 +147,8 @@ export const services = {
             {
               price: "$180",
               duration: "45 min",
-              url: "https://cal.com/celesteellyse/animal-communication",
+              url: "https://tally.so/r/J1l6Eo",
+              calUrl: "https://cal.com/celesteellyse/animal-communication",
             },
           ],
           details: details(
@@ -166,7 +167,8 @@ export const services = {
             {
               price: "$240",
               duration: "60 min",
-              url: "https://cal.com/celesteellyse/two-animal-session",
+              url: "https://tally.so/r/EqlXRN",
+              calUrl: "https://cal.com/celesteellyse/two-animal-session",
             },
           ],
           details: details(
@@ -184,7 +186,8 @@ export const services = {
             {
               price: "$240",
               duration: "45 min",
-              url: "https://cal.com/celesteellyse/communication-and-reiki",
+              url: "https://tally.so/r/VpPb0l",
+              calUrl: "https://cal.com/celesteellyse/communication-and-reiki",
             },
           ],
           details: details(
@@ -201,7 +204,8 @@ export const services = {
             {
               price: "$75",
               duration: "30 min",
-              url: "https://cal.com/celesteellyse/animal-reiki",
+              url: "https://tally.so/r/OQXz28",
+              calUrl: "https://cal.com/celesteellyse/animal-reiki",
             },
           ],
           details: details(
@@ -224,12 +228,14 @@ export const services = {
             {
               price: "$120",
               duration: "45 min",
-              url: "https://cal.com/celesteellyse/distance-reiki",
+              url: "https://tally.so/r/GepzMo",
+              calUrl: "https://cal.com/celesteellyse/distance-reiki",
             },
             {
               price: "$100",
               duration: "30 min",
-              url: "https://cal.com/celesteellyse/distance-reiki-30",
+              url: "https://tally.so/r/GepzMo",
+              calUrl: "https://cal.com/celesteellyse/distance-reiki-30",
             },
           ],
           details: details(
@@ -246,7 +252,8 @@ export const services = {
             {
               price: "$330",
               duration: "45 min",
-              url: "https://cal.com/celesteellyse/distance-reiki-3-sessions",
+              url: "https://tally.so/r/GepzMo",
+              calUrl: "https://cal.com/celesteellyse/distance-reiki-3-sessions",
             },
           ],
           details: details(
