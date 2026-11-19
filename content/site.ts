@@ -366,6 +366,11 @@ export const services = {
             link: {before: "For the 3-session Reiki package, see my", label: "terms", href: "/terms", after: "."},
           },
           {
+            question: "Reiki packages",
+            answer:
+              "The 3-session Distance Reiki package books your first session when you buy, and you’ll get a private link to book the other two whenever you like. All three need to be used within 4 months. Packages aren’t refundable once your first session has happened.",
+          },
+          {
             question: "Who can book?",
             answer:
               "Sessions are for ages 18 and up, and I only connect with an animal when their guardian has asked me to.",
