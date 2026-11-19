@@ -228,13 +228,13 @@ export const services = {
             {
               price: "$120",
               duration: "45 min",
-              url: "/book/distance-reiki",
+              url: "/book/distance-reiki?option=45",
               calUrl: "https://cal.com/celesteellyse/distance-reiki",
             },
             {
               price: "$100",
               duration: "30 min",
-              url: "/book/distance-reiki",
+              url: "/book/distance-reiki?option=30",
               calUrl: "https://cal.com/celesteellyse/distance-reiki-30",
             },
           ],
@@ -252,7 +252,7 @@ export const services = {
             {
               price: "$330",
               duration: "45 min",
-              url: "/book/distance-reiki",
+              url: "/book/distance-reiki?option=package",
               calUrl: "https://cal.com/celesteellyse/distance-reiki-3-sessions",
             },
           ],

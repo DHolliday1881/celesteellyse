@@ -48,37 +48,6 @@
   outline-offset: 4px;
 }
 
-/* Back to sessions, above the card */
-.back {
-  position: absolute;
-  bottom: calc(100% + 14px - 10px);
-  left: 6px;
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  padding: 10px 0;
-  color: var(--ink-label);
-  font-family: var(--font-label);
-  font-size: 10px;
-  font-weight: 500;
-  letter-spacing: 0.24em;
-  line-height: 1;
-  text-transform: uppercase;
-  white-space: nowrap;
-  transition: color 0.3s ease;
-}
-
-.backArrow {
-  font-size: 13px;
-  font-weight: 400;
-  letter-spacing: 0;
-}
-
-.back:hover,
-.back:focus-visible {
-  color: var(--coral);
-}
-
 /* Heading */
 .intro {
   display: flex;
@@ -87,8 +56,8 @@
 }
 
 .heading {
-  font-size: 28px;
-  font-weight: 200;
+  font-size: 24px;
+  font-weight: 300;
   line-height: 1.15;
   text-wrap: balance;
 }
@@ -434,7 +403,7 @@ fieldset[aria-invalid="true"] .pill span,
   }
 
   .heading {
-    font-size: 32px;
+    font-size: 26px;
   }
 
   .submitLong {

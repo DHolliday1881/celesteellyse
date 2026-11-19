@@ -1,4 +1,5 @@
 // Booking intake forms, posted to Netlify Forms; every field name must also be in public/__forms.html
+import {services} from "./site"
 
 /** Points every Cal.com embed at the $1 test events; set to false to book the real events. */
 export const USE_TEST_EVENTS = true
@@ -15,7 +16,7 @@ export type IntakePage = {label: string; fields: IntakeField[]}
 
 export type CalEvent = {event: string; testEvent: string}
 
-export type SessionChoice = CalEvent & {label: string; price: string}
+export type SessionChoice = CalEvent & {option: string; label: string; price: string; duration?: string}
 
 export type IntakeForm = {
   slug: string
@@ -65,7 +66,10 @@ const aboutAnimal: IntakeField[] = [
 ]
 
 export const booking = {
-  back: {label: "Back to sessions", href: "/services"},
+  eyebrow: "Book",
+  change: "Change",
+  from: "From",
+  session: {field: "session", notChosen: "Not chosen yet (picked after the form)"},
   intro: "Takes a few minutes. After this, you’ll pick your time.",
   progress: (page: number, total: number) => `${page} of ${total}`,
   buttons: {next: "Next", back: "Back", submit: "Submit & pick a time", submitShort: "Submit", sending: "Sending…", retry: "Try again"},
@@ -223,9 +227,16 @@ export const booking = {
       ],
       booking: {
         choices: [
-          {label: "One 45-minute session", price: "$120", event: "distance-reiki", testEvent: "test-reiki"},
-          {label: "One 30-minute session", price: "$100", event: "distance-reiki-30", testEvent: "test-reiki"},
-          {label: "3-session package", price: "$330", event: "distance-reiki-3-sessions", testEvent: "test-reiki"},
+          {option: "45", label: "One 45-minute session", price: "$120", event: "distance-reiki", testEvent: "test-reiki"},
+          {option: "30", label: "One 30-minute session", price: "$100", event: "distance-reiki-30", testEvent: "test-reiki"},
+          {
+            option: "package",
+            label: "3-session package",
+            price: "$330",
+            duration: "3 × 45 min",
+            event: "distance-reiki-3-sessions",
+            testEvent: "test-reiki",
+          },
         ],
       },
     },
@@ -238,3 +249,27 @@ export const calLink = ({event, testEvent}: CalEvent) => `${CAL_USER}/${USE_TEST
 /** Every field name a form can send, for the Netlify registration and the restore check. */
 export const fieldNames = (form: IntakeForm) =>
   form.pages.flatMap((page) => page.fields.flatMap((field) => ("name" in field ? [field] : [])))
+
+/** The booking choice named by a page's ?option=, if the form offers choices. */
+export const findChoice = (form: IntakeForm, option: string | undefined) =>
+  "choices" in form.booking ? form.booking.choices.find((choice) => choice.option === option) : undefined
+
+/** Name, price, duration and Services card for the header above a booking form, read from the Services page. */
+export function sessionHeader(form: IntakeForm, choice: SessionChoice | undefined) {
+  const path = `/book/${form.slug}`
+  const matches = services.groups
+    .flatMap((group) => group.services)
+    .flatMap((service) => service.options.filter((option) => option.url.split("?")[0] === path).map((option) => ({service, option})))
+  const match = choice ? matches.find(({option}) => option.url === `${path}?option=${choice.option}`) : matches.length === 1 ? matches[0] : undefined
+  if (match) {
+    return {
+      name: match.service.name,
+      price: match.option.price,
+      duration: choice?.duration ?? match.option.duration,
+      card: match.service.id,
+      from: false,
+    }
+  }
+  const cheapest = [...matches].sort((a, b) => Number(a.option.price.replace(/\D/g, "")) - Number(b.option.price.replace(/\D/g, "")))[0]
+  return {name: matches[0].service.name, price: cheapest.option.price, duration: undefined, card: matches[0].service.id, from: true}
+}

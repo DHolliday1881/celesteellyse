@@ -1,6 +1,5 @@
 "use client"
 
-import Link from "next/link"
 import {useCallback, useEffect, useId, useRef, useState, type FormEvent} from "react"
 import {booking, calLink, fieldNames, type IntakeField, type IntakeForm as Form, type SessionChoice} from "@/content/booking"
 import CalEmbed from "./CalEmbed"
@@ -17,6 +16,15 @@ const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
 /** Reads the form page from the address (?page=2 is the second page), counting from 0. */
 const pageFromUrl = () => Math.max(0, Number(new URLSearchParams(window.location.search).get("page") ?? 1) - 1)
+
+/** The current address with the form page set, keeping any other query (like ?option=). */
+function urlForPage(index: number) {
+  const params = new URLSearchParams(window.location.search)
+  if (index > 0) params.set("page", String(index + 1))
+  else params.delete("page")
+  const query = params.toString()
+  return `${window.location.pathname}${query ? `?${query}` : ""}`
+}
 
 /** Browser storage that may be unavailable (private mode, blocked site data). */
 const storage = {
@@ -58,8 +66,8 @@ function checkField(field: InputField, value: string, photo: PhotoState | undefi
   return undefined
 }
 
-/** Multi-page intake form posting to Netlify Forms in one submission, then the Cal.com calendar for the session. */
-export default function IntakeForm({form}: {form: Form}) {
+/** Multi-page intake form posting to Netlify Forms in one submission, then the Cal.com calendar for the session; `initialChoice` skips the session choice. */
+export default function IntakeForm({form, initialChoice}: {form: Form; initialChoice?: SessionChoice}) {
   const id = useId()
   const storageKey = `intake:${form.slug}`
   const inputs = fieldNames(form)
@@ -70,7 +78,7 @@ export default function IntakeForm({form}: {form: Form}) {
   const [page, setPage] = useState(0)
   const [checked, setChecked] = useState<Set<number>>(new Set())
   const [status, setStatus] = useState<Status>("form")
-  const [choice, setChoice] = useState<SessionChoice>()
+  const [choice, setChoice] = useState(initialChoice)
   const [failure, setFailure] = useState<"send" | "tooLarge">("send")
   const restored = useRef(false)
 
@@ -84,7 +92,7 @@ export default function IntakeForm({form}: {form: Form}) {
     const known = new Set(fieldNames(form).map((field) => field.name))
     // eslint-disable-next-line react-hooks/set-state-in-effect
     if (saved) setAnswers(Object.fromEntries(Object.entries(saved).filter(([name]) => known.has(name))))
-    if (window.location.search) window.history.replaceState(window.history.state, "", window.location.pathname)
+    if (pageFromUrl() > 0) window.history.replaceState(window.history.state, "", urlForPage(0))
     restored.current = true
   }, [form, storageKey])
 
@@ -156,6 +164,9 @@ export default function IntakeForm({form}: {form: Form}) {
         if (photo && typeof photo === "object") body.append(field.name, photo.file, photo.file.name)
       } else body.append(field.name, answers[field.name] ?? "")
     }
+    if ("choices" in form.booking) {
+      body.append(booking.session.field, choice ? `${choice.label} (${choice.price})` : booking.session.notChosen)
+    }
     const size = Object.values(photos).reduce((sum, photo) => sum + (typeof photo === "object" ? photo.file.size : 0), 0)
     if (size > MAX_REQUEST_BYTES - 64 * 1024) {
       setFailure("tooLarge")
@@ -180,7 +191,7 @@ export default function IntakeForm({form}: {form: Form}) {
     event.preventDefault()
     if (status === "sending" || !pageIsValid()) return
     if (page < total - 1) {
-      window.history.pushState(window.history.state, "", `${window.location.pathname}?page=${page + 2}`)
+      window.history.pushState(window.history.state, "", urlForPage(page + 1))
       setPage(page + 1)
     } else void send()
   }
@@ -319,16 +330,10 @@ export default function IntakeForm({form}: {form: Form}) {
 
   return (
     <div className={`${styles.frame} ${bookingStep ? styles.wide : ""}`}>
-      <Link href={booking.back.href} className={styles.back}>
-        <span className={styles.backArrow} aria-hidden="true">
-          ←
-        </span>
-        {booking.back.label}
-      </Link>
       <div ref={card} className={styles.card}>
       {bookingStep ? (
         <div key="booking" className={styles.panel}>
-          <h1 className={styles.heading}>{booking.thanks}</h1>
+          <h2 className={styles.heading}>{booking.thanks}</h2>
           {choices && !choice && (
             <div className={styles.field}>
               <p className={styles.label}>{booking.choose}</p>
@@ -361,7 +366,7 @@ export default function IntakeForm({form}: {form: Form}) {
           </p>
 
           <div className={styles.intro}>
-            <h1 className={styles.heading}>{page === 0 ? form.title : form.pages[page].label}</h1>
+            <h2 className={styles.heading}>{page === 0 ? form.title : form.pages[page].label}</h2>
             {page === 0 && <p className={styles.introText}>{booking.intro}</p>}
           </div>
 

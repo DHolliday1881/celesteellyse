@@ -43,6 +43,7 @@
 .row {
   display: flex;
   flex-direction: column;
+  scroll-margin-top: calc(var(--nav-height) + 24px);
 }
 
 .numeral {

@@ -19,7 +19,7 @@ export default function ServiceList({groups}: {groups: ServiceGroup[]}) {
 
           <ul className={styles.rows}>
             {group.services.map((service, index) => (
-              <li key={service.id} className={styles.row}>
+              <li key={service.id} id={`session-${service.id}`} className={styles.row}>
                 <span className={`label ${styles.numeral}`} aria-hidden="true">
                   {NUMERALS[offsets[g] + index]}
                 </span>
