@@ -82,8 +82,6 @@
 }
 
 .updated {
-  margin-top: 56px;
-  text-align: center;
   color: var(--ink-muted);
   font-family: var(--font-label);
   font-size: 12px;
@@ -153,10 +151,6 @@
 
   .sections {
     gap: 48px;
-    margin-top: 88px;
-  }
-
-  .updated {
     margin-top: 88px;
   }
 
