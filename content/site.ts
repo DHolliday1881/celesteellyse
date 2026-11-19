@@ -226,16 +226,16 @@ export const services = {
           summary: "A distance Reiki session for you, to help you release stress and come back to calm. All you have to do is lie down somewhere quiet and rest. Choose 30 or 45 minutes, or a series of three.",
           options: [
             {
-              price: "$120",
-              duration: "45 min",
-              url: "/book/distance-reiki?option=45",
-              calUrl: "https://cal.com/celesteellyse/distance-reiki",
-            },
-            {
               price: "$100",
               duration: "30 min",
               url: "/book/distance-reiki?option=30",
               calUrl: "https://cal.com/celesteellyse/distance-reiki-30",
+            },
+            {
+              price: "$120",
+              duration: "45 min",
+              url: "/book/distance-reiki?option=45",
+              calUrl: "https://cal.com/celesteellyse/distance-reiki",
             },
           ],
           details: details(
