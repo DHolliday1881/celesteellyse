@@ -325,6 +325,11 @@ export const services = {
               "For animal communication: their name, your questions, and a clear photo with their eyes visible. For a living animal, also their age and who they live with. Reply to your confirmation email with the photo. For Animal Reiki: their name and a photo. For Distance Reiki: your name and the city you’ll be in.",
           },
           {
+            question: "What is Reiki?",
+            answer:
+              "Reiki is a gentle Japanese energy practice. The word means “universal life force energy.” I act as a channel for that energy, and it goes where it’s needed most. You don’t have to do anything but rest. I’m a Reiki master, and I offer sessions for people and animals.",
+          },
+          {
             question: "What happens during a Reiki session?",
             answer:
               "At your booked time, I’ll text you before I begin. Lie down somewhere quiet, or let your animal rest wherever they like. They don’t need to stay still. Afterward, I’ll follow up by email or phone call with what I felt and saw.",
