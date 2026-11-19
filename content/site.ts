@@ -332,7 +332,7 @@ export const services = {
           {
             question: "Does distance matter?",
             answer:
-              "Not at all. Every session happens from a distance, wherever you and your animal are.",
+              "Not at all. In Reiki, energy follows intention, so I can connect with you or your animal wherever you are. Distance Reiki is a standard part of Reiki training, and many people find it just as relaxing as an in-person session. All you have to do is rest.",
           },
         ],
       },
