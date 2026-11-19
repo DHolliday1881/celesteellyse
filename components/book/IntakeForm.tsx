@@ -366,7 +366,7 @@ export default function IntakeForm({form, initialChoice}: {form: Form; initialCh
           </p>
 
           <div className={styles.intro}>
-            <h2 className={styles.heading}>{page === 0 ? form.title : form.pages[page].label}</h2>
+            <h2 className={styles.heading}>{form.pages[page].label}</h2>
             {page === 0 && <p className={styles.introText}>{booking.intro}</p>}
           </div>
 

@@ -21,7 +21,6 @@ export type SessionChoice = CalEvent & {option: string; label: string; price: st
 export type IntakeForm = {
   slug: string
   formName: string
-  title: string
   pages: IntakePage[]
   booking: CalEvent | {choices: SessionChoice[]}
 }
@@ -96,9 +95,8 @@ export const booking = {
     {
       slug: "animal-communication",
       formName: "intake-animal-communication",
-      title: "Tell me about your animal",
       pages: [
-        {label: "About you", fields: [firstName, email]},
+        {label: "First, a little about you", fields: [firstName, email]},
         {label: "About your animal", fields: aboutAnimal},
         {
           label: "Your questions",
@@ -111,11 +109,10 @@ export const booking = {
     {
       slug: "two-animals",
       formName: "intake-two-animals",
-      title: "Tell me about your animals",
       pages: [
-        {label: "About you", fields: [firstName, email]},
+        {label: "First, a little about you", fields: [firstName, email]},
         {
-          label: "Your first animal",
+          label: "About your first animal",
           fields: [
             {kind: "text", name: "animal-1-name", label: "Your first animal’s name", required: true},
             {kind: "photo", name: "animal-1-photo", label: "A photo of your first animal, with their eyes visible", required: true},
@@ -131,7 +128,7 @@ export const booking = {
           fields: [{kind: "heading", label: "Your questions for your first animal (up to 3, optional)"}, ...questions("animal-1-", 3)],
         },
         {
-          label: "Your second animal",
+          label: "About your second animal",
           fields: [
             {kind: "text", name: "animal-2-name", label: "Your second animal’s name", required: true},
             {kind: "photo", name: "animal-2-photo", label: "A photo of your second animal, with their eyes visible", required: true},
@@ -155,9 +152,8 @@ export const booking = {
     {
       slug: "communication-and-reiki",
       formName: "intake-communication-and-reiki",
-      title: "Tell me about your animal",
       pages: [
-        {label: "About you", fields: [firstName, email, phone("So I can text you before their Reiki.")]},
+        {label: "First, a little about you", fields: [firstName, email, phone("So I can text you before their Reiki.")]},
         {label: "About your animal", fields: aboutAnimal},
         {
           label: "Your questions",
@@ -180,9 +176,8 @@ export const booking = {
     {
       slug: "animal-reiki",
       formName: "intake-animal-reiki",
-      title: "Your animal’s Reiki session",
       pages: [
-        {label: "About you", fields: [firstName, email, phone("So I can text you before their Reiki.")]},
+        {label: "First, a little about you", fields: [firstName, email, phone("So I can text you before their Reiki.")]},
         {
           label: "About your animal",
           fields: [
@@ -205,10 +200,9 @@ export const booking = {
     {
       slug: "distance-reiki",
       formName: "intake-distance-reiki",
-      title: "Your Distance Reiki session",
       pages: [
         {
-          label: "About you",
+          label: "First, a little about you",
           fields: [
             firstName,
             email,
