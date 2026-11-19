@@ -2,7 +2,7 @@
 export const brand = {
   name: "Celeste Ellyse",
   email: "hello@celesteellyse.com",
-  disclaimer: "Animal communication sessions are offered for entertainment and personal insight. Reiki is a complementary practice. I’m not a veterinarian, doctor, or therapist, and no session replaces professional care.",
+  disclaimer: "Animal communication sessions are offered for entertainment and personal insight. Reiki supports relaxation and well-being. I’m not a veterinarian, doctor, or therapist, and no session replaces professional care.",
 }
 
 // Contact form
