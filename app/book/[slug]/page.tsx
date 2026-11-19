@@ -4,6 +4,7 @@ import IntakeForm from "@/components/book/IntakeForm"
 import NightSkyLoader from "@/components/NightSkyLoader"
 import SiteFooter from "@/components/SiteFooter"
 import {booking} from "@/content/booking"
+import {services} from "@/content/site"
 import styles from "./page.module.css"
 
 export const dynamicParams = false
@@ -11,6 +12,15 @@ export const dynamicParams = false
 /** One booking page per intake form. */
 export function generateStaticParams() {
   return booking.forms.map(({slug}) => ({slug}))
+}
+
+/** The session name and price from Services, or just the name when the page books more than one price. */
+function sessionLabel(slug: string) {
+  const options = services.groups
+    .flatMap((group) => group.services)
+    .flatMap((service) => service.options.filter((option) => option.url === `/book/${slug}`).map((option) => ({name: service.name, price: option.price})))
+  if (options.length === 1) return `${options[0].name} · ${options[0].price}`
+  return options[0]?.name
 }
 
 /** Title and description for a booking page. */
@@ -33,6 +43,7 @@ export default async function BookPage(props: PageProps<"/book/[slug]">) {
     <div className={styles.page}>
       <NightSkyLoader />
       <main className={styles.main}>
+        <p className={`label ${styles.session}`}>{sessionLabel(slug)}</p>
         <IntakeForm form={form} />
       </main>
       <SiteFooter />

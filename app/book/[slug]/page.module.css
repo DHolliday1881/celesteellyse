@@ -11,6 +11,13 @@
   padding: calc(var(--nav-height) + 20px) 16px 0;
 }
 
+/* Session name and price above the card */
+.session {
+  margin-bottom: 44px;
+  color: var(--periwinkle);
+  text-align: center;
+}
+
 .page > footer {
   z-index: 1;
 }
@@ -18,6 +25,6 @@
 /* Tablet and up */
 @media (min-width: 48rem) {
   .main {
-    padding: calc(var(--nav-height) + 40px) var(--gutter) 0;
+    padding: calc(var(--nav-height) + 64px) var(--gutter) 0;
   }
 }
