@@ -106,6 +106,7 @@ export const booking = {
     required: "Please fill this in.",
     email: "That email doesn’t look quite right.",
     phone: "Please add a phone number I can text.",
+    phoneInvalid: "That number doesn’t look quite right. Please include the area code.",
     choice: "Please choose one.",
     photo: "Please add a photo.",
     send: "Something went wrong sending your form. Your answers are still here. Please try again.",

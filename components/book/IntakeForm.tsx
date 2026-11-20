@@ -47,6 +47,13 @@ const storage = {
   },
 }
 
+/** True for a full US number (10 digits, optional leading 1) or an international number starting with + (8 to 15 digits). */
+function isPhone(value: string) {
+  const digits = value.replace(/\D/g, "")
+  if (value.trim().startsWith("+")) return digits.length >= 8 && digits.length <= 15
+  return digits.length === 10 || (digits.length === 11 && digits.startsWith("1"))
+}
+
 /** Returns the message for a field that isn't filled in correctly, or undefined when it is. */
 function checkField(field: InputField, value: string, photo: PhotoState | undefined) {
   if (field.kind === "photo") {
@@ -62,7 +69,7 @@ function checkField(field: InputField, value: string, photo: PhotoState | undefi
     return booking.errors.required
   }
   if (field.kind === "email" && !EMAIL_PATTERN.test(value.trim())) return booking.errors.email
-  if (field.kind === "tel" && value.replace(/\D/g, "").length < 7) return booking.errors.phone
+  if (field.kind === "tel" && !isPhone(value)) return booking.errors.phoneInvalid
   return undefined
 }
 
