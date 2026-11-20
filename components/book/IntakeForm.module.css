@@ -62,6 +62,10 @@
   text-wrap: balance;
 }
 
+.thanks {
+  text-align: center;
+}
+
 .introText {
   color: var(--ink-lead);
   font-size: 16px;
@@ -442,6 +446,10 @@ fieldset[aria-invalid="true"] .pill span,
 
   .heading {
     font-size: 26px;
+  }
+
+  .thanks {
+    margin-bottom: 20px;
   }
 
   .submitLong {

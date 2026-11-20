@@ -353,7 +353,7 @@ export default function IntakeForm({form, initialChoice}: {form: Form; initialCh
       <div ref={card} className={styles.card}>
       {bookingStep ? (
         <div key="booking" className={styles.panel}>
-          <h2 className={styles.heading}>{booking.thanks}</h2>
+          <h2 className={`${styles.heading} ${styles.thanks}`}>{booking.thanks}</h2>
           {choices && !choice && (
             <div className={styles.field}>
               <p className={styles.label}>{booking.choose}</p>
