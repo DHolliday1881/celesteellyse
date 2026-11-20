@@ -43,6 +43,35 @@ function loadCal(): CalApi {
   return cal
 }
 
+/** Cal.com's dark theme colours taken from the site's own tokens, as the calendar's iframe can't read our CSS variables. */
+function calColors() {
+  const root = getComputedStyle(document.documentElement)
+  const token = (name: string) => root.getPropertyValue(name).trim()
+  const mix = (color: string, percent: number) => `color-mix(in srgb, ${color} ${percent}%, transparent)`
+  const [navy, night, periwinkle, coral, starlight] = ["--navy", "--night", "--periwinkle", "--coral", "--starlight"].map(token)
+  const line = mix(periwinkle, 28)
+  return {
+    "cal-bg": "transparent",
+    "cal-bg-muted": "transparent",
+    "cal-bg-emphasis": mix(navy, 60),
+    "cal-bg-subtle": token("--glass-tint"),
+    "cal-bg-inverted": starlight,
+    "cal-border": line,
+    "cal-border-subtle": line,
+    "cal-border-muted": line,
+    "cal-border-booker": line,
+    "cal-border-emphasis": periwinkle,
+    "cal-text": starlight,
+    "cal-text-emphasis": starlight,
+    "cal-text-subtle": token("--ink-lead"),
+    "cal-text-muted": token("--ink-faint"),
+    "cal-text-inverted": night,
+    "cal-brand": coral,
+    "cal-brand-emphasis": `color-mix(in srgb, ${coral} 85%, ${starlight})`,
+    "cal-brand-text": navy,
+  }
+}
+
 /** Inline Cal.com booking calendar for `calLink` (user/event), dark, with the visitor's name and email filled in. */
 export default function CalEmbed({calLink, name, email}: {calLink: string; name: string; email: string}) {
   const container = useRef<HTMLDivElement>(null)
@@ -58,7 +87,7 @@ export default function CalEmbed({calLink, name, email}: {calLink: string; name:
       calLink,
       config: {layout: "month_view", theme: "dark", name, email},
     })
-    cal.ns[namespace]("ui", {theme: "dark", layout: "month_view"})
+    cal.ns[namespace]("ui", {theme: "dark", layout: "month_view", hideEventTypeDetails: true, cssVarsPerTheme: {dark: calColors()}})
     return () => {
       element.replaceChildren()
     }
