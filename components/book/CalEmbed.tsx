@@ -60,6 +60,8 @@ function calColors() {
     "cal-border-subtle": line,
     "cal-border-muted": line,
     "cal-border-booker": line,
+    // Cal's fallback border; hides the form panel's divider that overlaps the rounded corner when details are hidden
+    border: "transparent",
     "cal-border-emphasis": periwinkle,
     "cal-text": starlight,
     "cal-text-emphasis": starlight,
