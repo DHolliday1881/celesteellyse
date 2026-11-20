@@ -2,7 +2,7 @@
 import {services, type BookingOption} from "./site"
 
 /** Points every Cal.com embed at the $1 test events; set to false to book the real events. */
-export const USE_TEST_EVENTS = true
+export const USE_TEST_EVENTS = false
 
 export const CAL_USER = "celesteellyse"
 
@@ -99,13 +99,14 @@ export const booking = {
     choose: "Choose a photo",
     change: "Choose a different photo",
     preparing: "Getting your photo ready…",
-    tooBig: "That photo is too large to send. Please choose a different photo.",
+    unreadable: "This photo type didn’t work, please try a screenshot of it or a JPG",
     notImage: "Please choose a photo (an image file).",
   },
   errors: {
     required: "Please fill this in.",
     email: "That email doesn’t look quite right.",
     phone: "Please add a phone number I can text.",
+    phoneInvalid: "That number doesn’t look quite right. Please include the area code.",
     choice: "Please choose one.",
     photo: "Please add a photo.",
     send: "Something went wrong sending your form. Your answers are still here. Please try again.",
