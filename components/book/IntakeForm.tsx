@@ -7,7 +7,7 @@ import {MAX_REQUEST_BYTES, preparePhoto, type PreparedPhoto} from "./photo"
 import styles from "./IntakeForm.module.css"
 
 type Status = "form" | "sending" | "error" | "booking"
-type PhotoState = PreparedPhoto | "preparing" | "not-image" | "too-big"
+type PhotoState = PreparedPhoto | "preparing" | "not-image" | "unreadable"
 type InputField = Exclude<IntakeField, {kind: "heading"}>
 
 // Netlify only accepts fields declared in public/__forms.html; a mismatch is dropped silently
@@ -58,7 +58,7 @@ function isPhone(value: string) {
 function checkField(field: InputField, value: string, photo: PhotoState | undefined) {
   if (field.kind === "photo") {
     if (photo === "not-image") return booking.photo.notImage
-    if (photo === "too-big") return booking.photo.tooBig
+    if (photo === "unreadable") return booking.photo.unreadable
     return field.required && (!photo || photo === "preparing") ? booking.errors.photo : undefined
   }
   const empty = value.trim() === ""

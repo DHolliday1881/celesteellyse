@@ -99,7 +99,7 @@ export const booking = {
     choose: "Choose a photo",
     change: "Choose a different photo",
     preparing: "Getting your photo ready…",
-    tooBig: "That photo is too large to send. Please choose a different photo.",
+    unreadable: "This photo type didn’t work, please try a screenshot of it or a JPG",
     notImage: "Please choose a photo (an image file).",
   },
   errors: {
