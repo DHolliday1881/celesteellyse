@@ -2,7 +2,7 @@
 import {services, type BookingOption} from "./site"
 
 /** Points every Cal.com embed at the $1 test events; set to false to book the real events. */
-export const USE_TEST_EVENTS = true
+export const USE_TEST_EVENTS = false
 
 export const CAL_USER = "celesteellyse"
 
