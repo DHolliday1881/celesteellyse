@@ -23,7 +23,7 @@ const STARS = [
   {x: 94, y: 9, size: 1.5, opacity: 0.3},
 ] as const
 
-/** Terms page: a centred header, each term as a heading beside its text, then the last-updated date. */
+/** Terms page: a centred header, then each term as a heading beside its text. */
 export default function TermsPage() {
   const {title, label, intro, updated, sections, questions} = terms
 
@@ -59,6 +59,7 @@ export default function TermsPage() {
           </p>
           <h1 className={styles.heading}>{title}</h1>
           <p className={styles.intro}>{intro}</p>
+          <p className={styles.updated}>{updated}</p>
         </header>
 
         <div className={styles.sections}>
@@ -86,7 +87,6 @@ export default function TermsPage() {
           </section>
         </div>
 
-        <p className={styles.updated}>{updated}</p>
       </main>
 
       <SiteFooter />

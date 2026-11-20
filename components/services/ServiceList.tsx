@@ -1,3 +1,4 @@
+import Link from "next/link"
 import type {CSSProperties} from "react"
 import type {ServiceGroup} from "@/content/site"
 import styles from "./ServiceList.module.css"
@@ -18,7 +19,7 @@ export default function ServiceList({groups}: {groups: ServiceGroup[]}) {
 
           <ul className={styles.rows}>
             {group.services.map((service, index) => (
-              <li key={service.id} className={styles.row}>
+              <li key={service.id} id={`session-${service.id}`} className={styles.row}>
                 <span className={`label ${styles.numeral}`} aria-hidden="true">
                   {NUMERALS[offsets[g] + index]}
                 </span>
@@ -59,20 +60,18 @@ export default function ServiceList({groups}: {groups: ServiceGroup[]}) {
 
                 <div className={styles.actions}>
                   {service.options.map((option) => (
-                    <div key={option.url} className={styles.option}>
+                    <div key={option.price} className={styles.option}>
                       <p className={styles.priceLine}>
                         <span className={styles.price}>{option.price}</span>
                         <span className={styles.duration}>{option.duration}</span>
                       </p>
-                      <a
+                      <Link
                         href={option.url}
                         className={`button ${styles.book}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        aria-label={`Book ${service.name}, ${option.duration} (opens in a new tab)`}
+                        aria-label={`Book ${service.name}, ${option.duration}`}
                       >
                         Book
-                      </a>
+                      </Link>
                     </div>
                   ))}
                 </div>

@@ -118,6 +118,17 @@
   line-height: 1.7;
 }
 
+.link {
+  color: var(--moon-white);
+  box-shadow: inset 0 -1px 0 var(--periwinkle);
+  transition: color 0.3s ease;
+}
+
+.link:hover,
+.link:focus-visible {
+  color: var(--coral);
+}
+
 /* Tablet and up: two columns */
 @media (min-width: 48rem) {
   .question {

@@ -2,7 +2,7 @@
 export const brand = {
   name: "Celeste Ellyse",
   email: "hello@celesteellyse.com",
-  disclaimer: "Animal communication sessions are offered for entertainment and personal insight. Reiki is a complementary practice. I’m not a veterinarian, doctor, or therapist, and no session replaces professional care.",
+  disclaimer: "Animal communication sessions are offered for entertainment and personal insight. Reiki supports relaxation and well-being. I’m not a veterinarian, doctor, or therapist, and no session replaces professional care.",
 }
 
 // Contact form
@@ -27,8 +27,8 @@ export const contact = {
 
 // Social
 export const social = [
-  {label: "Instagram", href: "https://instagram.com/celeste.ellyse"},
-  {label: "TikTok", href: "https://tiktok.com/@celeste.ellyse"},
+  {label: "Instagram", href: "https://instagram.com/celeste.ellyse", icon: "/icons/instagram.svg"},
+  {label: "TikTok", href: "https://tiktok.com/@celeste.ellyse", icon: "/icons/tiktok.svg"},
 ]
 
 // Footer
@@ -39,7 +39,7 @@ export const footer = {
 // Navigation
 export const nav = [
   {label: "Home", href: "/"},
-  {label: "Services", href: "/services"},
+  {label: "Services", href: "/services", includes: "/book/"},
 ]
 
 // Images
@@ -109,7 +109,7 @@ export const home = {
 // Services
 export type ServiceDetail = {label: string; body: string}
 
-export type BookingOption = {price: string; duration: string; url: string}
+export type BookingOption = {price: string; duration: string; durationRange?: string; url: string; calUrl?: string}
 
 export type Service = {
   id: string
@@ -147,12 +147,14 @@ export const services = {
             {
               price: "$180",
               duration: "45 min",
-              url: "https://cal.com/celesteellyse/animal-communication",
+              durationRange: "45–60 min",
+              url: "/book/animal-communication",
+              calUrl: "https://cal.com/celesteellyse/animal-communication",
             },
           ],
           details: details(
             "I connect with your animal and write down everything they share through words, images, and feelings: who they are, how they feel, and their answers to your questions. For animals who have passed, it’s a chance to hear from them again.",
-            "When you book, share their name and your questions, plus their age and who they live with if they’re living. Then reply to your confirmation email with a clear photo, eyes visible.",
+            "Fill out a short form with their name, your questions, and a clear photo with their eyes visible, plus their age and who they live with if they’re living. Then pick any open time to hold your spot.",
             "Your written session by email within 7 days: what your animal shared, what they showed me, and their answers to each of your questions. It’s yours to keep and come back to whenever you want to hear from them again.",
           ),
           note: "Want to add Reiki? Book the combo, or add it after your session arrives.",
@@ -166,12 +168,14 @@ export const services = {
             {
               price: "$240",
               duration: "60 min",
-              url: "https://cal.com/celesteellyse/two-animal-session",
+              durationRange: "60–75 min",
+              url: "/book/two-animals",
+              calUrl: "https://cal.com/celesteellyse/two-animal-session",
             },
           ],
           details: details(
             "The same written conversation, with two animals. They can share a home, or one can be here and one passed.",
-            "When you book, share each animal’s name and your questions. For living animals, also tell me their age and who they live with. Then reply to your confirmation email with a clear photo of each, eyes visible.",
+            "Fill out a short form with each animal’s name, your questions, and a clear photo of each, eyes visible. For living animals, also share their age and who they live with. Then pick any open time to hold your spot.",
             "One written session by email within 7 days, with each animal in their own voice and their answers to your questions. Yours to keep and come back to.",
           ),
           note: addReikiNote,
@@ -184,12 +188,13 @@ export const services = {
             {
               price: "$240",
               duration: "45 min",
-              url: "https://cal.com/celesteellyse/communication-and-reiki",
+              url: "/book/communication-and-reiki",
+              calUrl: "https://cal.com/celesteellyse/communication-and-reiki",
             },
           ],
           details: details(
             "Everything in an animal communication session, with distance Reiki to follow. Many people like hearing from their animal first, then giving them some calm and care.",
-            "Book, share their name, age, who they live with, and your questions, then reply to your confirmation email with a clear photo, eyes visible. I’ll text you before the Reiki begins.",
+            "Fill out a short form with their name, your questions, and a clear photo with their eyes visible, plus their age and who they live with if they’re living. Then pick a time for their Reiki, and I’ll text you before it begins.",
             "Your written session by email within 7 days, plus a follow-up by email or phone call on what I felt and saw during the Reiki.",
           ),
         },
@@ -201,12 +206,13 @@ export const services = {
             {
               price: "$75",
               duration: "30 min",
-              url: "https://cal.com/celesteellyse/animal-reiki",
+              url: "/book/animal-reiki",
+              calUrl: "https://cal.com/celesteellyse/animal-reiki",
             },
           ],
           details: details(
             "Gentle energy work for calm and balance. It’s lovely during stressful stretches, recovery, older age, or big changes, or as a follow-up after a communication session. Animals carry a different energy than people, so Reiki meets them differently, and I allow time for your animal to settle in before the Reiki begins.",
-            "Pick a time, and share your animal’s name and a photo. Your animal can rest wherever they like, with no need to keep them still. I’ll text you right before I begin.",
+            "Fill out a short form with your animal’s name and a photo, then pick a time. Your animal can rest wherever they like, with no need to keep them still. I’ll text you right before I begin.",
             "A follow-up by email or phone call, sharing what I felt and saw during the session.",
           ),
         },
@@ -219,23 +225,43 @@ export const services = {
         {
           id: "distance-reiki",
           name: "Distance Reiki",
-          summary: "A distance Reiki session for you, to help you release stress and come back to calm. All you have to do is lie down somewhere quiet and rest. Choose 30 or 45 minutes.",
+          summary: "A distance Reiki session for you, to help you release stress and come back to calm. All you have to do is lie down somewhere quiet and rest. Choose 30 or 45 minutes, or a series of three.",
           options: [
-            {
-              price: "$120",
-              duration: "45 min",
-              url: "https://cal.com/celesteellyse/distance-reiki",
-            },
             {
               price: "$100",
               duration: "30 min",
-              url: "https://cal.com/celesteellyse/distance-reiki-30",
+              url: "/book/distance-reiki?option=30",
+              calUrl: "https://cal.com/celesteellyse/distance-reiki-30",
+            },
+            {
+              price: "$120",
+              duration: "45 min",
+              url: "/book/distance-reiki?option=45",
+              calUrl: "https://cal.com/celesteellyse/distance-reiki",
             },
           ],
           details: details(
             "Gentle energy work, sent to you wherever you are. It’s lovely when you’re stressed, grieving, worn out, or in the middle of a big change. Some people feel warmth or deep calm during the session, and some notice the shift in the days after.",
-            "Pick a time and tell me the city you’ll be in. Lie down somewhere quiet, and I’ll text you right before I begin. All you have to do is rest.",
+            "Fill out a short form, then pick a time. Lie down somewhere quiet, and I’ll text you right before I begin. All you have to do is rest.",
             "A follow-up by email or phone call, sharing what I felt and saw during your session and anything that stood out. Go easy on yourself afterward. Many people like a little quiet time.",
+          ),
+        },
+        {
+          id: "distance-reiki-3-sessions",
+          name: "Distance Reiki: 3 sessions",
+          summary: "Three 45-minute distance Reiki sessions for ongoing support. Save $30, and use them within 4 months.",
+          options: [
+            {
+              price: "$330",
+              duration: "45 min",
+              url: "/book/distance-reiki?option=package",
+              calUrl: "https://cal.com/celesteellyse/distance-reiki-3-sessions",
+            },
+          ],
+          details: details(
+            "The same gentle distance Reiki, spread over three sessions. Many people choose this during a longer stretch, like grief, burnout, or a big change, when one session doesn’t feel like enough.",
+            "Book your first session when you buy. Once I’ve read your form, I’ll suggest a rhythm for the other two, like once a week or every other week. Then book them whenever you like with your private link. I’ll text you right before each session.",
+            "A follow-up after each session by email or phone call, sharing what I felt and saw and anything that stood out.",
           ),
         },
       ],
@@ -251,8 +277,11 @@ export const services = {
         lit: "right",
         moons: [images.moonCrescent, images.moonQuarter, images.moonWaxing, images.moonFull],
         steps: [
-          {title: "Book and pay", body: "Pick your session and any open time to hold your spot."},
-          {title: "Share their details", body: "Their name, your questions, and a clear photo with their eyes visible."},
+          {
+            title: "Share their details",
+            body: "Fill out a short form with their name, your questions, and a clear photo with their eyes visible.",
+          },
+          {title: "Book and pay", body: "Pick any open time to hold your spot."},
           {title: "I tune in", body: "I sit quietly with your animal and write down everything they share."},
           {title: "Your session arrives", body: "Your written session arrives by email within 7 days."},
         ],
@@ -263,11 +292,11 @@ export const services = {
         lit: "left",
         moons: [images.moonWaningCrescent, images.moonThirdQuarter, images.moonWaningGibbous, images.moonFull],
         steps: [
-          {title: "Book a time", body: "Pick the time that works best for you."},
           {
             title: "Tell me who it’s for",
-            body: "For you, your name and the city you’ll be in. For your animal, their name and a photo.",
+            body: "Fill out a short form. For you, your name and the city you’ll be in. For your animal, their name and a photo.",
           },
+          {title: "Book a time", body: "Pick the time that works best for you."},
           {
             title: "Rest",
             body: "I’ll text you before I begin. Lie down somewhere quiet, or let your animal rest wherever they like.",
@@ -305,7 +334,12 @@ export const services = {
           {
             question: "What do I need to send you?",
             answer:
-              "For animal communication: their name, your questions, and a clear photo with their eyes visible. For a living animal, also their age and who they live with. Reply to your confirmation email with the photo. For Animal Reiki: their name and a photo. For Distance Reiki: your name and the city you’ll be in.",
+              "Before you book, you’ll fill out a short form, then pick your time and pay. For animal communication, it asks for their name, your questions, and a clear photo with their eyes visible, plus their age and who they live with if they’re living. For Animal Reiki, it asks for their name, a photo, and your phone number so I can text you before I begin. For Distance Reiki, it asks for your name, the city you’ll be in, and your phone number.",
+          },
+          {
+            question: "What is Reiki?",
+            answer:
+              "Reiki is a gentle Japanese energy practice. The word means “universal life force energy.” I act as a channel for that energy, and it goes where it’s needed most. You don’t have to do anything but rest. I’m a Reiki master, and I offer sessions for people and animals.",
           },
           {
             question: "What happens during a Reiki session?",
@@ -315,7 +349,7 @@ export const services = {
           {
             question: "Does distance matter?",
             answer:
-              "Not at all. Every session happens from a distance, wherever you and your animal are.",
+              "Not at all. In Reiki, energy follows intention, so I can connect with you or your animal wherever you are. Distance Reiki is a standard part of Reiki training, and many people find it just as relaxing as an in-person session. All you have to do is rest.",
           },
         ],
       },
@@ -341,6 +375,12 @@ export const services = {
             question: "Cancellations & refunds",
             answer:
               "You can cancel for a full refund up to 48 hours before the time you booked. For written sessions, that’s the date you picked when booking. After that, refunds aren’t available, but you can still reschedule up to 24 hours before, from your confirmation email.",
+            link: {before: "For the 3-session Reiki package, see my", label: "terms", href: "/terms", after: "."},
+          },
+          {
+            question: "Reiki packages",
+            answer:
+              "The 3-session Distance Reiki package books your first session when you buy, and you’ll get a private link to book the other two whenever you like. All three need to be used within 4 months. Packages aren’t refundable once your first session has happened.",
           },
           {
             question: "Who can book?",
@@ -357,7 +397,7 @@ export const services = {
 export const terms = {
   title: "Terms",
   label: "The fine print",
-  intro: "By booking a session, you agree to these terms. They’re here so we both know what to expect.",
+  intro: "By using this site or booking a session, you agree to these terms. They’re here so we both know what to expect.",
   updated: "Last updated November 2026",
   sections: [
     {
@@ -369,7 +409,7 @@ export const terms = {
       id: "what-a-session-is",
       heading: "What a session is",
       body: [
-        "Animal communication is offered for entertainment and personal insight. Reiki is a gentle, complementary energy practice for relaxation and balance. Neither is a science or a regulated profession.",
+        "Animal communication is offered for entertainment and personal insight. Reiki is a gentle energy practice for relaxation and balance, meant to work alongside medical care, not replace it. Neither is a science or a regulated profession.",
       ],
     },
     {
@@ -377,15 +417,16 @@ export const terms = {
       heading: "Not medical care",
       body: [
         "I’m not a veterinarian, doctor, or therapist. I don’t diagnose, treat, or give medical advice, and nothing I share replaces care from a professional.",
-        "If your animal is sick, hurt, or acting differently, please see your vet first. Please don’t stop or delay any treatment because of a session. Sessions aren’t for emergencies.",
+        "If your animal is sick, hurt, or acting differently, please see your vet first. Please don’t stop or delay any treatment because of a session. Sessions aren’t for emergencies. Sessions also aren’t legal or financial advice.",
+        "The same goes for you. If you’re working through a health or mental health concern, please keep working with your doctor or therapist. If you’re in crisis, call or text 988, or 911 in an emergency.",
       ],
     },
     {
       id: "no-guarantees",
       heading: "No guarantees",
       body: [
-        "Every animal is different, and so is every session. I can’t promise specific answers, a change in behavior, or a particular outcome.",
-        "An animal who has passed may not come through the way you hope. Reiki is gentle and voluntary, and your animal takes only what they want.",
+        "Every animal is different, and so is every session. I can’t promise specific answers, a change in behavior, or a particular outcome. What you take from a session is yours to interpret.",
+        "An animal who has passed may not come through the way you hope. Everyone experiences Reiki differently. Some people feel a lot, some feel very little, and both are normal. Reiki is gentle and voluntary. You can ask me to stop at any time, and your animal takes only what they want.",
       ],
     },
     {
@@ -413,6 +454,13 @@ export const terms = {
       body: [
         "You can cancel for a full refund up to 48 hours before the time you booked. For written sessions, that’s the date you picked when booking.",
         "After that, refunds aren’t available, but you can still reschedule up to 24 hours before, from your confirmation email.",
+      ],
+    },
+    {
+      id: "reiki-packages",
+      heading: "Reiki packages",
+      body: [
+        "Your first session is booked when you buy. You’ll get a private link to book your other sessions whenever you like. You can reschedule any session up to 24 hours before, from its confirmation email. All sessions need to be used within 4 months of purchase. Keeping track of that is up to you, and I won’t send reminders about it. A session missed without notice counts as used. Packages aren’t refundable once your first session has happened.",
       ],
     },
     {

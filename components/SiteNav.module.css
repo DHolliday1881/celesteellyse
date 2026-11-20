@@ -162,9 +162,55 @@
   color: var(--periwinkle);
 }
 
-.link[aria-current="page"] {
+.link[aria-current] {
   color: var(--periwinkle);
   box-shadow: inset 0 -1px 0 var(--periwinkle);
+}
+
+/* Social icons drawn in the link colour through the SVG's shape */
+.socials {
+  flex-direction: row;
+  gap: 1.75rem;
+}
+
+.socialLink {
+  justify-content: center;
+  min-width: var(--tap);
+  transition: color 0.25s ease, translate 0.35s ease;
+}
+
+.socialLink:hover,
+.socialLink:focus-visible {
+  translate: 0 -2px;
+}
+
+.socialIcon {
+  display: block;
+  width: 20px;
+  height: 20px;
+  background-color: currentColor;
+  mask: var(--icon) center / contain no-repeat;
+  transition: background-color 0.25s ease;
+}
+
+/* Glimmer settles back to the link colour; hover shows coral instead */
+.socialIcon.sweep {
+  --glimmer-to: var(--moon-white);
+  --glimmer-cool: var(--periwinkle);
+  --glimmer-warm: color-mix(in srgb, var(--coral) 55%, white);
+  --glimmer-halo: none;
+  background-clip: border-box;
+  background-image: linear-gradient(
+    105deg,
+    var(--moon-white) 0 24%,
+    color-mix(in srgb, var(--periwinkle) 50%, var(--moon-white)) 40%,
+    color-mix(in srgb, var(--coral) 42%, var(--moon-white)) 52%,
+    var(--moon-white) 72% 100%
+  );
+}
+
+.socialLink:is(:hover, :focus-visible) .socialIcon {
+  background: var(--coral);
 }
 
 .divider {

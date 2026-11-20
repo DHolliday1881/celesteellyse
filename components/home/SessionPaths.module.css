@@ -50,7 +50,7 @@
 
 .item + .item {
   padding-top: 2.5rem;
-  border-top: 1px solid rgba(149, 163, 236, 0.15);
+  border-top: 1px solid rgba(151, 167, 246, 0.15);
 }
 
 .icon {
@@ -92,7 +92,7 @@
 }
 
 .link:focus-visible::after {
-  outline: 2px solid rgba(149, 163, 236, 0.7);
+  outline: 2px solid rgba(151, 167, 246, 0.7);
   outline-offset: 12px;
   border-radius: 12px;
 }

@@ -2,24 +2,27 @@
 
 import Link from "next/link"
 import {usePathname} from "next/navigation"
-import {useEffect, useRef, useState} from "react"
+import {useEffect, useRef, useState, type CSSProperties} from "react"
 import {brand, nav, social} from "@/content/site"
 import Crescent from "./Crescent"
+import glimmer from "./Glimmer.module.css"
 import styles from "./SiteNav.module.css"
+import useGlimmerSweep from "./useGlimmerSweep"
 
-/** Sticky top navigation: name on the left, links on the right, a menu panel on phones; frosts once scrolled past its own height, or half a screen on Home. */
+const GLASS_AFTER_PX = 20
+const NAV_FIRST_SWEEP_MS = 4_000
+
+/** Sticky top navigation: name on the left, links on the right, a menu panel on phones; frosts once the page has scrolled 20px. */
 export default function SiteNav() {
   const pathname = usePathname()
   const [open, setOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const header = useRef<HTMLElement>(null)
   const toggle = useRef<HTMLButtonElement>(null)
+  const {ref: socialList, sweep, sweeping, done} = useGlimmerSweep<HTMLUListElement>(NAV_FIRST_SWEEP_MS)
 
   useEffect(() => {
-    const onScroll = () => {
-      const threshold = pathname === "/" ? window.innerHeight / 2 : (header.current?.offsetHeight ?? 0)
-      setScrolled(window.scrollY > threshold)
-    }
+    const onScroll = () => setScrolled(window.scrollY > GLASS_AFTER_PX)
     onScroll()
     window.addEventListener("scroll", onScroll, {passive: true})
     return () => window.removeEventListener("scroll", onScroll)
@@ -74,7 +77,7 @@ export default function SiteNav() {
               <Link
                 href={item.href}
                 className={styles.link}
-                aria-current={pathname === item.href ? "page" : undefined}
+                aria-current={pathname === item.href ? "page" : item.includes && pathname.startsWith(item.includes) ? "true" : undefined}
                 onClick={close}
               >
                 {item.label}
@@ -83,12 +86,18 @@ export default function SiteNav() {
           ))}
         </ul>
         <span className={styles.divider} aria-hidden="true" />
-        <ul className={styles.links}>
-          {social.map((item) => (
+        <ul ref={socialList} className={`${styles.links} ${styles.socials}`}>
+          {social.map((item, index) => (
             <li key={item.href}>
-              <a href={item.href} className={styles.link} target="_blank" rel="noopener noreferrer">
-                {item.label}
-                <span className="visually-hidden"> (opens in a new tab)</span>
+              <a href={item.href} className={`${styles.link} ${styles.socialLink}`} target="_blank" rel="noopener noreferrer">
+                <span
+                  key={sweep}
+                  className={sweeping ? `${styles.socialIcon} ${glimmer.glimmer} ${styles.sweep}` : styles.socialIcon}
+                  style={{"--order": index, "--icon": `url(${item.icon})`} as CSSProperties}
+                  aria-hidden="true"
+                  onAnimationEnd={index === social.length - 1 ? done : undefined}
+                />
+                <span className="visually-hidden">{item.label} (opens in a new tab)</span>
               </a>
             </li>
           ))}

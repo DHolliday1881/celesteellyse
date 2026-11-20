@@ -29,7 +29,7 @@ const DRIFT_SPEED = 0.02
 
 // Colour mix: shares of each colour, the rest is moon white
 const COLOR_MOON_WHITE = "#F3F1EA"
-const COLOR_PERIWINKLE = "#95A3EC"
+const COLOR_PERIWINKLE = "#97A7F6"
 const COLOR_LAVENDER = "#B3AEEA"
 const SHARE_PERIWINKLE = 0.15
 const SHARE_LAVENDER = 0.05

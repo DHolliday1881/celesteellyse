@@ -1,3 +1,4 @@
+import Link from "next/link"
 import {services} from "@/content/site"
 import AskForm from "./AskForm"
 import styles from "./Faq.module.css"
@@ -27,7 +28,19 @@ export default function Faq() {
                       <span>{item.question}</span>
                       <span className="toggle-icon" aria-hidden="true" />
                     </summary>
-                    <p className={styles.answer}>{item.answer}</p>
+                    <p className={styles.answer}>
+                      {item.answer}
+                      {item.link && (
+                        <>
+                          {" "}
+                          {item.link.before}{" "}
+                          <Link href={item.link.href} className={styles.link}>
+                            {item.link.label}
+                          </Link>
+                          {item.link.after}
+                        </>
+                      )}
+                    </p>
                   </details>
                 ))}
               </div>
