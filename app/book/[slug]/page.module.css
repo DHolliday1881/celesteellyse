@@ -71,6 +71,10 @@
     padding: calc(var(--nav-height) + 56px) var(--gutter) 0;
   }
 
+  .header {
+    margin-bottom: 40px;
+  }
+
   .title {
     font-size: clamp(1.75rem, 3.2vw, 2.5rem);
     white-space: nowrap;
