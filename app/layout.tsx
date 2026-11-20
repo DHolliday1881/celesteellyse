@@ -1,6 +1,5 @@
 import type {Metadata} from "next"
 import {Jost, Raleway} from "next/font/google"
-import Analytics from "@/components/Analytics"
 import SiteNav from "@/components/SiteNav"
 import "./globals.css"
 
@@ -18,10 +17,17 @@ export const metadata: Metadata = {
 export default function RootLayout({children}: LayoutProps<"/">) {
   return (
     <html lang="en" className={`${raleway.variable} ${jost.variable}`}>
+      <head>
+        <script
+          defer
+          src="https://cloud.umami.is/script.js"
+          data-website-id="07caa121-57cb-4d2d-b479-3c1530551a45"
+          data-domains="celesteellyse.com,www.celesteellyse.com"
+        />
+      </head>
       <body>
         <SiteNav />
         {children}
-        <Analytics />
       </body>
     </html>
   )
